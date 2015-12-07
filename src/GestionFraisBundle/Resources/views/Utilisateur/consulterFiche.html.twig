@@ -1,0 +1,114 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}<link href="{{ asset('Css/form.css') }}" rel="stylesheet">{% endblock %}
+
+{%  block body %}
+
+<div class="container" ">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="fichefrais">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-xs-6">
+                    {{ visiteur.nom }} {{ visiteur.prenom }}
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                    Mois : {{ ficheFrais.mois }}
+                </div>
+
+                <div class="col-sm-6 col-xs-12">
+                    Date modification : {{ ficheFrais.dateModif|date("d/m/Y")  }}
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-3 col-xs-12">
+                    {% for item in etatFicheFrais %}
+                        Etat : {{ item.libelle }}
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <div class="row">
+                <h3>Frais Forfait</h3>
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Libelle</th>
+                        <th>Quantité</th>
+                        <th>Etat</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       {% for key, item in tabLigneFraisForfait %}
+                           <tr>
+
+                                <td>{{ key }}</td>
+                                <td>{{ item.quantite }}</td>
+                                <td> {% for etat in etatLigneFrais %}
+                                        {% if etat.id == item.idEtatLigneFrais %}
+                                            {{ etat.libelleEtatLigneFrais }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                           </tr>
+                       {% endfor %}
+
+                    </tbody>
+                  </table>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <h3>Frais Hors Forfait</h3>
+                {% for key, item in ligneFraisHorsForfait %}
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Montant</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                                <td>{{ item.date|date("d/m/Y") }}</td>
+                                <td>{{ item.montant }} €</td>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                         <th>Libelle</th>
+                                         </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                             <td>{{ item.libelleLigneHorsForfait }}</td>
+                                         </tr>
+                                    </tbody>
+                                </table>
+                         {% endfor %}
+                         </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bandeau col-xs-12"></div>
+
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-3 col-md-offset-6">
+                    Valider
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
+

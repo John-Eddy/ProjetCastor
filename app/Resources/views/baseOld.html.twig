@@ -16,3 +16,38 @@
 
     </body>
 </html>
+
+<div></div>
+<h2>{{ ficheFrais.mois }}</h2>
+<p>
+    {% for item in etatFicheFrais %}
+        Etat : {{ item.libelle }}
+    {% endfor %}
+</p>
+<p>
+
+<div>
+    {{ ficheFrais.dateMofif }}
+    <div>
+
+</p>
+</div>
+<br>
+<div>
+    {% for item in etatLigneFrais %}
+        {{ dump(item) }}
+    {% endfor %}
+</div>
+<br>
+<div>
+    {% for item in ligneFraisForfait %}
+        {{ dump(item) }}
+    {% endfor %}
+</div>
+<br>
+<div>
+    {% for item in ligneFraisHorsForfait %}
+        {{ dump(item) }}
+    {% endfor %}
+</div>
+</div>

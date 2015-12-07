@@ -1,0 +1,3 @@
+visiteur_consulter:
+    path:     /consulter/{mois}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:ConsulterFiche" }

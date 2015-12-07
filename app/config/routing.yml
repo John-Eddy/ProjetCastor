@@ -28,3 +28,7 @@ gestion_frais_etatfichefrais:
 gestion_frais_visiteur:
     resource: "@GestionFraisBundle/Resources/config/routing/visiteur.yml"
     prefix:   /visiteur
+
+gestion_frais_utilisateur:
+    resource: "@GestionFraisBundle/Resources/config/routing/utilisateur.yml"
+    prefix:   /utilisateur
