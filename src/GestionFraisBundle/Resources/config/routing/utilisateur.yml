@@ -1,0 +1,7 @@
+visiteur_consulter:
+    path:     /consulter/{mois}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:ConsulterFiche" }
+
+visiteur_renseigner:
+    path:     /renseigner/{mois}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:RenseignerFiche" }

@@ -1,0 +1,16 @@
+
+{
+    border: 1px solid black;
+}
+#fichefrais {
+    background-color: #F5F5F5;
+    border: 1px solid #DDDDDD;
+    border-width: 1px;
+    border-color: #DDDDDD;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+textarea
+{
+    width: 100%
+}
