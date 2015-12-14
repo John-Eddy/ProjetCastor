@@ -1,3 +1,7 @@
+body, html
+{
+	height: 100%;
+}
 .container
 {
 	width: 100%;
@@ -11,7 +15,31 @@ div.bandeau-small
 	height: 20px;
 }
 
-
+#contenu, .contenu
+{
+	background-color: #F5F5F5;
+	border: 1px solid #DDDDDD;
+	border-width: 1px;
+	border-color: #DDDDDD;
+	padding: 10px 15px;
+	border-radius: 4px;
+	overflow:auto;
+	min-height: 100%
+}
+a.lien-fiche {
+	display: block;
+	color: black;
+	border: 1px solid #DDDDDD;
+	padding: 10px 15px;
+	border-width: 1px;
+	border-color: #DDDDDD;
+	border-radius: 4px;
+}
+a.lien-fiche:hover
+{
+	background-color: #fcfcfc;
+	text-decoration: none;
+}
 
 img
 {
@@ -19,13 +47,10 @@ img
 	height: 100px;
 }
 
+
 footer {
 	background-color: #101010;
-	position: static;
-	bottom: 0px;
-	padding-top: 50px;
-	padding-bottom: 50px;
-	margin-top: 100px;
 	color: #99979C;
 	text-align: center;
+	height: 50px;
 }

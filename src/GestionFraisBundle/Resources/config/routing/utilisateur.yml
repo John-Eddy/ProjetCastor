@@ -1,3 +1,7 @@
+utilisateur_index:
+    path:   /
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:Index" }
+
 utilisateur_consulter:
     path:     /consulter/{mois}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:ConsulterFiche" }

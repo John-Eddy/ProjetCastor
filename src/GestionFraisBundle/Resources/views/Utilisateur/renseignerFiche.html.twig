@@ -6,7 +6,7 @@
 {%  block body %}
 
     <div class="container">
-        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="fichefrais">
+        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 " id="contenu">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3 col-xs-6">
@@ -101,15 +101,8 @@
                         {% endfor %}
                         <button type="button" id="btn-ajouter{{ nbFraisHorsForfait }}"  onclick="ajoutFrais({{ nbFraisHorsForfait }});" class="btn btn-default" >Ajouter Frais Hors Forfait</button>
                     </div>
-                    <div class="bandeau-small"></div>
-
-                    <div class="row">
-                        <label for="comentaire">Comentaire</label>
-                        <textarea type="textarea" value="{{ ficheFrais.comentaire }}dsQEF" id="comentaire" class="form-control"></textarea>
-                    </div>
 
                     <div class="bandeau col-xs-12"></div>
-
 
                     <div class="row">
                         <div class="col-xs-2 col-xs-offset-5">
@@ -121,6 +114,8 @@
             </div>
         </div>
     </div>
+
+
      <script language="javascript">
         function ajoutFrais( num)
         {

@@ -1,0 +1,4 @@
+comptable_index:
+    path:     /
+    defaults: { _controller: "GestionFraisBundle:Comptable:Index" }
+

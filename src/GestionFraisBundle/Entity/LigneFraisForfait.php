@@ -20,8 +20,8 @@ class LigneFraisForfait
      *
      * @ORM\Column(name="idVisiteur", type="integer")
      *
-     * @ORM\OneToOne(targetEntity="Fichefrais")
-     * @ORM\JoinColumn(name="$idVisiteur", referencedColumnName="idVisiteur")
+     * @ORM\ManyToOne(targetEntity="Visiteur", inversedBy="id")
+     * @ORM\JoinColumn(name="idVisiteur", referencedColumnName="id")
      */
     private $idVisiteur;
 
@@ -32,8 +32,8 @@ class LigneFraisForfait
      *
      * @ORM\Column(name="mois", type="string", length=6)
      *
-     * @ORM\OneToOne(targetEntity="Fichefrais")
-     * @ORM\JoinColumn(name="$mois", referencedColumnName="mois")
+     * @ORM\ManyToOne(targetEntity="FicheFrais", inversedBy="mois")
+     * @ORM\JoinColumn(name="mois", referencedColumnName="mois")
      */
     private $mois;
 

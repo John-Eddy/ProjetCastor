@@ -5,7 +5,7 @@
 {%  block body %}
 
 <div class="container">
-    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="fichefrais">
+    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="contenu">
         <div class="container">
             <div class="row">
                 <div class="col-sm-3 col-xs-6">
@@ -23,9 +23,7 @@
 
             <div class="row">
                 <div class="col-sm-3 col-xs-12">
-                    {% for item in etatFicheFrais %}
-                        Etat : {{ item.libelle }}
-                    {% endfor %}
+                   <p>Etat : {{ etatFicheFrais.libelle }}</p>
                 </div>
             </div>
 
@@ -46,7 +44,7 @@
                            <tr>
 
                                 <td>{{ key }}</td>
-                                <td>{{ item.quantite }}></td>
+                                <td>{{ item.quantite }}</td>
                                 <td> {% for etat in etatLigneFrais %}
                                         {% if etat.id == item.idEtatLigneFrais %}
                                             {{ etat.libelleEtatLigneFrais }}
@@ -108,12 +106,7 @@
 
             <div class="bandeau col-xs-12"></div>
 
-            <div class="row">
-                <div class="col-xs-2 col-xs-offset-5">
-                    <a class="btn btn-default ">Modifier</a>
-                </div>
-            </div>
-            <div class="bandeau-small"></div>
+
 
         </div>
     </div>

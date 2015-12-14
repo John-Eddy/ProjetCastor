@@ -2,7 +2,6 @@
  * Created by Portable-Eddy on 09/12/2015.
  */
 
-<script language="javascript">
     function ajoutFrais( numFrais){//ajoute une ligne de produits/qt� � la div "lignes"
 
         //masque le bouton en cours
@@ -46,4 +45,17 @@
 
 
     }
-    </script>
+//met le footer en bas de la page
+    function footerDown(){
+
+
+        var bh = document.getElementsByName('body').offsetHeight; //document height here
+        var hh = document.getElementById('header').offsetHeight; //header height
+       // var ch = document.getElementById('contenu').offsetHeight; //contenu height
+        var fh = document.getElementById('footer').offsetHeight; //footer height
+        var wh = (bh- hh - fh); //this is the height for the wrapper
+
+        document.getElementById('wrapper').style.height = wh+'px';
+
+        //wrapper.css('min-height', wh); //set the height for the wrapper div
+    }

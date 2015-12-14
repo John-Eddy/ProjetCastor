@@ -31,8 +31,8 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 
-<body>
-
+<body onload="footerDown()">
+<header id="header">
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -44,7 +44,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">
-                <img alt="Brand" src="{{ asset('Images/logo_gsb.png') }}">
+                <img onclick="footerDown()" alt="Brand" src="{{ asset('Images/logo_gsb.png') }}">
             </a>
         </div>
 
@@ -69,26 +69,26 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-
 </header>
 
 
 
 
-<div class="bandeau col-xs-12"></div>
+
 
     {% block body %}{% endblock %}
 
 
-<div class="bandeau col-xs-12"></div>
 
+<div class="bandeau"></div>
 
-<footer class="container">
+<footer class="container" id="footer">
 
 </footer>
 
 {% block javascripts %}{% endblock %}
 <script src="{{ asset('JavaScript/form.js') }}"></script>
+
 </body>
 
 </html>

@@ -5,6 +5,7 @@ namespace GestionFraisBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
+
 /**
  * Visiteur
  *
@@ -19,6 +20,11 @@ class Visiteur extends BaseUser
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\OneToMany(targetEntity="FicheFrais", mappedBy="idVisiteur")
+     *
+     * @ORM\OneToMany(targetEntity="LigneFraisForfait", mappedBy="idVisiteur")
+     *
      */
     protected $id;
 

@@ -19,8 +19,8 @@ class FicheFrais
      * @ORM\Id
      *
      * @ORM\Column(name="idVisiteur", type="integer")
-     * @ORM\ManyToOne(targetEntity="Visiteur")
-     * @ORM\JoinColumn(name="$id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Visiteur", inversedBy="id")
+     * @ORM\JoinColumn(name="idVisiteur", referencedColumnName="id")
      */
     private $idVisiteur;
 
@@ -29,6 +29,8 @@ class FicheFrais
      *
      * @ORM\Id
      * @ORM\Column(name="mois", type="string", length=6)
+     *
+     * @ORM\OneToMany(targetEntity="LigneFraisForfait", mappedBy="mois")
      *
      */
     private $mois;
@@ -57,22 +59,6 @@ class FicheFrais
      * @ORM\Column(name="dateModif", type="datetime")
      */
     private $dateModif;
-
-    /**
-     * Set idVisiteur
-     *
-     * @param integer $idVisiteur
-     *
-     * @return FicheFrais
-     */
-
-    /**
-     * @var \string
-     *
-     * @ORM\Column(name="commentaire", type="string", length=255)
-     *
-     */
-    private $comentaire;
 
 
     public function setIdVisiteur($idVisiteur)
@@ -211,29 +197,4 @@ class FicheFrais
     {
         return $this->nbJustificatif;
     }
-
-    /**
-     * Set comentaire
-     *
-     * @param \string $comentaire
-     *
-     * @return FicheFrais
-     */
-    public function setComentaire($comentaire)
-    {
-        $this->comentaire = $comentaire;
-
-        return $this;
-    }
-
-    /**
-     * Get comentaire
-     *
-     * @return \string
-     */
-    public function getComentaire()
-    {
-        return $this->comentaire;
-    }
 }
-
