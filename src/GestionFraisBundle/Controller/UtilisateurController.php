@@ -279,4 +279,48 @@ class UtilisateurController extends Controller
         }
     }
 
+    /*
+     * Fonction qui vérifie les données recupérer depuis la fiche et les enregistre si elle son valide
+     */
+    public function enregistrerFicheAction($mois)
+    {
+
+        //Si l'un des champs Killometres ou Repas_Midi ou Nuitée n'est pas definit on retourne a la fiche avec un message d'erreur
+        if(!isset($_POST["Kilometres"]) || !isset($_POST["Repas_Midi"]) || !isset($_POST["Nuitée"]) )
+        {
+            $messageEreur = "Erreur certains champs n'ont pas été renseigné";
+            return $this->render('GestionFraisBundle:Utilisateur:champNonRenseigner.html.twig', array(
+                'message' => $messageEreur,
+                'action' => "utilisateur_renseigner",
+                'mois'=> $mois,
+            ));
+        }
+        else{
+            //On recupère les information du visiteur connécter
+            $Visiteur = $this->get('security.context')->getToken()->getUser();
+            //Récuperation de l'id du viisiteur
+            $idVisiteur = $Visiteur->getId();
+
+            //Connection BDD
+            $em = $this->getDoctrine()->getManager();
+
+            //recupération de la fiche frais
+            $ficheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(
+                array(
+                    'mois' => $mois,
+                    'idVisiteur' => $idVisiteur));
+
+
+            foreach ($_POST as $clef => $valeur)
+            {
+                $tab[$clef] = $valeur;
+            }
+            return $this->render('GestionFraisBundle:Utilisateur:vueTest.html.twig', array(
+                'tab' => $_POST
+            ));
+        }
+
+
+    }
+
 }

@@ -9,3 +9,7 @@ utilisateur_consulter:
 utilisateur_renseigner:
     path:     /renseigner/{mois}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:RenseignerFiche" }
+
+utilisateur_enregistrer:
+    path:     /enregistrer/{mois}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:EnregistrerFiche" }

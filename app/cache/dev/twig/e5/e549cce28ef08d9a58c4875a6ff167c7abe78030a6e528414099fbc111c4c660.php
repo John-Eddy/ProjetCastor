@@ -19,8 +19,8 @@ class __TwigTemplate_67d0401f58272677922083888a1f0a19099539e4dc9871eb5951e64bb48
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_e43dab5369892235af5178e7b7550f0742dd292e1a277c06786b3dc02bb96d41 = $this->env->getExtension("native_profiler");
-        $__internal_e43dab5369892235af5178e7b7550f0742dd292e1a277c06786b3dc02bb96d41->enter($__internal_e43dab5369892235af5178e7b7550f0742dd292e1a277c06786b3dc02bb96d41_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::base.html.twig"));
+        $__internal_09254fa7dc785022a7b0b964327cde08ac1eb5a4e2a20deb24c19f2b91b9a9ce = $this->env->getExtension("native_profiler");
+        $__internal_09254fa7dc785022a7b0b964327cde08ac1eb5a4e2a20deb24c19f2b91b9a9ce->enter($__internal_09254fa7dc785022a7b0b964327cde08ac1eb5a4e2a20deb24c19f2b91b9a9ce_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "::base.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -71,66 +71,66 @@ class __TwigTemplate_67d0401f58272677922083888a1f0a19099539e4dc9871eb5951e64bb48
         echo "\" />
 </head>
 
-<body onload=\"footerDown()\">
+<body id=\"body\" onload=\"footerDown()\">
 <header id=\"header\">
-<nav class=\"navbar navbar-inverse\">
-    <div class=\"container-fluid\">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class=\"navbar-header\">
-            <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">
-                <span class=\"sr-only\">Toggle navigation</span>
-                <span class=\"icon-bar\"></span>
-                <span class=\"icon-bar\"></span>
-                <span class=\"icon-bar\"></span>
-            </button>
-            <a class=\"navbar-brand\" href=\"#\">
-                <img onclick=\"footerDown()\" alt=\"Brand\" src=\"";
+    <nav class=\"navbar navbar-inverse\">
+        <div class=\"container-fluid\">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class=\"navbar-header\">
+                <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">
+                    <span class=\"sr-only\">Toggle navigation</span>
+                    <span class=\"icon-bar\"></span>
+                    <span class=\"icon-bar\"></span>
+                    <span class=\"icon-bar\"></span>
+                </button>
+                <a class=\"navbar-brand\" href=\"#\">
+                    <img onclick=\"footerDown()\" alt=\"Brand\" src=\"";
         // line 47
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("Images/logo_gsb.png"), "html", null, true);
         echo "\">
-            </a>
-        </div>
+                </a>
+            </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">
 
 
 
-            ";
+                ";
         // line 56
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
             // line 57
             echo "
-                <ul class=\"nav navbar-nav navbar-right\">
-                    <li><a href=\"";
+                    <ul class=\"nav navbar-nav navbar-right\">
+                        <li><a href=\"";
             // line 59
             echo $this->env->getExtension('routing')->getPath("fos_user_security_logout");
             echo "\">";
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("layout.logout", array(), "FOSUserBundle"), "html", null, true);
             echo "</a></li>
-                    <p class=\"navbar-text\">";
+                        <p class=\"navbar-text\">";
             // line 60
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("layout.logged_in_as", array("%username%" => $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()), "username", array())), "FOSUserBundle"), "html", null, true);
             echo " </p>
-                   </ul>
-            ";
+                       </ul>
+                ";
         } else {
             // line 63
-            echo "                <ul class=\"nav navbar-nav navbar-right\">
-                    <li><a href=\"";
+            echo "                    <ul class=\"nav navbar-nav navbar-right\">
+                        <li><a href=\"";
             // line 64
             echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
             echo "\">";
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("layout.login", array(), "FOSUserBundle"), "html", null, true);
             echo "</a></li>
-                </ul>
-            ";
+                    </ul>
+                ";
         }
         // line 67
         echo "
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 
 </header>
 
@@ -146,7 +146,7 @@ class __TwigTemplate_67d0401f58272677922083888a1f0a19099539e4dc9871eb5951e64bb48
         echo "
 
 
-<div class=\"bandeau\"></div>
+<div id=\"wrapper\"></div>
 
 <footer class=\"container\" id=\"footer\">
 
@@ -157,7 +157,7 @@ class __TwigTemplate_67d0401f58272677922083888a1f0a19099539e4dc9871eb5951e64bb48
         $this->displayBlock('javascripts', $context, $blocks);
         // line 90
         echo "<script src=\"";
-        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("JavaScript/form.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("JavaScript/wrapper.js"), "html", null, true);
         echo "\"></script>
 
 </body>
@@ -165,51 +165,51 @@ class __TwigTemplate_67d0401f58272677922083888a1f0a19099539e4dc9871eb5951e64bb48
 </html>
 ";
         
-        $__internal_e43dab5369892235af5178e7b7550f0742dd292e1a277c06786b3dc02bb96d41->leave($__internal_e43dab5369892235af5178e7b7550f0742dd292e1a277c06786b3dc02bb96d41_prof);
+        $__internal_09254fa7dc785022a7b0b964327cde08ac1eb5a4e2a20deb24c19f2b91b9a9ce->leave($__internal_09254fa7dc785022a7b0b964327cde08ac1eb5a4e2a20deb24c19f2b91b9a9ce_prof);
 
     }
 
     // line 16
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_a568e2e41f937a2ac4a3485b6ba97416b286bdb65f0276413aaf934f3f1193c5 = $this->env->getExtension("native_profiler");
-        $__internal_a568e2e41f937a2ac4a3485b6ba97416b286bdb65f0276413aaf934f3f1193c5->enter($__internal_a568e2e41f937a2ac4a3485b6ba97416b286bdb65f0276413aaf934f3f1193c5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_d4616b3420707a5d8c309b6b5d3975c84694e190670f77876f15afaee3d5a90f = $this->env->getExtension("native_profiler");
+        $__internal_d4616b3420707a5d8c309b6b5d3975c84694e190670f77876f15afaee3d5a90f->enter($__internal_d4616b3420707a5d8c309b6b5d3975c84694e190670f77876f15afaee3d5a90f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
         
-        $__internal_a568e2e41f937a2ac4a3485b6ba97416b286bdb65f0276413aaf934f3f1193c5->leave($__internal_a568e2e41f937a2ac4a3485b6ba97416b286bdb65f0276413aaf934f3f1193c5_prof);
+        $__internal_d4616b3420707a5d8c309b6b5d3975c84694e190670f77876f15afaee3d5a90f->leave($__internal_d4616b3420707a5d8c309b6b5d3975c84694e190670f77876f15afaee3d5a90f_prof);
 
     }
 
     // line 29
     public function block_title($context, array $blocks = array())
     {
-        $__internal_ec52d41fb68ca7183d025301ebf712c902d70291da56f42ea58ca91eadd0bb7a = $this->env->getExtension("native_profiler");
-        $__internal_ec52d41fb68ca7183d025301ebf712c902d70291da56f42ea58ca91eadd0bb7a->enter($__internal_ec52d41fb68ca7183d025301ebf712c902d70291da56f42ea58ca91eadd0bb7a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
+        $__internal_876e13b84529abdff2e00a5a1eb39c40494180b120deef5aadef6e90803f089c = $this->env->getExtension("native_profiler");
+        $__internal_876e13b84529abdff2e00a5a1eb39c40494180b120deef5aadef6e90803f089c->enter($__internal_876e13b84529abdff2e00a5a1eb39c40494180b120deef5aadef6e90803f089c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "title"));
 
         
-        $__internal_ec52d41fb68ca7183d025301ebf712c902d70291da56f42ea58ca91eadd0bb7a->leave($__internal_ec52d41fb68ca7183d025301ebf712c902d70291da56f42ea58ca91eadd0bb7a_prof);
+        $__internal_876e13b84529abdff2e00a5a1eb39c40494180b120deef5aadef6e90803f089c->leave($__internal_876e13b84529abdff2e00a5a1eb39c40494180b120deef5aadef6e90803f089c_prof);
 
     }
 
     // line 79
     public function block_body($context, array $blocks = array())
     {
-        $__internal_9c7ab09dc4c7de0f97a1cddaa530fe14e5f87ca12d13f45f6489134cc46083cd = $this->env->getExtension("native_profiler");
-        $__internal_9c7ab09dc4c7de0f97a1cddaa530fe14e5f87ca12d13f45f6489134cc46083cd->enter($__internal_9c7ab09dc4c7de0f97a1cddaa530fe14e5f87ca12d13f45f6489134cc46083cd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_260bfcc63bcebac62dd91fd1678ad214ee194a57bd53d947d760d578ab70b6f2 = $this->env->getExtension("native_profiler");
+        $__internal_260bfcc63bcebac62dd91fd1678ad214ee194a57bd53d947d760d578ab70b6f2->enter($__internal_260bfcc63bcebac62dd91fd1678ad214ee194a57bd53d947d760d578ab70b6f2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         
-        $__internal_9c7ab09dc4c7de0f97a1cddaa530fe14e5f87ca12d13f45f6489134cc46083cd->leave($__internal_9c7ab09dc4c7de0f97a1cddaa530fe14e5f87ca12d13f45f6489134cc46083cd_prof);
+        $__internal_260bfcc63bcebac62dd91fd1678ad214ee194a57bd53d947d760d578ab70b6f2->leave($__internal_260bfcc63bcebac62dd91fd1678ad214ee194a57bd53d947d760d578ab70b6f2_prof);
 
     }
 
     // line 89
     public function block_javascripts($context, array $blocks = array())
     {
-        $__internal_40bb7d83ca7faf10cd21f4608faf46ce92503a2d2e359275ea0d5d53784256d3 = $this->env->getExtension("native_profiler");
-        $__internal_40bb7d83ca7faf10cd21f4608faf46ce92503a2d2e359275ea0d5d53784256d3->enter($__internal_40bb7d83ca7faf10cd21f4608faf46ce92503a2d2e359275ea0d5d53784256d3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
+        $__internal_252f75bd2f1310035323f34244134b86587ee54865e9e334cd1e76f72c62e20f = $this->env->getExtension("native_profiler");
+        $__internal_252f75bd2f1310035323f34244134b86587ee54865e9e334cd1e76f72c62e20f->enter($__internal_252f75bd2f1310035323f34244134b86587ee54865e9e334cd1e76f72c62e20f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
         
-        $__internal_40bb7d83ca7faf10cd21f4608faf46ce92503a2d2e359275ea0d5d53784256d3->leave($__internal_40bb7d83ca7faf10cd21f4608faf46ce92503a2d2e359275ea0d5d53784256d3_prof);
+        $__internal_252f75bd2f1310035323f34244134b86587ee54865e9e334cd1e76f72c62e20f->leave($__internal_252f75bd2f1310035323f34244134b86587ee54865e9e334cd1e76f72c62e20f_prof);
 
     }
 
@@ -261,43 +261,43 @@ class __TwigTemplate_67d0401f58272677922083888a1f0a19099539e4dc9871eb5951e64bb48
 /*     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />*/
 /* </head>*/
 /* */
-/* <body onload="footerDown()">*/
+/* <body id="body" onload="footerDown()">*/
 /* <header id="header">*/
-/* <nav class="navbar navbar-inverse">*/
-/*     <div class="container-fluid">*/
-/*         <!-- Brand and toggle get grouped for better mobile display -->*/
-/*         <div class="navbar-header">*/
-/*             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">*/
-/*                 <span class="sr-only">Toggle navigation</span>*/
-/*                 <span class="icon-bar"></span>*/
-/*                 <span class="icon-bar"></span>*/
-/*                 <span class="icon-bar"></span>*/
-/*             </button>*/
-/*             <a class="navbar-brand" href="#">*/
-/*                 <img onclick="footerDown()" alt="Brand" src="{{ asset('Images/logo_gsb.png') }}">*/
-/*             </a>*/
-/*         </div>*/
+/*     <nav class="navbar navbar-inverse">*/
+/*         <div class="container-fluid">*/
+/*             <!-- Brand and toggle get grouped for better mobile display -->*/
+/*             <div class="navbar-header">*/
+/*                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">*/
+/*                     <span class="sr-only">Toggle navigation</span>*/
+/*                     <span class="icon-bar"></span>*/
+/*                     <span class="icon-bar"></span>*/
+/*                     <span class="icon-bar"></span>*/
+/*                 </button>*/
+/*                 <a class="navbar-brand" href="#">*/
+/*                     <img onclick="footerDown()" alt="Brand" src="{{ asset('Images/logo_gsb.png') }}">*/
+/*                 </a>*/
+/*             </div>*/
 /* */
-/*         <!-- Collect the nav links, forms, and other content for toggling -->*/
-/*         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">*/
+/*             <!-- Collect the nav links, forms, and other content for toggling -->*/
+/*             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">*/
 /* */
 /* */
 /* */
-/*             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}*/
+/*                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}*/
 /* */
-/*                 <ul class="nav navbar-nav navbar-right">*/
-/*                     <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>*/
-/*                     <p class="navbar-text">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} </p>*/
-/*                    </ul>*/
-/*             {% else %}*/
-/*                 <ul class="nav navbar-nav navbar-right">*/
-/*                     <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>*/
-/*                 </ul>*/
-/*             {% endif %}*/
+/*                     <ul class="nav navbar-nav navbar-right">*/
+/*                         <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>*/
+/*                         <p class="navbar-text">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} </p>*/
+/*                        </ul>*/
+/*                 {% else %}*/
+/*                     <ul class="nav navbar-nav navbar-right">*/
+/*                         <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>*/
+/*                     </ul>*/
+/*                 {% endif %}*/
 /* */
-/*         </div><!-- /.navbar-collapse -->*/
-/*     </div><!-- /.container-fluid -->*/
-/* </nav>*/
+/*             </div><!-- /.navbar-collapse -->*/
+/*         </div><!-- /.container-fluid -->*/
+/*     </nav>*/
 /* */
 /* </header>*/
 /* */
@@ -310,14 +310,14 @@ class __TwigTemplate_67d0401f58272677922083888a1f0a19099539e4dc9871eb5951e64bb48
 /* */
 /* */
 /* */
-/* <div class="bandeau"></div>*/
+/* <div id="wrapper"></div>*/
 /* */
 /* <footer class="container" id="footer">*/
 /* */
 /* </footer>*/
 /* */
 /* {% block javascripts %}{% endblock %}*/
-/* <script src="{{ asset('JavaScript/form.js') }}"></script>*/
+/* <script src="{{ asset('JavaScript/wrapper.js') }}"></script>*/
 /* */
 /* </body>*/
 /* */

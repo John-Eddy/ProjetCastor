@@ -602,6 +602,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'utilisateur_renseigner')), array (  '_controller' => 'GestionFraisBundle\\Controller\\UtilisateurController::RenseignerFicheAction',));
             }
 
+            // utilisateur_enregistrer
+            if (0 === strpos($pathinfo, '/utilisateur/enregistrer') && preg_match('#^/utilisateur/enregistrer/(?P<mois>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'utilisateur_enregistrer')), array (  '_controller' => 'GestionFraisBundle\\Controller\\UtilisateurController::EnregistrerFicheAction',));
+            }
+
         }
 
         // comptable_index

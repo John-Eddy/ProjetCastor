@@ -23,35 +23,35 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_bdbfe07d6b003fdd45cb45331ff51634606bf17c9f780acaa9fc7156c45c6e30 = $this->env->getExtension("native_profiler");
-        $__internal_bdbfe07d6b003fdd45cb45331ff51634606bf17c9f780acaa9fc7156c45c6e30->enter($__internal_bdbfe07d6b003fdd45cb45331ff51634606bf17c9f780acaa9fc7156c45c6e30_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "GestionFraisBundle:Utilisateur:renseignerFiche.html.twig"));
+        $__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974 = $this->env->getExtension("native_profiler");
+        $__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974->enter($__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "GestionFraisBundle:Utilisateur:renseignerFiche.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_bdbfe07d6b003fdd45cb45331ff51634606bf17c9f780acaa9fc7156c45c6e30->leave($__internal_bdbfe07d6b003fdd45cb45331ff51634606bf17c9f780acaa9fc7156c45c6e30_prof);
+        $__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974->leave($__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974_prof);
 
     }
 
     // line 3
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_137738f9093f201b6028133b1df28e1e7fb5825dda67b5bef643805508992262 = $this->env->getExtension("native_profiler");
-        $__internal_137738f9093f201b6028133b1df28e1e7fb5825dda67b5bef643805508992262->enter($__internal_137738f9093f201b6028133b1df28e1e7fb5825dda67b5bef643805508992262_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967 = $this->env->getExtension("native_profiler");
+        $__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967->enter($__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 4
         echo "    <link href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("Css/form.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" xmlns=\"http://www.w3.org/1999/html\">";
         
-        $__internal_137738f9093f201b6028133b1df28e1e7fb5825dda67b5bef643805508992262->leave($__internal_137738f9093f201b6028133b1df28e1e7fb5825dda67b5bef643805508992262_prof);
+        $__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967->leave($__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967_prof);
 
     }
 
     // line 6
     public function block_body($context, array $blocks = array())
     {
-        $__internal_0394e055a877ee340fe57b24386ac88d6951bb3e07dae14155492218c63d3aa9 = $this->env->getExtension("native_profiler");
-        $__internal_0394e055a877ee340fe57b24386ac88d6951bb3e07dae14155492218c63d3aa9->enter($__internal_0394e055a877ee340fe57b24386ac88d6951bb3e07dae14155492218c63d3aa9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067 = $this->env->getExtension("native_profiler");
+        $__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067->enter($__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 7
         echo "
@@ -103,8 +103,11 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
         echo "                    </div>
                 </div>
 
-                <form>
-                    <div class=\"row\">
+                <form name=\"ficheFrais\" method=\"post\" action=\"";
+        // line 33
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("utilisateur_enregistrer", array("mois" => $this->getAttribute((isset($context["ficheFrais"]) ? $context["ficheFrais"] : $this->getContext($context, "ficheFrais")), "mois", array()))), "html", null, true);
+        echo "\" onsubmit=\"return verifFiche(this)\"  onblur=\"verifChampNumerique(this)\">
+                    <div class=\"row\" id =\"fraisForfait\">
                         <h3>Frais Forfait</h3>
                         <table class=\"table table-bordered\">
                             <thead>
@@ -130,9 +133,9 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
                                         <input type=\"number\" value=\"";
             // line 49
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "quantite", array()), "html", null, true);
-            echo "\" id=\"";
+            echo "\" name=\"";
             echo twig_escape_filter($this->env, $context["key"], "html", null, true);
-            echo "Montant\" class=\"form-control\">
+            echo "\" min=\"0\" class=\"form-control \" onblur=\"verifChampNumerique(this)\" >
                                     </td>
 
                                 </tr>
@@ -147,91 +150,108 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
                         </table>
                     </div>
 
+                    <div class=\"bandeau-small\"></div>
 
 
                     <div class=\"row\" id =\"fraisHorsForfait\">
                         <h3>Frais Hors Forfait</h3>
-                        ";
-        // line 63
-        $context["nbFraisHorsForfait"] = 0;
-        // line 64
-        echo "
+                        <div class=\"bandeau-small\"></div>
                         ";
         // line 65
+        $context["nbFraisHorsForfait"] = 0;
+        // line 66
+        echo "
+                        ";
+        // line 67
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["ligneFraisHorsForfait"]) ? $context["ligneFraisHorsForfait"] : $this->getContext($context, "ligneFraisHorsForfait")));
         foreach ($context['_seq'] as $context["key"] => $context["item"]) {
-            // line 66
+            // line 68
             echo "                            ";
             $context["nbFraisHorsForfait"] = ((isset($context["nbFraisHorsForfait"]) ? $context["nbFraisHorsForfait"] : $this->getContext($context, "nbFraisHorsForfait")) + 1);
-            // line 67
-            echo "                            <table class=\"table table-bordered\" id=\"fraisHorsForfait";
+            // line 69
+            echo "                            <div class=\"row\" id=\"fraisHorsForfait";
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
             echo "\">
-                                <thead>
-                                <tr>
-                                    <th><p>Date</p></th>
-                                    <th><p>Montant</p></th>
-                                </tr>
-
-                                </thead>
-                                <tbody>
-                                    <td>
-                                        <input type=\"date\" value=\"12/11/2015\" id =\"";
-            // line 77
+                                <table class=\"table table-bordered\" >
+                                    <h4>Frais hors forfait n° ";
+            // line 71
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
-            echo "Date\" class=\"form-control\">
-                                    </td>
-                                    <td>
-                                        <input type=\"number\" value=\"";
-            // line 80
+            echo "</h4>
+                                    <thead>
+                                    <tr>
+                                        <th><p>Date (jj/mm/aaa)</p></th>
+                                        <th><p>Montant</p></th>
+                                    </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <td>
+                                            <input type=\"date\" value=\"12/11/2015\" name =\"";
+            // line 81
+            echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
+            echo "Date\" class=\"form-control\" onblur=\"verifChampDate(this)\">
+                                        </td>
+                                        <td>
+                                            <input type=\"number\" value=\"";
+            // line 84
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "montant", array()), "html", null, true);
-            echo "\" id=\"";
+            echo "\" name=\"";
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
-            echo "Montant \" class=\"form-control\">
-                                    </td>
+            echo "Montant \" class=\"form-control\" onblur=\"verifChampNumerique(this)\">
+                                        </td>
 
-                                    <table class=\"table table-bordered\">
-                                        <thead>
-                                        <tr>
-                                            <th><p>Libelle</p></th>
-                                        </tr>
-                                        </thead>
-
-                                        <tbody>
+                                        <table class=\"table table-bordered\" id=\"libelleHF\">
+                                            <thead>
                                             <tr>
-
-                                               <td>
-                                                    <textarea type=\"textarea\" value=\"";
-            // line 94
-            echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "libelleLigneHorsForfait", array()), "html", null, true);
-            echo "\" id=\"";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
-            echo "Libelle\" class=\"form-control\"></textarea>
-                                                </td>
+                                                <th><p>Libelle</p></th>
                                             </tr>
-                                        </tbody>
-                                    </table>
-                                </tbody>
-                            </table>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr>
+
+                                                   <td>
+                                                        <textarea type=\"textarea\" value=\"";
+            // line 98
+            echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "libelleLigneHorsForfait", array()), "html", null, true);
+            echo "\" name=\"";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
+            echo "Libelle\" class=\"form-control\" onblur=\"verifChampText(this)\"></textarea>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </tbody>
+                                </table>
+                                <buton class=\"btn btn-default btn-suprimerFraisHF col-xs-3 col-xs-offset-9\" id=\"btn-suprimer";
+            // line 105
+            echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
+            echo "\" onclick=\"suprimerFrais('";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
+            echo "');\">Suprimer</buton>
+                            </div>
+                            <div class=\"bandeau-small\"></div>
                         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['key'], $context['item'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 102
-        echo "                        <button type=\"button\" id=\"btn-ajouter";
+        // line 109
+        echo "                    </div>
+                    <div class=\"row\">
+                     <button type=\"button\" id=\"btn-ajouter";
+        // line 111
         echo twig_escape_filter($this->env, (isset($context["nbFraisHorsForfait"]) ? $context["nbFraisHorsForfait"] : $this->getContext($context, "nbFraisHorsForfait")), "html", null, true);
         echo "\"  onclick=\"ajoutFrais(";
         echo twig_escape_filter($this->env, (isset($context["nbFraisHorsForfait"]) ? $context["nbFraisHorsForfait"] : $this->getContext($context, "nbFraisHorsForfait")), "html", null, true);
         echo ");\" class=\"btn btn-default\" >Ajouter Frais Hors Forfait</button>
                     </div>
-
                     <div class=\"bandeau col-xs-12\"></div>
 
                     <div class=\"row\">
                         <div class=\"col-xs-2 col-xs-offset-5\">
-                            <a class=\"btn btn-default \">Enregistrer</a>
+                            <input type=\"submit\" value=\"Enregistrer\" class=\"btn btn-default \"></input>
                         </div>
                     </div>
                     <div class=\"bandeau-small\"></div>
@@ -239,77 +259,37 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
             </div>
         </div>
     </div>
+    <script language=\"javascript\" src=\"";
+        // line 125
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("JavaScript/fraisHF.js"), "html", null, true);
+        echo "\"></script>
+
+    <script language=\"javascript\" src=\"";
+        // line 127
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("JavaScript/verificationFiche.js"), "html", null, true);
+        echo "\"></script>
 
 
-     <script language=\"javascript\">
-        function ajoutFrais( num)
-        {
-            //ajoute Un frais hors forfait a la div fraishorsForfait
-
-            //masque le bouton en cours
-            document.getElementById(\"btn-ajouter\"+num).setAttribute(\"hidden\",\"true\");
-            num++;\t\t\t//incr�mente le num�ro de frais
-
-            var lesFrais=document.getElementById(\"fraisHorsForfait\");\t//récupère l'objet DOM qui contient les données
-
-            var unFrais =
-                    '<table class=\"table table-bordered\"> ' +
-                    '<thead> ' +
-                    '<tr> ' +
-                    '<th><p>Date</p></th> ' +
-                    '<th><p>Montant</p></th> ' +
-                    '</tr> ' +
-                    '</thead> ' +
-                    '<tbody> ' +
-                    '<td> ' +
-                    '<input type=\"date\"  id =\"'+num+'Date\" class=\"form-control\"> ' +
-                    '</td> ' +
-                    '<td> ' +
-                    '<input type=\"number\" value=\"0\" id=\"'+num+'Montant \" class=\"form-control\"> ' +
-                    '</td> ' +
-                    '<table class=\"table table-bordered\"> ' +
-                    '<thead> ' +
-                    '<tr> ' +
-                    '<th><p>Libelle</p></th> ' +
-                    '</tr> ' +
-                    '</thead> ' +
-                    '<tbody> ' +
-                    '<tr> ' +
-                    '<td> ' +
-                    '<textarea type=\"textarea\" id=\"'+num+'Libelle\" class=\"form-control\"></textarea> ' +
-                    '</td> ' +
-                    '</tr> ' +
-                    '</tbody> ' +
-                    '</table> ' +
-                    '</tbody>' +
-                    '<buton class=\"btn btn-default\" id=\"btn-ajouter'+num+'\" onclick=\"ajoutFrais('+num+');\">Ajouter Frais Hors Forfait</buton>';
-
-            lesFrais.innerHTML += unFrais ;\t\t\t\t\t\t//l'ajoute � la DIV
-
-
-
-        }
-    </script>
 
 ";
         
-        $__internal_0394e055a877ee340fe57b24386ac88d6951bb3e07dae14155492218c63d3aa9->leave($__internal_0394e055a877ee340fe57b24386ac88d6951bb3e07dae14155492218c63d3aa9_prof);
+        $__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067->leave($__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067_prof);
 
     }
 
-    // line 170
+    // line 132
     public function block_javascripts($context, array $blocks = array())
     {
-        $__internal_a901574639c81904ad38b4dcabdb0f33b978d936d38f7749d3e1cff78d77e395 = $this->env->getExtension("native_profiler");
-        $__internal_a901574639c81904ad38b4dcabdb0f33b978d936d38f7749d3e1cff78d77e395->enter($__internal_a901574639c81904ad38b4dcabdb0f33b978d936d38f7749d3e1cff78d77e395_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
+        $__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe = $this->env->getExtension("native_profiler");
+        $__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe->enter($__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 171
+        // line 133
         echo "
 
 
 ";
         
-        $__internal_a901574639c81904ad38b4dcabdb0f33b978d936d38f7749d3e1cff78d77e395->leave($__internal_a901574639c81904ad38b4dcabdb0f33b978d936d38f7749d3e1cff78d77e395_prof);
+        $__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe->leave($__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe_prof);
 
     }
 
@@ -325,7 +305,7 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 
     public function getDebugInfo()
     {
-        return array (  307 => 171,  301 => 170,  223 => 102,  207 => 94,  188 => 80,  182 => 77,  168 => 67,  165 => 66,  161 => 65,  158 => 64,  156 => 63,  145 => 54,  132 => 49,  127 => 47,  123 => 45,  119 => 44,  103 => 30,  94 => 28,  90 => 27,  80 => 20,  73 => 16,  65 => 13,  57 => 7,  51 => 6,  42 => 4,  36 => 3,  11 => 1,);
+        return array (  287 => 133,  281 => 132,  269 => 127,  264 => 125,  245 => 111,  241 => 109,  229 => 105,  217 => 98,  198 => 84,  192 => 81,  179 => 71,  173 => 69,  170 => 68,  166 => 67,  163 => 66,  161 => 65,  148 => 54,  135 => 49,  130 => 47,  126 => 45,  122 => 44,  108 => 33,  103 => 30,  94 => 28,  90 => 27,  80 => 20,  73 => 16,  65 => 13,  57 => 7,  51 => 6,  42 => 4,  36 => 3,  11 => 1,);
     }
 }
 /* {% extends '::base.html.twig' %}*/
@@ -360,8 +340,8 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 /*                     </div>*/
 /*                 </div>*/
 /* */
-/*                 <form>*/
-/*                     <div class="row">*/
+/*                 <form name="ficheFrais" method="post" action="{{ path('utilisateur_enregistrer', {mois: ficheFrais.mois}) }}" onsubmit="return verifFiche(this)"  onblur="verifChampNumerique(this)">*/
+/*                     <div class="row" id ="fraisForfait">*/
 /*                         <h3>Frais Forfait</h3>*/
 /*                         <table class="table table-bordered">*/
 /*                             <thead>*/
@@ -376,7 +356,7 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 /* */
 /*                                     <td><p>{{ key }}</p></td>*/
 /*                                     <td>*/
-/*                                         <input type="number" value="{{ item.quantite }}" id="{{ key }}Montant" class="form-control">*/
+/*                                         <input type="number" value="{{ item.quantite }}" name="{{ key }}" min="0" class="form-control " onblur="verifChampNumerique(this)" >*/
 /*                                     </td>*/
 /* */
 /*                                 </tr>*/
@@ -386,57 +366,65 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 /*                         </table>*/
 /*                     </div>*/
 /* */
+/*                     <div class="bandeau-small"></div>*/
 /* */
 /* */
 /*                     <div class="row" id ="fraisHorsForfait">*/
 /*                         <h3>Frais Hors Forfait</h3>*/
+/*                         <div class="bandeau-small"></div>*/
 /*                         {%  set nbFraisHorsForfait = 0%}*/
 /* */
 /*                         {% for key, item in ligneFraisHorsForfait %}*/
 /*                             {% set nbFraisHorsForfait =  nbFraisHorsForfait + 1  %}*/
-/*                             <table class="table table-bordered" id="fraisHorsForfait{{ item.num }}">*/
-/*                                 <thead>*/
-/*                                 <tr>*/
-/*                                     <th><p>Date</p></th>*/
-/*                                     <th><p>Montant</p></th>*/
-/*                                 </tr>*/
+/*                             <div class="row" id="fraisHorsForfait{{ item.num }}">*/
+/*                                 <table class="table table-bordered" >*/
+/*                                     <h4>Frais hors forfait n° {{ item.num }}</h4>*/
+/*                                     <thead>*/
+/*                                     <tr>*/
+/*                                         <th><p>Date (jj/mm/aaa)</p></th>*/
+/*                                         <th><p>Montant</p></th>*/
+/*                                     </tr>*/
 /* */
-/*                                 </thead>*/
-/*                                 <tbody>*/
-/*                                     <td>*/
-/*                                         <input type="date" value="12/11/2015" id ="{{ item.num }}Date" class="form-control">*/
-/*                                     </td>*/
-/*                                     <td>*/
-/*                                         <input type="number" value="{{ item.montant }}" id="{{ item.num }}Montant " class="form-control">*/
-/*                                     </td>*/
+/*                                     </thead>*/
+/*                                     <tbody>*/
+/*                                         <td>*/
+/*                                             <input type="date" value="12/11/2015" name ="{{ item.num }}Date" class="form-control" onblur="verifChampDate(this)">*/
+/*                                         </td>*/
+/*                                         <td>*/
+/*                                             <input type="number" value="{{ item.montant }}" name="{{ item.num }}Montant " class="form-control" onblur="verifChampNumerique(this)">*/
+/*                                         </td>*/
 /* */
-/*                                     <table class="table table-bordered">*/
-/*                                         <thead>*/
-/*                                         <tr>*/
-/*                                             <th><p>Libelle</p></th>*/
-/*                                         </tr>*/
-/*                                         </thead>*/
-/* */
-/*                                         <tbody>*/
+/*                                         <table class="table table-bordered" id="libelleHF">*/
+/*                                             <thead>*/
 /*                                             <tr>*/
-/* */
-/*                                                <td>*/
-/*                                                     <textarea type="textarea" value="{{ item.libelleLigneHorsForfait }}" id="{{ item.num }}Libelle" class="form-control"></textarea>*/
-/*                                                 </td>*/
+/*                                                 <th><p>Libelle</p></th>*/
 /*                                             </tr>*/
-/*                                         </tbody>*/
-/*                                     </table>*/
-/*                                 </tbody>*/
-/*                             </table>*/
-/*                         {% endfor %}*/
-/*                         <button type="button" id="btn-ajouter{{ nbFraisHorsForfait }}"  onclick="ajoutFrais({{ nbFraisHorsForfait }});" class="btn btn-default" >Ajouter Frais Hors Forfait</button>*/
-/*                     </div>*/
+/*                                             </thead>*/
 /* */
+/*                                             <tbody>*/
+/*                                                 <tr>*/
+/* */
+/*                                                    <td>*/
+/*                                                         <textarea type="textarea" value="{{ item.libelleLigneHorsForfait }}" name="{{ item.num }}Libelle" class="form-control" onblur="verifChampText(this)"></textarea>*/
+/*                                                     </td>*/
+/*                                                 </tr>*/
+/*                                             </tbody>*/
+/*                                         </table>*/
+/*                                     </tbody>*/
+/*                                 </table>*/
+/*                                 <buton class="btn btn-default btn-suprimerFraisHF col-xs-3 col-xs-offset-9" id="btn-suprimer{{ item.num }}" onclick="suprimerFrais('{{ item.num }}');">Suprimer</buton>*/
+/*                             </div>*/
+/*                             <div class="bandeau-small"></div>*/
+/*                         {% endfor %}*/
+/*                     </div>*/
+/*                     <div class="row">*/
+/*                      <button type="button" id="btn-ajouter{{ nbFraisHorsForfait }}"  onclick="ajoutFrais({{ nbFraisHorsForfait }});" class="btn btn-default" >Ajouter Frais Hors Forfait</button>*/
+/*                     </div>*/
 /*                     <div class="bandeau col-xs-12"></div>*/
 /* */
 /*                     <div class="row">*/
 /*                         <div class="col-xs-2 col-xs-offset-5">*/
-/*                             <a class="btn btn-default ">Enregistrer</a>*/
+/*                             <input type="submit" value="Enregistrer" class="btn btn-default "></input>*/
 /*                         </div>*/
 /*                     </div>*/
 /*                     <div class="bandeau-small"></div>*/
@@ -444,57 +432,11 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 /*             </div>*/
 /*         </div>*/
 /*     </div>*/
+/*     <script language="javascript" src="{{ asset('JavaScript/fraisHF.js') }}"></script>*/
+/* */
+/*     <script language="javascript" src="{{ asset('JavaScript/verificationFiche.js') }}"></script>*/
 /* */
 /* */
-/*      <script language="javascript">*/
-/*         function ajoutFrais( num)*/
-/*         {*/
-/*             //ajoute Un frais hors forfait a la div fraishorsForfait*/
-/* */
-/*             //masque le bouton en cours*/
-/*             document.getElementById("btn-ajouter"+num).setAttribute("hidden","true");*/
-/*             num++;			//incr�mente le num�ro de frais*/
-/* */
-/*             var lesFrais=document.getElementById("fraisHorsForfait");	//récupère l'objet DOM qui contient les données*/
-/* */
-/*             var unFrais =*/
-/*                     '<table class="table table-bordered"> ' +*/
-/*                     '<thead> ' +*/
-/*                     '<tr> ' +*/
-/*                     '<th><p>Date</p></th> ' +*/
-/*                     '<th><p>Montant</p></th> ' +*/
-/*                     '</tr> ' +*/
-/*                     '</thead> ' +*/
-/*                     '<tbody> ' +*/
-/*                     '<td> ' +*/
-/*                     '<input type="date"  id ="'+num+'Date" class="form-control"> ' +*/
-/*                     '</td> ' +*/
-/*                     '<td> ' +*/
-/*                     '<input type="number" value="0" id="'+num+'Montant " class="form-control"> ' +*/
-/*                     '</td> ' +*/
-/*                     '<table class="table table-bordered"> ' +*/
-/*                     '<thead> ' +*/
-/*                     '<tr> ' +*/
-/*                     '<th><p>Libelle</p></th> ' +*/
-/*                     '</tr> ' +*/
-/*                     '</thead> ' +*/
-/*                     '<tbody> ' +*/
-/*                     '<tr> ' +*/
-/*                     '<td> ' +*/
-/*                     '<textarea type="textarea" id="'+num+'Libelle" class="form-control"></textarea> ' +*/
-/*                     '</td> ' +*/
-/*                     '</tr> ' +*/
-/*                     '</tbody> ' +*/
-/*                     '</table> ' +*/
-/*                     '</tbody>' +*/
-/*                     '<buton class="btn btn-default" id="btn-ajouter'+num+'" onclick="ajoutFrais('+num+');">Ajouter Frais Hors Forfait</buton>';*/
-/* */
-/*             lesFrais.innerHTML += unFrais ;						//l'ajoute � la DIV*/
-/* */
-/* */
-/* */
-/*         }*/
-/*     </script>*/
 /* */
 /* {% endblock  %}*/
 /* {% block javascripts %}*/
