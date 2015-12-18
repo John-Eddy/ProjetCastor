@@ -23,10 +23,10 @@ function ajoutFrais( num){//ajoute une ligne de produits/qt� � la div "ligne
         '</thead> ' +
         '<tbody> ' +
         '<td> ' +
-        '<input type="date"  id ="'+num+'Date" class="form-control" onblur="verifChampDate(this)"> ' +
+        '<input type="date"  name ="date['+num+']" class="form-control" onblur="verifChampDate(this)"> ' +
         '</td> ' +
         '<td> ' +
-        '<input type="number" value="0" id="'+num+'Montant " class="form-control" onblur="verifChampNumerique(this)"> ' +
+        '<input type="number" value="0" name="montant['+num+'] " class="form-control" onblur="verifChampNumerique(this)"> ' +
         '</td> ' +
         '<table class="table table-bordered" id="libelleHF"> ' +
         '<thead> ' +
@@ -37,7 +37,7 @@ function ajoutFrais( num){//ajoute une ligne de produits/qt� � la div "ligne
         '<tbody> ' +
         '<tr> ' +
         '<td> ' +
-        '<textarea type="textarea" id="'+num+'Libelle" class="form-control" onblur="verifChampText(this)"></textarea>" ' +
+        '<textarea type="textarea" name="libelle['+num+']" class="form-control" onblur="verifChampText(this)"></textarea> ' +
         '</td> ' +
         '</tr> ' +
         '</tbody> ' +
@@ -45,9 +45,7 @@ function ajoutFrais( num){//ajoute une ligne de produits/qt� � la div "ligne
         '</tbody>' +
         '</table>'+
         '<buton class="btn btn-default btn-suprimerFraisHF col-xs-3 col-xs-offset-9" id="btn-suprimer'+num+'" onclick="suprimerFrais('+num+');">Suprimer</buton>'+
-        '<div class="bandeau-small"></div>'
-
-        ;
+        '<div class="bandeau-small"></div>';
 
     lesFrais.innerHTML += (unFrais) ;						//l'ajoute le frais à la DIV lesFrais
 

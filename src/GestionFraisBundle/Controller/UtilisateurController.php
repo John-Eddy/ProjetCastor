@@ -309,14 +309,29 @@ class UtilisateurController extends Controller
                 array(
                     'mois' => $mois,
                     'idVisiteur' => $idVisiteur));
+            //Modification de la date de modification de la fiche
+            //$ficheFrais->setDateModif();
+
+
+
+            $lignesFraisForfait = array();
+            $lignesFraisHorsForfait = array();
 
 
             foreach ($_POST as $clef => $valeur)
             {
-                $tab[$clef] = $valeur;
+                if( $clef == 'date' || $clef == 'montant'|| $clef == 'libelle')
+                {
+                    $lignesFraisHorsForfait[$clef]=$valeur;
+                }
+                else
+                {
+                    $lignesFraisForfait[$clef]=$valeur;
+                }
             }
             return $this->render('GestionFraisBundle:Utilisateur:vueTest.html.twig', array(
-                'tab' => $_POST
+                'lignesFraisForfait' => $lignesFraisForfait,
+                'lignesFraisHorsForfait' => $lignesFraisHorsForfait,
             ));
         }
 

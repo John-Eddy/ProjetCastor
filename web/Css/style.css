@@ -53,7 +53,10 @@ table, .table
 	margin-bottom: 0px;
 	margin-top: 0px;
 }
-
+#wrapper
+{
+	min-height:50px;
+}
 
 footer {
 	background-color: #101010;

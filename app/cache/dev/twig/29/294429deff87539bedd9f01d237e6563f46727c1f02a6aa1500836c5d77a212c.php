@@ -23,35 +23,35 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974 = $this->env->getExtension("native_profiler");
-        $__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974->enter($__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "GestionFraisBundle:Utilisateur:renseignerFiche.html.twig"));
+        $__internal_4afd0c5b97559aec03e1b814039596031f70ed0f6ccbe70502e7d2775ddc31b0 = $this->env->getExtension("native_profiler");
+        $__internal_4afd0c5b97559aec03e1b814039596031f70ed0f6ccbe70502e7d2775ddc31b0->enter($__internal_4afd0c5b97559aec03e1b814039596031f70ed0f6ccbe70502e7d2775ddc31b0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "GestionFraisBundle:Utilisateur:renseignerFiche.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974->leave($__internal_717486022e59f9fdd0ced6829c0c9ce466609930f1fe86ebad15bbf0242e3974_prof);
+        $__internal_4afd0c5b97559aec03e1b814039596031f70ed0f6ccbe70502e7d2775ddc31b0->leave($__internal_4afd0c5b97559aec03e1b814039596031f70ed0f6ccbe70502e7d2775ddc31b0_prof);
 
     }
 
     // line 3
     public function block_stylesheets($context, array $blocks = array())
     {
-        $__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967 = $this->env->getExtension("native_profiler");
-        $__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967->enter($__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
+        $__internal_b890a5b8fa2bea231584737fae2ab7679920b2968c9ff9be024c5bef75cc2027 = $this->env->getExtension("native_profiler");
+        $__internal_b890a5b8fa2bea231584737fae2ab7679920b2968c9ff9be024c5bef75cc2027->enter($__internal_b890a5b8fa2bea231584737fae2ab7679920b2968c9ff9be024c5bef75cc2027_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheets"));
 
         // line 4
         echo "    <link href=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("Css/form.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" xmlns=\"http://www.w3.org/1999/html\">";
         
-        $__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967->leave($__internal_d2a5af60110bd88be931544d6615485621566c1d37bfb011af4d8c5359273967_prof);
+        $__internal_b890a5b8fa2bea231584737fae2ab7679920b2968c9ff9be024c5bef75cc2027->leave($__internal_b890a5b8fa2bea231584737fae2ab7679920b2968c9ff9be024c5bef75cc2027_prof);
 
     }
 
     // line 6
     public function block_body($context, array $blocks = array())
     {
-        $__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067 = $this->env->getExtension("native_profiler");
-        $__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067->enter($__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_da31ac2bce3336dd4269a718eb6ded04f07258fb90aa3a836516f81860ec313b = $this->env->getExtension("native_profiler");
+        $__internal_da31ac2bce3336dd4269a718eb6ded04f07258fb90aa3a836516f81860ec313b->enter($__internal_da31ac2bce3336dd4269a718eb6ded04f07258fb90aa3a836516f81860ec313b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 7
         echo "
@@ -187,18 +187,20 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
                                     </thead>
                                     <tbody>
                                         <td>
-                                            <input type=\"date\" value=\"12/11/2015\" name =\"";
+                                            <input type=\"date\" value=\"";
             // line 81
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["item"], "date", array()), "d/m/Y"), "html", null, true);
+            echo "\" name =\"date[";
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
-            echo "Date\" class=\"form-control\" onblur=\"verifChampDate(this)\">
+            echo "]\" class=\"form-control\" onblur=\"verifChampDate(this)\">
                                         </td>
                                         <td>
                                             <input type=\"number\" value=\"";
             // line 84
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "montant", array()), "html", null, true);
-            echo "\" name=\"";
+            echo "\" name=\"montant[";
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
-            echo "Montant \" class=\"form-control\" onblur=\"verifChampNumerique(this)\">
+            echo "]\" class=\"form-control\" onblur=\"verifChampNumerique(this)\">
                                         </td>
 
                                         <table class=\"table table-bordered\" id=\"libelleHF\">
@@ -212,12 +214,12 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
                                                 <tr>
 
                                                    <td>
-                                                        <textarea type=\"textarea\" value=\"";
+                                                        <textarea type=\"textarea\"  name=\"libelle[";
             // line 98
-            echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "libelleLigneHorsForfait", array()), "html", null, true);
-            echo "\" name=\"";
             echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "num", array()), "html", null, true);
-            echo "Libelle\" class=\"form-control\" onblur=\"verifChampText(this)\"></textarea>
+            echo "]\" class=\"form-control\" onblur=\"verifChampText(this)\">";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["item"], "libelleLigneHorsForfait", array()), "html", null, true);
+            echo "</textarea>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -273,15 +275,15 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 
 ";
         
-        $__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067->leave($__internal_1733b1d16e2d5f5f30d3a418642fedf62e988c9664a5e8043f1c6bec57b11067_prof);
+        $__internal_da31ac2bce3336dd4269a718eb6ded04f07258fb90aa3a836516f81860ec313b->leave($__internal_da31ac2bce3336dd4269a718eb6ded04f07258fb90aa3a836516f81860ec313b_prof);
 
     }
 
     // line 132
     public function block_javascripts($context, array $blocks = array())
     {
-        $__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe = $this->env->getExtension("native_profiler");
-        $__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe->enter($__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
+        $__internal_39f459de889940014f574a9a853dccb1fd9358863832408b01008de3285fe07b = $this->env->getExtension("native_profiler");
+        $__internal_39f459de889940014f574a9a853dccb1fd9358863832408b01008de3285fe07b->enter($__internal_39f459de889940014f574a9a853dccb1fd9358863832408b01008de3285fe07b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
         // line 133
         echo "
@@ -289,7 +291,7 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 
 ";
         
-        $__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe->leave($__internal_2fcee0d93fbe46d2f1b66dd56f23dc8cd6a339db58499e2e1ab4f9adb12820fe_prof);
+        $__internal_39f459de889940014f574a9a853dccb1fd9358863832408b01008de3285fe07b->leave($__internal_39f459de889940014f574a9a853dccb1fd9358863832408b01008de3285fe07b_prof);
 
     }
 
@@ -305,7 +307,7 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 
     public function getDebugInfo()
     {
-        return array (  287 => 133,  281 => 132,  269 => 127,  264 => 125,  245 => 111,  241 => 109,  229 => 105,  217 => 98,  198 => 84,  192 => 81,  179 => 71,  173 => 69,  170 => 68,  166 => 67,  163 => 66,  161 => 65,  148 => 54,  135 => 49,  130 => 47,  126 => 45,  122 => 44,  108 => 33,  103 => 30,  94 => 28,  90 => 27,  80 => 20,  73 => 16,  65 => 13,  57 => 7,  51 => 6,  42 => 4,  36 => 3,  11 => 1,);
+        return array (  289 => 133,  283 => 132,  271 => 127,  266 => 125,  247 => 111,  243 => 109,  231 => 105,  219 => 98,  200 => 84,  192 => 81,  179 => 71,  173 => 69,  170 => 68,  166 => 67,  163 => 66,  161 => 65,  148 => 54,  135 => 49,  130 => 47,  126 => 45,  122 => 44,  108 => 33,  103 => 30,  94 => 28,  90 => 27,  80 => 20,  73 => 16,  65 => 13,  57 => 7,  51 => 6,  42 => 4,  36 => 3,  11 => 1,);
     }
 }
 /* {% extends '::base.html.twig' %}*/
@@ -327,7 +329,7 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 /*                     </div>*/
 /* */
 /*                     <div class="col-sm-6 col-xs-12">*/
-/*                         <p>Date modification : {{ ficheFrais.dateModif|date("d/m/Y")  }}</p>*/
+/*                         <p>Date modification : {{ ficheFrais.dateModif|date("d/m/Y") }}</p>*/
 /*                     </div>*/
 /*                 </div>*/
 /* */
@@ -388,10 +390,10 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 /*                                     </thead>*/
 /*                                     <tbody>*/
 /*                                         <td>*/
-/*                                             <input type="date" value="12/11/2015" name ="{{ item.num }}Date" class="form-control" onblur="verifChampDate(this)">*/
+/*                                             <input type="date" value="{{ item.date|date('d/m/Y') }}" name ="date[{{ item.num }}]" class="form-control" onblur="verifChampDate(this)">*/
 /*                                         </td>*/
 /*                                         <td>*/
-/*                                             <input type="number" value="{{ item.montant }}" name="{{ item.num }}Montant " class="form-control" onblur="verifChampNumerique(this)">*/
+/*                                             <input type="number" value="{{ item.montant }}" name="montant[{{ item.num }}]" class="form-control" onblur="verifChampNumerique(this)">*/
 /*                                         </td>*/
 /* */
 /*                                         <table class="table table-bordered" id="libelleHF">*/
@@ -405,7 +407,7 @@ class __TwigTemplate_30495a4cf14befa611579a03f71950c3184f33fdc28f024f96297e6a14b
 /*                                                 <tr>*/
 /* */
 /*                                                    <td>*/
-/*                                                         <textarea type="textarea" value="{{ item.libelleLigneHorsForfait }}" name="{{ item.num }}Libelle" class="form-control" onblur="verifChampText(this)"></textarea>*/
+/*                                                         <textarea type="textarea"  name="libelle[{{ item.num }}]" class="form-control" onblur="verifChampText(this)">{{ item.libelleLigneHorsForfait }}</textarea>*/
 /*                                                     </td>*/
 /*                                                 </tr>*/
 /*                                             </tbody>*/

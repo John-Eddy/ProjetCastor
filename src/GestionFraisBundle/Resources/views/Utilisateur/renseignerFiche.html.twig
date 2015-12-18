@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="col-sm-6 col-xs-12">
-                        <p>Date modification : {{ ficheFrais.dateModif|date("d/m/Y")  }}</p>
+                        <p>Date modification : {{ ficheFrais.dateModif|date("d/m/Y") }}</p>
                     </div>
                 </div>
 
@@ -78,10 +78,10 @@
                                     </thead>
                                     <tbody>
                                         <td>
-                                            <input type="date" value="12/11/2015" name ="{{ item.num }}Date" class="form-control" onblur="verifChampDate(this)">
+                                            <input type="date" value="{{ item.date|date('d/m/Y') }}" name ="date[{{ item.num }}]" class="form-control" onblur="verifChampDate(this)">
                                         </td>
                                         <td>
-                                            <input type="number" value="{{ item.montant }}" name="{{ item.num }}Montant " class="form-control" onblur="verifChampNumerique(this)">
+                                            <input type="number" value="{{ item.montant }}" name="montant[{{ item.num }}]" class="form-control" onblur="verifChampNumerique(this)">
                                         </td>
 
                                         <table class="table table-bordered" id="libelleHF">
@@ -95,7 +95,7 @@
                                                 <tr>
 
                                                    <td>
-                                                        <textarea type="textarea" value="{{ item.libelleLigneHorsForfait }}" name="{{ item.num }}Libelle" class="form-control" onblur="verifChampText(this)"></textarea>
+                                                        <textarea type="textarea"  name="libelle[{{ item.num }}]" class="form-control" onblur="verifChampText(this)">{{ item.libelleLigneHorsForfait }}</textarea>
                                                     </td>
                                                 </tr>
                                             </tbody>

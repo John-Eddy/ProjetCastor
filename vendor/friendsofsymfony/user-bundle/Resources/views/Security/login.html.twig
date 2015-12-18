@@ -3,22 +3,39 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block body %}
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-    <label for="username">{{ 'security.login.username'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+<div class="container">
+    <div class=" col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" id="contenu" >
 
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" />
+        <div class="container">
 
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+            <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-</form>
+                <h3 class="text-center">Connection</h3>
+
+                <div class="bandeau-small"></div>
+
+                <label for="username" class="sr-only">{{ 'security.login.username'|trans }}</label>
+                <input type="text" id="unsername"  class="form-control" placeholder="{{ 'security.login.username'|trans }}"
+                       autofocus="" name="_username" value="{{ last_username }}" required="required">
+
+                <label for="password" class="sr-only"for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                <input type="password" id="password" name="_password" class="form-control" placeholder="{{  'security.login.password'|trans }}" required="required">
+                {% if error %}
+                    <p style="color:red">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                {% endif %}
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on">{{ 'security.login.remember_me'|trans }}
+                    </label>
+                </div>
+                <div class="bandeau-small"></div>
+                <input class="btn btn-lg btn-primary btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                <div class="bandeau-small"></div>
+            </form>
+        </div> <!-- /container -->
+    </div>
+</div>
 {% endblock body %}
