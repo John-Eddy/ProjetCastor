@@ -16,5 +16,13 @@ class ComptableController extends Controller
 
         return $this->render('GestionFraisBundle:Comptable:index.html.twig');
     }
+    /*
+     * Affiche la fiche frais correspondant au parametres fournis avec la possibilité de modifier l'etat des lignes et de la fiche
+     *
+     */
+    public function validerFicheAction($visiteur, $mois)
+    {
+
+    }
 
 }

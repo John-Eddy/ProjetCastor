@@ -312,12 +312,19 @@ class UtilisateurController extends Controller
             //Modification de la date de modification de la fiche
             //$ficheFrais->setDateModif();
 
-
+            //récupération des frais forfait
+            $fraisForfait = $em->getRepository('GestionFraisBundle:FraisForfait')->findAll();
+            $tabFraisForfait= array();
+            foreach($fraisForfait as $value)
+            {
+                $tabFraisForfait[$value->getLibelle()] = $value->getId();
+            }
 
             $lignesFraisForfait = array();
             $lignesFraisHorsForfait = array();
 
 
+            //Séparation des Ligne de frais forfait et des ligne de frais hors forfaits dans deux tableau
             foreach ($_POST as $clef => $valeur)
             {
                 if( $clef == 'date' || $clef == 'montant'|| $clef == 'libelle')
@@ -326,9 +333,14 @@ class UtilisateurController extends Controller
                 }
                 else
                 {
-                    $lignesFraisForfait[$clef]=$valeur;
+                    $lignesFraisForfait[$clef] = $valeur;
                 }
             }
+            foreach($lignesFraisForfait as $clef => $value )
+            {
+
+            }
+
             return $this->render('GestionFraisBundle:Utilisateur:vueTest.html.twig', array(
                 'lignesFraisForfait' => $lignesFraisForfait,
                 'lignesFraisHorsForfait' => $lignesFraisHorsForfait,
