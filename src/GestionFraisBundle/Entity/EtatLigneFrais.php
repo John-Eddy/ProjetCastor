@@ -7,27 +7,52 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * EtatLigneFrais
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="GestionFraisBundle\Entity\EtatLigneFraisRepository")
+ * @ORM\Table(name="etat_ligne_frais")
+ * @ORM\Entity
  */
 class EtatLigneFrais
 {
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelleEtatLigneFrais", type="string", length=255, nullable=false)
+     */
+    private $libelleetatlignefrais;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="libelleEtatLigneFrais", type="string", length=255)
-     */
-    private $libelleEtatLigneFrais;
 
+
+    /**
+     * Set libelleetatlignefrais
+     *
+     * @param string $libelleetatlignefrais
+     *
+     * @return EtatLigneFrais
+     */
+    public function setLibelleetatlignefrais($libelleetatlignefrais)
+    {
+        $this->libelleetatlignefrais = $libelleetatlignefrais;
+    
+        return $this;
+    }
+
+    /**
+     * Get libelleetatlignefrais
+     *
+     * @return string
+     */
+    public function getLibelleetatlignefrais()
+    {
+        return $this->libelleetatlignefrais;
+    }
 
     /**
      * Get id
@@ -38,29 +63,13 @@ class EtatLigneFrais
     {
         return $this->id;
     }
-
     /**
-     * Set libelleEtatLigneFrais
+     * (Add this method into your class)
      *
-     * @param string $libelleEtatLigneFrais
-     *
-     * @return EtatLigneFrais
+     * @return string String representation of this class
      */
-    public function setLibelleEtatLigneFrais($libelleEtatLigneFrais)
+    public function __toString()
     {
-        $this->libelleEtatLigneFrais = $libelleEtatLigneFrais;
-
-        return $this;
-    }
-
-    /**
-     * Get libelleEtatLigneFrais
-     *
-     * @return string
-     */
-    public function getLibelleEtatLigneFrais()
-    {
-        return $this->libelleEtatLigneFrais;
+        return $this->libelleetatlignefrais;
     }
 }
-

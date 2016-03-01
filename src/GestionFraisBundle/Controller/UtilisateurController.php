@@ -7,41 +7,40 @@
  */
 
 
+
 namespace GestionFraisBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-
-
-
+use GestionFraisBundle\Utils;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class UtilisateurController extends Controller
 {
     /*
-     * Récupere les fiche de l'utilisateur conécter depuis la BDD et les affiches par etat
+     * Récupere les fiche de l'utilisateur connecté et tout les etat de la table etatFicheFrais
+     *  depuis la BDD et les transmet a la vue Utilisateur:index.html.twig
+     *
+     */
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(){
 
-        $visiteur = $this->get('security.context')->getToken()->getUser();
+        $visiteur = $this->get('security.context')->getToken()->getUser();//Visiteur connecté
 
         $em = $this->getDoctrine()->getManager();
 
         //recupération des  fiches frais triées par mois
-
-        $ficheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findBy(
-            array('idVisiteur' => $visiteur->getId()),
-            array('mois' => 'DESC')
+        $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findBy(
+            array('idvisiteur' => $visiteur->getId()),
+            array('datemodif' => 'DESC')
         );
 
-        //recupération des etats des fiches
-        $etatFicheFrais = $em->getRepository('GestionFraisBundle:EtatFicheFrais')->findAll();
+        //Recupération de toutes les colone de la table etatFicheFrais
+        $lesEtatFicheFrais = $em->getRepository('GestionFraisBundle:EtatFicheFrais')->findAll();
 
-
-
-        return $this->render('GestionFraisBundle:Utilisateur:index.html.twig', array(
-            'ficheFrais' => $ficheFrais,
-            'etatFicheFrais' => $etatFicheFrais
+        return $this->render('GestionFraisBundle:Utilisateur\fichefrais:index.html.twig', array(
+            "lesFicheFrais" =>$lesFicheFrais,
         ));
     }
 
@@ -52,112 +51,49 @@ class UtilisateurController extends Controller
      *  - $mois : chaine de caractère (sous la forme mmaaaa)
      *
      * Cette fonction vérifie si une fiche de frais existe pour l'utilisateur connecté et le mois en paramètre
-     *  - si c'est le cas la fonction charges les données de la fiche et le retourne dans la vue "src\GestionFraisBundle\Ressources\views\Utilisateur\consulterFiche.html.twig"
+     *  - si c'est le cas la fonction charges les données de la fiche et le retourne dans la vue "src\GestionFraisBundle\Ressources\views\Utilisateur\consulter.html.twig"
      *  - sinon elle retourne une vue avec le message d'erreur corespondant ( fiche introuvable)
      *
      */
-    public function consulterFicheAction($mois)
+    public function consulterAction($id)
     {
-        $Visiteur = $this->get('security.context')->getToken()->getUser();
-
-
-
-        $idVisiteur = $Visiteur->getId();
 
         $em = $this->getDoctrine()->getManager();
 
 
         //recupération de la fiche frais
+        $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneById($id);
 
-        $ficheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(
-            array(
-                'mois' => $mois,
-                'idVisiteur' => $idVisiteur));
 
         //verification de l'éxistance de la fiche de frais :
-
-        if ($ficheFrais != null)
+        if( !$uneFicheFrais)
         {
-            //recupération del'etat de cette fiche
-
-            $etatFicheFrais = $em->getRepository('GestionFraisBundle:EtatFicheFrais')->findOneBy(
-                array(
-                    'id' => $ficheFrais->getIdEtatFicheFrais(),
-                )
-            );
-
-            //recupération des frais forfait
-            $fraisForfait = $em->getRepository('GestionFraisBundle:FraisForfait')->findAll();
-
-
-            //recupération des ligne de frais forfait de cette fiche
-            $lignesFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(
-                array(
-                    'mois' => $mois,
-                    'idVisiteur' => $idVisiteur
-                )
-            );
-
-            //Récupération de l'etat de chaque Ligne
-
-            $etatsligneFrais = $em->getRepository('GestionFraisBundle:EtatLigneFrais')->findALL();
-
-
-            //recupération des ligne de frais hors forfait de cette fiche
-            $lignesFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findBy(
-                array(
-                    'mois' => $mois,
-                    'idVisiteur' => $idVisiteur
-                )
-            );
-
-
-            /* on parcour les frais forfaits et les lignes de frais forfait pour pouvoir les regrouper sous forme d'un tableau
-                * la forme du tableau sera :
-                *   (
-                 *      libelleFrais(String) => ligneFraisForfait(Objet de type LigneFraisForfait),
-                 *      libelleFrais2(String) => ligneFraisForfait2(Objet de type LigneFraisForfait),
-                 *      ...,
-                 * )
-                *
-                */
-            //tableau recevant chaque ligne de frais forfait avec comme clef le libelle de son frais
-            $tabLigneFraisForfait = array();
-
-            // on parcour les frais forfaits et les lignes de frais forfait pour pouvoir les regrouper sous forme d'un tableau
-
-            foreach ($fraisForfait as $frais) {
-                //on recupere l'id d'un frais
-                $idfrais = $frais->getId();
-
-
-                foreach ($lignesFraisForfait as $ligne) {
-                    //si l'id du frais forfait corespond avec l'id du fraisforfait de la ligneFraisForfait
-                    if ($idfrais == $ligne->getIdFraisForfait()) {
-                        //libellefrais recoit le libelle du frais forfait
-                        $libelleFrais = $frais->getLibelleFraisForfait();
-                        $tabLigneFraisForfait += array($libelleFrais => $ligne);
-                    }
-                }
-            }
-
-
-            return $this->render('GestionFraisBundle:Utilisateur:consulterFiche.html.twig', array(
-                'visiteur' => $Visiteur,
-                'etatLigneFrais' => $etatsligneFrais,
-                'ficheFrais' => $ficheFrais,
-                'etatFicheFrais' => $etatFicheFrais,
-                'tabLigneFraisForfait' => $tabLigneFraisForfait,
-                'ligneFraisHorsForfait' => $lignesFraisHorsForfait,
-            ));
+            throw $this->createNotFoundException('Fiche introuvable.');
         }
-        //si la fiche n'existe pas
-        else{
-            $messageEreur = "Aucune fiche n'existe pour le mois : ".$mois;
-            return $this->render('GestionFraisBundle:Utilisateur:ficheIntrouvable.html.twig', array(
-                'message' => $messageEreur
-            ));
-        }
+
+
+        //recupération des ligne de frais forfait de cette fiche
+        $lesLignesFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(
+            array(
+                'idfichefrais' => $id,
+            )
+        );
+
+
+        //recupération des ligne de frais hors forfait de cette fiche
+        $lesLignesFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findBy(
+            array(
+                'idfichefrais' => $id,
+            )
+        );
+
+
+
+        return $this->render('GestionFraisBundle:Utilisateur\fichefrais:consulter.html.twig', array(
+            'uneFicheFrais' => $uneFicheFrais,
+            'lesLignesFraisForfait' => $lesLignesFraisForfait,
+            'lesLignesFraisHorsForfait' => $lesLignesFraisHorsForfait,
+        ));
     }
 
 
@@ -169,185 +105,122 @@ class UtilisateurController extends Controller
      *
      * Cette fonction vérifie si une fiche de frais existe pour l'utilisateur connecté et le mois en paramètre
      * Puis elle vérifie que la fiche concerné est modifiable en fonction de son état
-     *  - si c'est le cas la fonction charges les données de la fiche et le retourne dans la vue "src\GestionFraisBundle\Ressources\views\Utilisateur\consulterFiche.html.twig"
+     *  - si c'est le cas la fonction charges les données de la fiche et le retourne dans la vue "src\GestionFraisBundle\Ressources\views\Utilisateur\consulter.html.twig"
      *  - sinon elle retourne une vue avec le message d'erreur corespondant ( soit fiche introuvable, soit fiche non modifiale)
      */
-    public function renseignerFicheAction($mois)
+    public function renseignerAction($id)
     {
-        $Visiteur = $this->get('security.context')->getToken()->getUser();
-
-        $idVisiteur = $Visiteur->getId();
-
         $em = $this->getDoctrine()->getManager();
 
-
         //recupération de la fiche frais
-        $ficheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(
+        $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(array(
+            'id' => $id));
+
+        //verification de l'éxistance de la fiche de frais :
+        if (!$uneFicheFrais) {
+            throw $this->createNotFoundException('Fiche introuvable.');
+        }
+
+        //recupération du visiteur de cette fiche
+        $visiteurFiche = $em->getRepository('GestionFraisBundle:Visiteur')->findOneBy(
             array(
-                'mois' => $mois,
-                'idVisiteur' => $idVisiteur));
+                'id' => $id,
+            )
+        );
 
-        if ($ficheFrais != null) {
+        //recupération del'etat de cette fiche
+        $etatFicheFrais = $em->getRepository('GestionFraisBundle:EtatFicheFrais')->findOneBy(
+            array('id' => $uneFicheFrais->getIdEtatFicheFrais())
+        );
 
-            //recupération del'etat de cette fiche
-            $etatFicheFrais = $em->getRepository('GestionFraisBundle:EtatFicheFrais')->findOneBy(
-                array(
-                    'id' => $ficheFrais->getIdEtatFicheFrais(),
-                )
-            );
-
-            //On verifie que l'etat de cette fiche
-            if ($etatFicheFrais->getLibelle() == "Fiche créée, saisie en cours") {
-                //recupération des frais forfait
-                $fraisForfait = $em->getRepository('GestionFraisBundle:FraisForfait')->findAll();
-
-
-                //recupération des ligne de frais forfait de cette fiche
-                $lignesFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(
-                    array(
-                        'mois' => $mois,
-                        'idVisiteur' => $idVisiteur
-                    )
-                );
-
-                //Récupération de l'etat de chaque Ligne
-                $etatsligneFrais = $em->getRepository('GestionFraisBundle:EtatLigneFrais')->findALL();
-
-
-                //recupération des ligne de frais hors forfait de cette fiche
-                $lignesFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findBy(
-                    array(
-                        'mois' => $mois,
-                        'idVisiteur' => $idVisiteur
-                    )
-                );
-
-
-                //tableau recevant chaque ligne de frais forfait avec comme clef le libelle du frais corespondant a la ligne
-                $tabLigneFraisForfait = array();
-
-                /* on parcour les frais forfaits et les lignes de frais forfait pour pouvoir les regrouper sous forme d'un tableau
-                * la forme du tableau sera :
-                *   (
-                 *      libelleFrais(String) => ligneFraisForfait(Objet de type LigneFraisForfait),
-                 *      libelleFrais2(String) => ligneFraisForfait2(Objet de type LigneFraisForfait),
-                 *      ...,
-                 * )
-                *
-                */
-                foreach ($fraisForfait as $frais) {
-                    //on recupere l'id d'un frais
-                    $idfrais = $frais->getId();
-
-                    foreach ($lignesFraisForfait as $ligne) {
-                        //si l'id du frais forfait corespond avec l'id de la ligne de frais forfait
-                        if ($idfrais == $ligne->getIdFraisForfait()) {
-                            //libellefrais recoit le libelle du frais forfait
-                            $libelleFrais = $frais->getLibelleFraisForfait();
-                            $tabLigneFraisForfait += array($libelleFrais => $ligne);
-                        }
-                    }
-                }
-
-
-                return $this->render('GestionFraisBundle:Utilisateur:renseignerFiche.html.twig', array(
-                    'visiteur' => $Visiteur,
-                    'etatLigneFrais' => $etatsligneFrais,
-                    'ficheFrais' => $ficheFrais,
-                    'etatFicheFrais' => $etatFicheFrais,
-                    'tabLigneFraisForfait' => $tabLigneFraisForfait,
-                    'ligneFraisHorsForfait' => $lignesFraisHorsForfait,
-                ));
-            }
-            //si la saisie n'est pas posible
-            else
-            {
-                $messageEreur = "Impossillble de modifier la fiche";
-                return $this->render('GestionFraisBundle:Utilisateur:ficheNonModifiable.html.twig', array(
-                    'message' => $messageEreur,
-                    'action' => "utilisateur_consulter",
-                    'mois'=> $mois,
-                ));
-            }
+        //On verifie que l'etat de cette fiche permet la modification par l'utlisateur
+        if ($etatFicheFrais->getLibelle() != "Fiche créée, saisie en cours") {
+            throw $this->createAccessDeniedException('Modification impossible');
         }
-        //si la fiche n'existe pas
-        else{
-            $messageEreur = "Aucune fiche n'existe pour le mois : ".$mois;
-            return $this->render('GestionFraisBundle:Utilisateur:ficheIntrouvable.html.twig', array(
-                'message' => $messageEreur
-            ));
-        }
+
+        //recupération des ligne de frais forfait de cette fiche
+        $lesLignesFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(
+            array(
+                'idfichefrais' => $id,
+            )
+        );
+
+
+        //recupération des ligne de frais hors forfait de cette fiche
+        $lesLignesFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findBy(
+            array(
+                'idfichefrais' => $id,
+            )
+        );
+
+
+
+        return $this->render('GestionFraisBundle:Utilisateur:fichefrais\renseigner.html.twig', array(
+            'uneFicheFrais' => $uneFicheFrais,
+            'lesLignesFraisForfait' => $lesLignesFraisForfait,
+            'lesLignesFraisHorsForfait' => $lesLignesFraisHorsForfait,
+        ));
+
     }
 
     /*
      * Fonction qui vérifie les données recupérer depuis la fiche et les enregistre si elle son valide
      */
-    public function enregistrerFicheAction($mois)
+    public function enregistrerAction($id)
     {
 
+        //Connection BDD
+        $em = $this->getDoctrine()->getManager();
+
+        $lesTypeDeFraisForfait = $em->getRepository('GestionFraisBundle:FraisForfait')->findAll();
+
         //Si l'un des champs Killometres ou Repas_Midi ou Nuitée n'est pas definit on retourne a la fiche avec un message d'erreur
-        if(!isset($_POST["Kilometres"]) || !isset($_POST["Repas_Midi"]) || !isset($_POST["Nuitée"]) )
+        foreach($_POST as $unId => $uneQuantite)
         {
-            $messageEreur = "Erreur certains champs n'ont pas été renseigné";
-            return $this->render('GestionFraisBundle:Utilisateur:champNonRenseigner.html.twig', array(
-                'message' => $messageEreur,
-                'action' => "utilisateur_renseigner",
-                'mois'=> $mois,
-            ));
-        }
-        else{
-            //On recupère les information du visiteur connécter
-            $Visiteur = $this->get('security.context')->getToken()->getUser();
-            //Récuperation de l'id du viisiteur
-            $idVisiteur = $Visiteur->getId();
-
-            //Connection BDD
-            $em = $this->getDoctrine()->getManager();
-
-            //recupération de la fiche frais
-            $ficheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(
-                array(
-                    'mois' => $mois,
-                    'idVisiteur' => $idVisiteur));
-            //Modification de la date de modification de la fiche
-            //$ficheFrais->setDateModif();
-
-            //récupération des frais forfait
-            $fraisForfait = $em->getRepository('GestionFraisBundle:FraisForfait')->findAll();
-            $tabFraisForfait= array();
-            foreach($fraisForfait as $value)
+            if (!isset($_POST[$unId]) )
             {
-                $tabFraisForfait[$value->getLibelle()] = $value->getId();
+                throw $this->createNotFoundException('Erreur Champs.');
             }
-
-            $lignesFraisForfait = array();
-            $lignesFraisHorsForfait = array();
-
-
-            //Séparation des Ligne de frais forfait et des ligne de frais hors forfaits dans deux tableau
-            foreach ($_POST as $clef => $valeur)
-            {
-                if( $clef == 'date' || $clef == 'montant'|| $clef == 'libelle')
-                {
-                    $lignesFraisHorsForfait[$clef]=$valeur;
-                }
-                else
-                {
-                    $lignesFraisForfait[$clef] = $valeur;
-                }
-            }
-            foreach($lignesFraisForfait as $clef => $value )
-            {
-
-            }
-
-            return $this->render('GestionFraisBundle:Utilisateur:vueTest.html.twig', array(
-                'lignesFraisForfait' => $lignesFraisForfait,
-                'lignesFraisHorsForfait' => $lignesFraisHorsForfait,
-            ));
         }
 
 
+        //recupération des ligne de frais forfait de cette fiche
+        $lesLignesFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(array('idfichefrais' => $id));
+
+        //On parcourt les ligne frais reccupéré
+        foreach($lesLignesFraisForfait as $uneLigneFraisForfait)
+        {
+            foreach($_POST as $unId => $uneQuantite)// On parcour les donnée recupérer depuis le formulair
+            {
+                if($unId == $uneLigneFraisForfait->getId())//si l'id de la ligne recupéré depuis  le formulaire corespond a celui de la ligne
+                {
+                    $uneLigneFraisForfait->setquantite($uneQuantite);//on met a jour la quantité de cette ligne
+                    $em->persist($uneLigneFraisForfait);//on enregistre la ligne en base de donnée
+                }
+            }
+        }
+
+
+        //recupération de la fiche frais
+        $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneById($id);
+
+        //Modification de la date de modification de la fiche
+        $dateActuel = new \DateTime("now");
+        $uneFicheFrais->setDateModif( $dateActuel);
+
+        //Enregistrement des la fiche mis a jour en base de donnée
+        $em->persist($uneFicheFrais);
+
+        $em->flush();
+
+        return $this->redirectToRoute("ficheFrais_renseigner",array(
+            'id'=>$uneFicheFrais->getId()
+        ));
     }
 
+
+    Public function nouvelleLigneFraisHorsForfait($id)
+    {
+
+    }
 }

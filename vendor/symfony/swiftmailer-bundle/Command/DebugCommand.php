@@ -129,7 +129,7 @@ EOF
 
         $output->writeln(sprintf('<comment>Name</comment>           %s', $name));
         $output->writeln(sprintf('<comment>Service</comment>        %s', $service));
-        $output->writeln(sprintf('<comment>Class</comment>          %s', get_class($mailer)));
+        $output->writeln(sprintf('<comment>Utils</comment>          %s', get_class($mailer)));
         $output->writeln(sprintf('<comment>Transport</comment>      %s (%s)', sprintf('swiftmailer.mailer.%s.transport.name', $name), get_class($transport)));
         $output->writeln(sprintf('<comment>Spool</comment>          %s', $spool));
         if ($this->getContainer()->hasParameter(sprintf('swiftmailer.spool.%s.file.path', $name))) {

@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class for Symfony bundles to register entity listeners
+ * Utils for Symfony bundles to register entity listeners
  *
  * @author Sander Marechal <s.marechal@jejik.com>
  */

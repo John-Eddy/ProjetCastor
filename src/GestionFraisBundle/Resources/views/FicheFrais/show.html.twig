@@ -6,24 +6,20 @@
     <table class="record_properties">
         <tbody>
             <tr>
-                <th>Idvisiteur</th>
-                <td>{{ entity.idVisiteur }}</td>
-            </tr>
-            <tr>
                 <th>Mois</th>
                 <td>{{ entity.mois }}</td>
             </tr>
             <tr>
-                <th>Idetatfichefrais</th>
-                <td>{{ entity.idEtatFicheFrais }}</td>
+                <th>Datemodif</th>
+                <td>{{ entity.datemodif|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Montantvalide</th>
-                <td>{{ entity.montantValide }}</td>
+                <td>{{ entity.montantvalide }}</td>
             </tr>
             <tr>
-                <th>Datemodif</th>
-                <td>{{ entity.dateModif|date('Y-m-d H:i:s') }}</td>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
             </tr>
         </tbody>
     </table>
@@ -35,7 +31,7 @@
         </a>
     </li>
     <li>
-        <a href="{{ path('fichefrais_edit', { 'id': entity.idVisiteur }) }}">
+        <a href="{{ path('fichefrais_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

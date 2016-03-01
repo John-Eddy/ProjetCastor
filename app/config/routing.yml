@@ -1,5 +1,5 @@
 gestion_frais:
-    resource: "@GestionFraisBundle/Resources/config/routing.yml"
+    resource: "@GestionFraisBundle/Resources/config/routing/routing.yml"
     prefix:   /
 
 app:

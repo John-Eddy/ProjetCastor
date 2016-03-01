@@ -93,6 +93,6 @@ class MappingException extends \Exception
      */
     public static function nonExistingClass($className)
     {
-        return new self("Class '$className' does not exist");
+        return new self("Utils '$className' does not exist");
     }
 }

@@ -19,7 +19,7 @@ class ClassNodeTest extends AbstractNodeTest
     public function getToStringConversionTestData()
     {
         return array(
-            array(new ClassNode(new ElementNode(), 'class'), 'Class[Element[*].class]'),
+            array(new ClassNode(new ElementNode(), 'class'), 'Utils[Element[*].class]'),
         );
     }
 

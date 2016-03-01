@@ -86,7 +86,7 @@ class DebugUnitOfWorkListener
 
         fwrite($fh, "Flush Operation [".$this->context."] - Dumping identity map:\n");
         foreach ($identityMap as $className => $map) {
-            fwrite($fh, "Class: ". $className . "\n");
+            fwrite($fh, "Utils: ". $className . "\n");
 
             foreach ($map as $entity) {
                 fwrite($fh, " Entity: " . $this->getIdString($entity, $uow) . " " . spl_object_hash($entity)."\n");

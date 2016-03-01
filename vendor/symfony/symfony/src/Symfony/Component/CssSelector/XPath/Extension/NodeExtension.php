@@ -85,7 +85,7 @@ class NodeExtension extends AbstractExtension
             'Function' => array($this, 'translateFunction'),
             'Pseudo' => array($this, 'translatePseudo'),
             'Attribute' => array($this, 'translateAttribute'),
-            'Class' => array($this, 'translateClass'),
+            'Utils' => array($this, 'translateClass'),
             'Hash' => array($this, 'translateHash'),
             'Element' => array($this, 'translateElement'),
         );

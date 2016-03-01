@@ -230,7 +230,7 @@ class ORMException extends Exception
      */
     public static function metadataCacheNotConfigured()
     {
-        return new self('Class Metadata Cache is not configured.');
+        return new self('Utils Metadata Cache is not configured.');
     }
 
     /**

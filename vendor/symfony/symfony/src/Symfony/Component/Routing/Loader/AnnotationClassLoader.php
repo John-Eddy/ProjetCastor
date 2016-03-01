@@ -105,7 +105,7 @@ abstract class AnnotationClassLoader implements LoaderInterface
     public function load($class, $type = null)
     {
         if (!class_exists($class)) {
-            throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
+            throw new \InvalidArgumentException(sprintf('Utils "%s" does not exist.', $class));
         }
 
         $class = new \ReflectionClass($class);

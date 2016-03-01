@@ -58,7 +58,7 @@ class ClassMetadataInfo implements ClassMetadata
 
     /**
      * JOINED means the class will be persisted according to the rules of
-     * <tt>Class Table Inheritance</tt>.
+     * <tt>Utils Table Inheritance</tt>.
      */
     const INHERITANCE_TYPE_JOINED = 2;
 
@@ -696,7 +696,7 @@ class ClassMetadataInfo implements ClassMetadata
     public function getSingleIdReflectionProperty()
     {
         if ($this->isIdentifierComposite) {
-            throw new BadMethodCallException("Class " . $this->name . " has a composite identifier.");
+            throw new BadMethodCallException("Utils " . $this->name . " has a composite identifier.");
         }
         return $this->reflFields[$this->identifier[0]];
     }
@@ -3204,7 +3204,7 @@ class ClassMetadataInfo implements ClassMetadata
     }
 
     /**
-     * Map Embedded Class
+     * Map Embedded Utils
      *
      * @param array $mapping
      * @throws MappingException

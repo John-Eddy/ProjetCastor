@@ -20,7 +20,7 @@ class NegationNodeTest extends AbstractNodeTest
     public function getToStringConversionTestData()
     {
         return array(
-            array(new NegationNode(new ElementNode(), new ClassNode(new ElementNode(), 'class')), 'Negation[Element[*]:not(Class[Element[*].class])]'),
+            array(new NegationNode(new ElementNode(), new ClassNode(new ElementNode(), 'class')), 'Negation[Element[*]:not(Utils[Element[*].class])]'),
         );
     }
 

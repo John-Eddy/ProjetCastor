@@ -179,7 +179,7 @@ class ReflectionCaster
                 $a[$prefix.'typeHint'] = $v->name;
             }
         } catch (\ReflectionException $e) {
-            if (preg_match('/^Class ([^ ]++) does not exist$/', $e->getMessage(), $m)) {
+            if (preg_match('/^Utils ([^ ]++) does not exist$/', $e->getMessage(), $m)) {
                 $a[$prefix.'typeHint'] = $m[1];
             }
         }

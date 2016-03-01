@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+{%  block body %}
+
+    <div class="bandeau"></div>
+    <div class="container">
+        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="contenu" >
+            <h2 class="">Fiche Frais</h2>
+            <div class="bandeau"></div>
+
+            {% for uneFicheFrais in lesFicheFrais %}
+                {% set action = "" %}
+                {% set libelleMois = [uneFicheFrais.mois[0:2],uneFicheFrais.mois[2:]]|join('/') %}
+                        {% if uneFicheFrais.getIdetatfichefrais().getLibelle() != "Fiche créée, saisie en cours" %}
+                            {% set action = "ficheFrais_consulter" %}
+                        {% else %}
+                            {% set action = "ficheFrais_renseigner" %}
+                        {% endif %}
+
+                <a class="lien-fiche" href="{{ path(action, {id: uneFicheFrais.id}) }}">
+                    <div class="row" id = "{{ uneFicheFrais.id }}">
+                        <div class="col-sm-6">
+                            <p>Mois : {{ libelleMois }}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>Date de modification : {{ uneFicheFrais.dateModif|date("d/m/Y") }}</p>
+                        </div>
+                        <div class="col-xs-12">
+                            <p>Etat : {{uneFicheFrais.getIdetatfichefrais().getLibelle() }}</p>
+                        </div>
+                        <div class="col-xs-12">
+                            <p>Id : {{ uneFicheFrais.id}}</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="bandeau-small"></div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock  %}

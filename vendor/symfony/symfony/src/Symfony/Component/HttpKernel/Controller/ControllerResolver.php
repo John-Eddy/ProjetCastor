@@ -144,7 +144,7 @@ class ControllerResolver implements ControllerResolverInterface
         list($class, $method) = explode('::', $controller, 2);
 
         if (!class_exists($class)) {
-            throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
+            throw new \InvalidArgumentException(sprintf('Utils "%s" does not exist.', $class));
         }
 
         return array($this->instantiateController($class), $method);

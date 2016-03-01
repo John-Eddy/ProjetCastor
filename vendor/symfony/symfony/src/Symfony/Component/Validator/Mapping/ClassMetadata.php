@@ -518,7 +518,7 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
         }
 
         if (!$this->getReflectionClass()->implementsInterface('Symfony\Component\Validator\GroupSequenceProviderInterface')) {
-            throw new GroupDefinitionException(sprintf('Class "%s" must implement GroupSequenceProviderInterface', $this->name));
+            throw new GroupDefinitionException(sprintf('Utils "%s" must implement GroupSequenceProviderInterface', $this->name));
         }
 
         $this->groupSequenceProvider = $active;
@@ -533,7 +533,7 @@ class ClassMetadata extends ElementMetadata implements ClassMetadataInterface
     }
 
     /**
-     * Class nodes are never cascaded.
+     * Utils nodes are never cascaded.
      *
      * {@inheritdoc}
      */

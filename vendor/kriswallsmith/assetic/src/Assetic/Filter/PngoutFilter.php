@@ -18,7 +18,7 @@ use Assetic\Util\FilesystemUtils;
 /**
  * Runs assets through pngout.
  *
- * @link http://advsys.net/ken/utils.htm#pngout
+ * @link http://advsys.net/ken/Utils.htm#pngout
  * @author Kris Wallsmith <kris.wallsmith@gmail.com>
  */
 class PngoutFilter extends BaseProcessFilter

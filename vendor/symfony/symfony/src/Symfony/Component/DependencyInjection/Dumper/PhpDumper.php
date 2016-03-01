@@ -803,7 +803,7 @@ EOF;
     /**
      * Adds the class headers.
      *
-     * @param string $class     Class name
+     * @param string $class     Utils name
      * @param string $baseClass The name of the base class
      * @param string $namespace The class namespace
      *

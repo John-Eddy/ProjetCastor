@@ -27,7 +27,7 @@ div.bandeau-small
 	min-height: 100%
 
 }
-a.lien-fiche {
+.lien-fiche {
 	display: block;
 	color: black;
 	border: 1px solid #DDDDDD;
@@ -36,12 +36,16 @@ a.lien-fiche {
 	border-color: #DDDDDD;
 	border-radius: 4px;
 }
-a.lien-fiche:hover
+.lien-fiche:hover
 {
 	background-color: #fcfcfc;
 	text-decoration: none;
 }
 
+.lien-tableau:hover
+{
+	background-color: #fcfcfc;
+}
 img
 {
 	max-height: 100%;

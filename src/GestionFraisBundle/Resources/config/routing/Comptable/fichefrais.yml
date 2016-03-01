@@ -1,0 +1,30 @@
+fichefrais:
+    path:     /
+    defaults: { _controller: "GestionFraisBundle:FicheFrais:index" }
+
+fichefrais_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionFraisBundle:FicheFrais:show" }
+
+fichefrais_new:
+    path:     /new
+    defaults: { _controller: "GestionFraisBundle:FicheFrais:new" }
+
+fichefrais_create:
+    path:     /create
+    defaults: { _controller: "GestionFraisBundle:FicheFrais:create" }
+    methods:  POST
+
+fichefrais_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionFraisBundle:FicheFrais:edit" }
+
+fichefrais_update:
+    path:     /{id}/update
+    defaults: { _controller: "GestionFraisBundle:FicheFrais:update" }
+    methods:  [POST, PUT]
+
+fichefrais_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionFraisBundle:FicheFrais:delete" }
+    methods:  [POST, DELETE]

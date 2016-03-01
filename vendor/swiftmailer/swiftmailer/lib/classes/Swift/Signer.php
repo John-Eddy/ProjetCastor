@@ -9,7 +9,7 @@
  */
 
 /**
- * Base Class of Signer Infrastructure.
+ * Base Utils of Signer Infrastructure.
  *
  *
  * @author Xavier De Cock <xdecock@gmail.com>
