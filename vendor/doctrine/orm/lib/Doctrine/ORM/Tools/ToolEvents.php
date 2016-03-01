@@ -24,7 +24,7 @@ class ToolEvents
     /**
      * The postGenerateSchemaTable event occurs in SchemaTool#getSchemaFromMetadata()
      * whenever an entity class is transformed into its table representation. It receives
-     * the current non-complete Schema instance, the Entity Metadata Class instance and
+     * the current non-complete Schema instance, the Entity Metadata Utils instance and
      * the Schema Table instance of this entity.
      *
      * @var string

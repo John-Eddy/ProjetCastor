@@ -7,7 +7,7 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Test\TypeTestCase as BaseTypeTestCase;
 
 /**
- * Class TypeTestCase
+ * Utils TypeTestCase
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  *

@@ -8,13 +8,13 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        //recuperation des données du visiteur connécté
-        //$visiteur = $this->get('security.context')->getToken()->getUser();
+        return $this->redirectToRoute("utilisateur_index");
+        /*recuperation des roles du visiteur connécté
+        /$roles = $this->get('security.context')->getToken()->getUser()->getRoles();
 
-        //recuperation des roles de ce visiteur
-        $roles = array( 1 => "ROLE_UTILISATEUR");
-
+        echo(serialize($roles));
         //controle du role du visiteur
+
         if(in_array('ROLE_UTILISATEUR',$roles))
         {
             return $this->redirectToRoute("utilisateur_index");
@@ -25,6 +25,7 @@ class DefaultController extends Controller
         }
         else if(in_array('ROLE_ADMIN',$roles))
         {
-        }
+            return $this->redirectToRoute('comptable_index');
+        }*/
     }
 }

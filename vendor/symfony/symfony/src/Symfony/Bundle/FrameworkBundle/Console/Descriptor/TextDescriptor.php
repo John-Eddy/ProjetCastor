@@ -81,7 +81,7 @@ class TextDescriptor extends Descriptor
             '<comment>Host Regex</comment>   '.('' !== $route->getHost() ? $route->compile()->getHostRegex() : ''),
             '<comment>Scheme</comment>       '.($route->getSchemes() ? implode('|', $route->getSchemes()) : 'ANY'),
             '<comment>Method</comment>       '.($route->getMethods() ? implode('|', $route->getMethods()) : 'ANY'),
-            '<comment>Class</comment>        '.get_class($route),
+            '<comment>Utils</comment>        '.get_class($route),
             '<comment>Defaults</comment>     '.$this->formatRouterConfig($route->getDefaults()),
             '<comment>Requirements</comment> '.($requirements ? $this->formatRouterConfig($requirements) : 'NO CUSTOM'),
             '<comment>Options</comment>      '.$this->formatRouterConfig($route->getOptions()),
@@ -145,7 +145,7 @@ class TextDescriptor extends Descriptor
         } else {
             $description = $this->formatSection('container', sprintf('Information for service <info>%s</info>', $options['id']))
                 ."\n".sprintf('<comment>Service Id</comment>       %s', isset($options['id']) ? $options['id'] : '-')
-                ."\n".sprintf('<comment>Class</comment>            %s', get_class($service));
+                ."\n".sprintf('<comment>Utils</comment>            %s', get_class($service));
 
             $this->writeText($description, $options);
         }
@@ -203,7 +203,7 @@ class TextDescriptor extends Descriptor
 
         $table = new Table($this->getOutput());
         $table->setStyle('compact');
-        $table->setHeaders(array_merge(array('Service ID'), $tagsNames, array('Class name')));
+        $table->setHeaders(array_merge(array('Service ID'), $tagsNames, array('Utils name')));
 
         foreach ($this->sortServiceIds($serviceIds) as $serviceId) {
             $definition = $this->resolveServiceDefinition($builder, $serviceId);
@@ -245,7 +245,7 @@ class TextDescriptor extends Descriptor
             : array();
 
         $description[] = sprintf('<comment>Service Id</comment>       %s', isset($options['id']) ? $options['id'] : '-');
-        $description[] = sprintf('<comment>Class</comment>            %s', $definition->getClass() ?: '-');
+        $description[] = sprintf('<comment>Utils</comment>            %s', $definition->getClass() ?: '-');
 
         $tags = $definition->getTags();
         if (count($tags)) {
@@ -275,7 +275,7 @@ class TextDescriptor extends Descriptor
         }
 
         if ($definition->getFactoryClass(false)) {
-            $description[] = sprintf('<comment>Factory Class</comment>    %s', $definition->getFactoryClass(false));
+            $description[] = sprintf('<comment>Factory Utils</comment>    %s', $definition->getFactoryClass(false));
         }
 
         if ($definition->getFactoryService(false)) {
@@ -293,7 +293,7 @@ class TextDescriptor extends Descriptor
                 } elseif ($factory[0] instanceof Definition) {
                     throw new \InvalidArgumentException('Factory is not describable.');
                 } else {
-                    $description[] = sprintf('<comment>Factory Class</comment>    %s', $factory[0]);
+                    $description[] = sprintf('<comment>Factory Utils</comment>    %s', $factory[0]);
                 }
                 $description[] = sprintf('<comment>Factory Method</comment>   %s', $factory[1]);
             } else {

@@ -14,7 +14,7 @@ namespace Assetic\Filter;
 use Assetic\Asset\AssetInterface;
 
 /**
- * Class CssCacheBustingFilter
+ * Utils CssCacheBustingFilter
  *
  * @package Assetic\Filter
  * @author Maximilian Reichel <info@phramz.com>

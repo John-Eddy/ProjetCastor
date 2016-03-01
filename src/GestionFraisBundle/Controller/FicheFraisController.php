@@ -4,16 +4,15 @@ namespace GestionFraisBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
 use GestionFraisBundle\Entity\FicheFrais;
 use GestionFraisBundle\Form\FicheFraisType;
+use GestionFraisBundle\MyClass\LigneFraisForfaitComplete;
+use GestionFraisBundle\MyClass\LigneFraisHorsForfaitComplete;
 
 /**
  * FicheFrais controller.
  *
- * @Route("/fichefrais")
  */
 class FicheFraisController extends Controller
 {
@@ -21,9 +20,6 @@ class FicheFraisController extends Controller
     /**
      * Lists all FicheFrais entities.
      *
-     * @Route("/", name="fichefrais")
-     * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -31,16 +27,13 @@ class FicheFraisController extends Controller
 
         $entities = $em->getRepository('GestionFraisBundle:FicheFrais')->findAll();
 
-        return array(
+        return $this->render('GestionFraisBundle:FicheFrais:index.html.twig', array(
             'entities' => $entities,
-        );
+        ));
     }
     /**
      * Creates a new FicheFrais entity.
      *
-     * @Route("/", name="fichefrais_create")
-     * @Method("POST")
-     * @Template("GestionFraisBundle:FicheFrais:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -56,10 +49,10 @@ class FicheFraisController extends Controller
             return $this->redirect($this->generateUrl('fichefrais_show', array('id' => $entity->getId())));
         }
 
-        return array(
+        return $this->render('GestionFraisBundle:FicheFrais:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
@@ -84,27 +77,21 @@ class FicheFraisController extends Controller
     /**
      * Displays a form to create a new FicheFrais entity.
      *
-     * @Route("/new", name="fichefrais_new")
-     * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new FicheFrais();
         $form   = $this->createCreateForm($entity);
 
-        return array(
+        return $this->render('GestionFraisBundle:FicheFrais:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
      * Finds and displays a FicheFrais entity.
      *
-     * @Route("/{id}", name="fichefrais_show")
-     * @Method("GET")
-     * @Template()
      */
     public function showAction($id)
     {
@@ -118,18 +105,15 @@ class FicheFraisController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('GestionFraisBundle:FicheFrais:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
      * Displays a form to edit an existing FicheFrais entity.
      *
-     * @Route("/{id}/edit", name="fichefrais_edit")
-     * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -144,11 +128,11 @@ class FicheFraisController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('GestionFraisBundle:FicheFrais:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
@@ -172,9 +156,6 @@ class FicheFraisController extends Controller
     /**
      * Edits an existing FicheFrais entity.
      *
-     * @Route("/{id}", name="fichefrais_update")
-     * @Method("PUT")
-     * @Template("GestionFraisBundle:FicheFrais:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -196,17 +177,15 @@ class FicheFraisController extends Controller
             return $this->redirect($this->generateUrl('fichefrais_edit', array('id' => $id)));
         }
 
-        return array(
+        return $this->render('GestionFraisBundle:FicheFrais:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
     /**
      * Deletes a FicheFrais entity.
      *
-     * @Route("/{id}", name="fichefrais_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {

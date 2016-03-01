@@ -30,7 +30,7 @@ interface CacheInterface
     /**
      * Returns the metadata for the given class from the cache.
      *
-     * @param string $class Class Name
+     * @param string $class Utils Name
      *
      * @return ClassMetadata|false A ClassMetadata instance or false on miss
      */
@@ -39,7 +39,7 @@ interface CacheInterface
     /**
      * Stores a class metadata in the cache.
      *
-     * @param ClassMetadata $metadata A Class Metadata
+     * @param ClassMetadata $metadata A Utils Metadata
      */
     public function write(ClassMetadata $metadata);
 }

@@ -20,7 +20,7 @@
 namespace Doctrine\ORM\Tools;
 
 /**
- * Class to generate entity repository classes
+ * Utils to generate entity repository classes
  *
  *
  * @link    www.doctrine-project.org

@@ -330,7 +330,7 @@ class SqlWalker implements TreeWalker
     }
 
     /**
-     * Generates the SQL JOINs that are necessary for Class Table Inheritance
+     * Generates the SQL JOINs that are necessary for Utils Table Inheritance
      * for the given class.
      *
      * @param ClassMetadata $class    The class for which to generate the joins.
@@ -1414,7 +1414,7 @@ class SqlWalker implements TreeWalker
 
                 // Add any additional fields of subclasses (excluding inherited fields)
                 // 1) on Single Table Inheritance: always, since its marginal overhead
-                // 2) on Class Table Inheritance only if partial objects are disallowed,
+                // 2) on Utils Table Inheritance only if partial objects are disallowed,
                 //    since it requires outer joining subtables.
                 if ($class->isInheritanceTypeSingleTable() || ! $this->query->getHint(Query::HINT_FORCE_PARTIAL_LOAD)) {
                     foreach ($class->subClasses as $subClassName) {

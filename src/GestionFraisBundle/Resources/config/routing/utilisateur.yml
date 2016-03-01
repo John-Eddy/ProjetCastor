@@ -1,15 +1,11 @@
 utilisateur_index:
-    path:   /
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:Index" }
+      path:     /
+      defaults: { _controller: "GestionFraisBundle:Utilisateur:Index" }
 
-utilisateur_consulter:
-    path:     /consulter/{mois}
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:ConsulterFiche" }
+utilisateur_fichefrais:
+     resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/fichefrais.yml"
+     prefix:   /fichefrais
 
-utilisateur_renseigner:
-    path:     /renseigner/{mois}
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:RenseignerFiche" }
-
-utilisateur_enregistrer:
-    path:     /enregistrer/{mois}
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:EnregistrerFiche" }
+gestion_frais_lignefraishorsforfait:
+    resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/lignefraishorsforfait.yml"
+    prefix:   /lignefraishorsforfait

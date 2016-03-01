@@ -58,7 +58,7 @@ class MarkdownDescriptor extends Descriptor
             ."\n".'- Host Regex: '.('' !== $route->getHost() ? $route->compile()->getHostRegex() : '')
             ."\n".'- Scheme: '.($route->getSchemes() ? implode('|', $route->getSchemes()) : 'ANY')
             ."\n".'- Method: '.($route->getMethods() ? implode('|', $route->getMethods()) : 'ANY')
-            ."\n".'- Class: '.get_class($route)
+            ."\n".'- Utils: '.get_class($route)
             ."\n".'- Defaults: '.$this->formatRouterConfig($route->getDefaults())
             ."\n".'- Requirements: '.($requirements ? $this->formatRouterConfig($requirements) : 'NO CUSTOM')
             ."\n".'- Options: '.$this->formatRouterConfig($route->getOptions());
@@ -178,7 +178,7 @@ class MarkdownDescriptor extends Descriptor
      */
     protected function describeContainerDefinition(Definition $definition, array $options = array())
     {
-        $output = '- Class: `'.$definition->getClass().'`'
+        $output = '- Utils: `'.$definition->getClass().'`'
             ."\n".'- Scope: `'.$definition->getScope().'`'
             ."\n".'- Public: '.($definition->isPublic() ? 'yes' : 'no')
             ."\n".'- Synthetic: '.($definition->isSynthetic() ? 'yes' : 'no')
@@ -196,7 +196,7 @@ class MarkdownDescriptor extends Descriptor
         }
 
         if ($definition->getFactoryClass(false)) {
-            $output .= "\n".'- Factory Class: `'.$definition->getFactoryClass(false).'`';
+            $output .= "\n".'- Factory Utils: `'.$definition->getFactoryClass(false).'`';
         }
 
         if ($definition->getFactoryService(false)) {
@@ -214,7 +214,7 @@ class MarkdownDescriptor extends Descriptor
                 } elseif ($factory[0] instanceof Definition) {
                     throw new \InvalidArgumentException('Factory is not describable.');
                 } else {
-                    $output .= "\n".'- Factory Class: `'.$factory[0].'`';
+                    $output .= "\n".'- Factory Utils: `'.$factory[0].'`';
                 }
                 $output .= "\n".'- Factory Method: `'.$factory[1].'`';
             } else {
@@ -301,15 +301,15 @@ class MarkdownDescriptor extends Descriptor
 
             if (is_object($callable[0])) {
                 $string .= "\n".sprintf('- Name: `%s`', $callable[1]);
-                $string .= "\n".sprintf('- Class: `%s`', get_class($callable[0]));
+                $string .= "\n".sprintf('- Utils: `%s`', get_class($callable[0]));
             } else {
                 if (0 !== strpos($callable[1], 'parent::')) {
                     $string .= "\n".sprintf('- Name: `%s`', $callable[1]);
-                    $string .= "\n".sprintf('- Class: `%s`', $callable[0]);
+                    $string .= "\n".sprintf('- Utils: `%s`', $callable[0]);
                     $string .= "\n- Static: yes";
                 } else {
                     $string .= "\n".sprintf('- Name: `%s`', substr($callable[1], 8));
-                    $string .= "\n".sprintf('- Class: `%s`', $callable[0]);
+                    $string .= "\n".sprintf('- Utils: `%s`', $callable[0]);
                     $string .= "\n- Static: yes";
                     $string .= "\n- Parent: yes";
                 }
@@ -327,7 +327,7 @@ class MarkdownDescriptor extends Descriptor
                 $callableParts = explode('::', $callable);
 
                 $string .= "\n".sprintf('- Name: `%s`', $callableParts[1]);
-                $string .= "\n".sprintf('- Class: `%s`', $callableParts[0]);
+                $string .= "\n".sprintf('- Utils: `%s`', $callableParts[0]);
                 $string .= "\n- Static: yes";
             }
 

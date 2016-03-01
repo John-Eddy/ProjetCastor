@@ -1,0 +1,15 @@
+fichefrais_index:
+    path:     /
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:Index" }
+
+ficheFrais_consulter:
+    path:    /consulter/{id}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:Consulter" }
+
+ficheFrais_renseigner:
+    path:    /renseigner/{id}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:Renseigner" }
+
+ficheFrais_enregistrer:
+    path:     /enregistrer/{id}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:Enregistrer" }

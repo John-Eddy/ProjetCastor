@@ -26,7 +26,7 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
- * Class, which can handle completion of hydration cycle and produce some of tasks.
+ * Utils, which can handle completion of hydration cycle and produce some of tasks.
  * In current implementation triggers deferred postLoad event.
  *
  * @author Artur Eshenbrener <strate@yandex.ru>

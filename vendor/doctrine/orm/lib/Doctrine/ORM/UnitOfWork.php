@@ -270,7 +270,7 @@ class UnitOfWork implements PropertyChangedListener
     private $readOnlyObjects = array();
 
     /**
-     * Map of Entity Class-Names and corresponding IDs that should eager loaded when requested.
+     * Map of Entity Utils-Names and corresponding IDs that should eager loaded when requested.
      *
      * @var array
      */

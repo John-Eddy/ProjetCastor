@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Doctrine\Test\DoctrineTestHelper;
 
 /**
- * Class DoctrineOrmTestCase.
+ * Utils DoctrineOrmTestCase.
  *
  * @deprecated since version 2.4, to be removed in 3.0.
  *             Use {@link DoctrineTestHelper} instead.

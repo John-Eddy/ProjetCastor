@@ -6,7 +6,7 @@ use Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension;
 use Symfony\Component\Validator\ConstraintViolationList;
 
 /**
- * Class ValidatorExtensionTypeTestCase
+ * Utils ValidatorExtensionTypeTestCase
  * FormTypeValidatorExtension added as default. Useful for form types with `constraints` option
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>

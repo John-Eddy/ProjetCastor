@@ -591,7 +591,7 @@ class Parser
             // Check if queryComponent points to an AbstractSchemaName or a ResultVariable
             if ( ! isset($qComp['metadata'])) {
                 $this->semanticalError(
-                    "'$identVariable' does not point to a Class.", $deferredItem['token']
+                    "'$identVariable' does not point to a Utils.", $deferredItem['token']
                 );
             }
 
@@ -634,17 +634,17 @@ class Parser
             }
 
             if ( ! class_exists($className)) {
-                $this->semanticalError(sprintf('Class "%s" is not defined.', $className), $token);
+                $this->semanticalError(sprintf('Utils "%s" is not defined.', $className), $token);
             }
 
             $class = new \ReflectionClass($className);
 
             if ( ! $class->isInstantiable()) {
-                $this->semanticalError(sprintf('Class "%s" can not be instantiated.', $className), $token);
+                $this->semanticalError(sprintf('Utils "%s" can not be instantiated.', $className), $token);
             }
 
             if ($class->getConstructor() === null) {
-                $this->semanticalError(sprintf('Class "%s" has not a valid constructor.', $className), $token);
+                $this->semanticalError(sprintf('Utils "%s" has not a valid constructor.', $className), $token);
             }
 
             if ($class->getConstructor()->getNumberOfRequiredParameters() > count($args)) {
@@ -754,7 +754,7 @@ class Parser
             // Check if field or association exists
             if ( ! isset($class->associationMappings[$field]) && ! isset($class->fieldMappings[$field])) {
                 $this->semanticalError(
-                    'Class ' . $class->name . ' has no field or association named ' . $field,
+                    'Utils ' . $class->name . ' has no field or association named ' . $field,
                     $deferredItem['token']
                 );
             }
@@ -968,7 +968,7 @@ class Parser
         $exists = class_exists($schemaName, true);
 
         if ( ! $exists) {
-            $this->semanticalError("Class '$schemaName' is not defined.", $this->lexer->token);
+            $this->semanticalError("Utils '$schemaName' is not defined.", $this->lexer->token);
         }
 
         return $schemaName;
@@ -1039,7 +1039,7 @@ class Parser
         $class = $qComp['metadata'];
 
         if ( ! $class->hasAssociation($field)) {
-            $this->semanticalError('Class ' . $class->name . ' has no association named ' . $field);
+            $this->semanticalError('Utils ' . $class->name . ' has no association named ' . $field);
         }
 
         return new AST\JoinAssociationPathExpression($identVariable, $field);

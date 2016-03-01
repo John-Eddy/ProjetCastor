@@ -22,7 +22,7 @@ namespace Doctrine\ORM\Event;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class that holds event arguments for a preInsert/preUpdate event.
+ * Utils that holds event arguments for a preInsert/preUpdate event.
  *
  * @author Guilherme Blanco <guilehrmeblanco@hotmail.com>
  * @author Roman Borschel <roman@code-factory.org>

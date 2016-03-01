@@ -34,11 +34,11 @@ class ClassParserTest extends \PHPUnit_Framework_TestCase
     public function getParseTestData()
     {
         return array(
-            array('.testclass', 'Class[Element[*].testclass]'),
-            array('testel.testclass', 'Class[Element[testel].testclass]'),
-            array('testns|.testclass', 'Class[Element[testns|*].testclass]'),
-            array('testns|*.testclass', 'Class[Element[testns|*].testclass]'),
-            array('testns|testel.testclass', 'Class[Element[testns|testel].testclass]'),
+            array('.testclass', 'Utils[Element[*].testclass]'),
+            array('testel.testclass', 'Utils[Element[testel].testclass]'),
+            array('testns|.testclass', 'Utils[Element[testns|*].testclass]'),
+            array('testns|*.testclass', 'Utils[Element[testns|*].testclass]'),
+            array('testns|testel.testclass', 'Utils[Element[testns|testel].testclass]'),
         );
     }
 }

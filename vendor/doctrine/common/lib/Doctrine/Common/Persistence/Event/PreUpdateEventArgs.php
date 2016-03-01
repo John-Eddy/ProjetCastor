@@ -22,7 +22,7 @@ namespace Doctrine\Common\Persistence\Event;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class that holds event arguments for a preUpdate event.
+ * Utils that holds event arguments for a preUpdate event.
  *
  * @author Guilherme Blanco <guilehrmeblanco@hotmail.com>
  * @author Roman Borschel <roman@code-factory.org>

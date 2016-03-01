@@ -57,7 +57,7 @@ class DropCommand extends AbstractCommand
             ),
             new InputOption(
                 'full-database', null, InputOption::VALUE_NONE,
-                'Instead of using the Class Metadata to detect the database table schema, drop ALL assets that the database contains.'
+                'Instead of using the Utils Metadata to detect the database table schema, drop ALL assets that the database contains.'
             ),
         ))
         ->setHelp(<<<EOT

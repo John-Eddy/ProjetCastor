@@ -27,7 +27,7 @@ use Doctrine\ORM\Query\AST;
 
 /**
  * Executes the SQL statements for bulk DQL UPDATE statements on classes in
- * Class Table Inheritance (JOINED).
+ * Utils Table Inheritance (JOINED).
  *
  * @author Roman Borschel <roman@code-factory.org>
  * @since 2.0
