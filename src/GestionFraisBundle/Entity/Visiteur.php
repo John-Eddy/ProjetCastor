@@ -69,7 +69,7 @@ class Visiteur extends BaseUser
     public function setNom($nom)
     {
         $this->nom = $nom;
-    
+
         return $this;
     }
 
@@ -93,7 +93,7 @@ class Visiteur extends BaseUser
     public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
-    
+
         return $this;
     }
 
@@ -117,7 +117,7 @@ class Visiteur extends BaseUser
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
-    
+
         return $this;
     }
 
@@ -141,7 +141,7 @@ class Visiteur extends BaseUser
     public function setCp($cp)
     {
         $this->cp = $cp;
-    
+
         return $this;
     }
 
@@ -165,7 +165,7 @@ class Visiteur extends BaseUser
     public function setVille($ville)
     {
         $this->ville = $ville;
-    
+
         return $this;
     }
 

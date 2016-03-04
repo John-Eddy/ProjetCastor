@@ -22,7 +22,7 @@ class FicheFrais
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateModif", type="date", nullable=false)
+     * @ORM\Column(name="dateModif", type="datetime", nullable=false)
      */
     private $datemodif;
 
@@ -43,16 +43,6 @@ class FicheFrais
     private $id;
 
     /**
-     * @var \GestionFraisBundle\Entity\Visiteur
-     *
-     * @ORM\ManyToOne(targetEntity="GestionFraisBundle\Entity\Visiteur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idVisiteur", referencedColumnName="id")
-     * })
-     */
-    private $idvisiteur;
-
-    /**
      * @var \GestionFraisBundle\Entity\EtatFicheFrais
      *
      * @ORM\ManyToOne(targetEntity="GestionFraisBundle\Entity\EtatFicheFrais")
@@ -61,6 +51,16 @@ class FicheFrais
      * })
      */
     private $idetatfichefrais;
+
+    /**
+     * @var \GestionFraisBundle\Entity\Visiteur
+     *
+     * @ORM\ManyToOne(targetEntity="GestionFraisBundle\Entity\Visiteur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idVisiteur", referencedColumnName="id")
+     * })
+     */
+    private $idvisiteur;
 
 
 
@@ -147,30 +147,6 @@ class FicheFrais
     }
 
     /**
-     * Set idvisiteur
-     *
-     * @param \GestionFraisBundle\Entity\Visiteur $idvisiteur
-     *
-     * @return FicheFrais
-     */
-    public function setIdvisiteur(\GestionFraisBundle\Entity\Visiteur $idvisiteur = null)
-    {
-        $this->idvisiteur = $idvisiteur;
-    
-        return $this;
-    }
-
-    /**
-     * Get idvisiteur
-     *
-     * @return \GestionFraisBundle\Entity\Visiteur
-     */
-    public function getIdvisiteur()
-    {
-        return $this->idvisiteur;
-    }
-
-    /**
      * Set idetatfichefrais
      *
      * @param \GestionFraisBundle\Entity\EtatFicheFrais $idetatfichefrais
@@ -193,13 +169,28 @@ class FicheFrais
     {
         return $this->idetatfichefrais;
     }
+
     /**
-     * (Add this method into your class)
+     * Set idvisiteur
      *
-     * @return string String representation of this class
+     * @param \GestionFraisBundle\Entity\Visiteur $idvisiteur
+     *
+     * @return FicheFrais
      */
-    public function __toString()
+    public function setIdvisiteur(\GestionFraisBundle\Entity\Visiteur $idvisiteur = null)
     {
-        return $this->mois;
+        $this->idvisiteur = $idvisiteur;
+    
+        return $this;
+    }
+
+    /**
+     * Get idvisiteur
+     *
+     * @return \GestionFraisBundle\Entity\Visiteur
+     */
+    public function getIdvisiteur()
+    {
+        return $this->idvisiteur;
     }
 }

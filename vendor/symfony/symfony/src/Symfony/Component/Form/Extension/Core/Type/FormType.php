@@ -206,7 +206,7 @@ class FormType extends BaseType
             // section 4.2., empty URIs are considered same-document references
             'action' => '',
             'attr' => $defaultAttr,
-            'post_max_size_message' => 'The uploaded file was too large. Please try to upload a smaller file.',
+            'post_max_size_message' => 'The uploaded file was too large. Please try to uploads a smaller file.',
         ));
 
         $resolver->setAllowedTypes('label_attr', 'array');

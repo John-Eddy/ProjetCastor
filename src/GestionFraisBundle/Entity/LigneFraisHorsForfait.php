@@ -3,6 +3,8 @@
 namespace GestionFraisBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * LigneFraisHorsForfait
@@ -34,6 +36,13 @@ class LigneFraisHorsForfait
     private $libellelignehorsforfait;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="justificatif", type="string", length=255, nullable=false)
+     */
+    private $justificatif;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -62,7 +71,10 @@ class LigneFraisHorsForfait
      */
     private $idetatlignefrais;
 
-
+    /**
+     * @Assert\File(maxSize="1000k")
+     */
+    public $file;
 
     /**
      * Set date
@@ -74,7 +86,7 @@ class LigneFraisHorsForfait
     public function setDate($date)
     {
         $this->date = $date;
-    
+
         return $this;
     }
 
@@ -98,7 +110,7 @@ class LigneFraisHorsForfait
     public function setMontant($montant)
     {
         $this->montant = $montant;
-    
+
         return $this;
     }
 
@@ -122,7 +134,7 @@ class LigneFraisHorsForfait
     public function setLibellelignehorsforfait($libellelignehorsforfait)
     {
         $this->libellelignehorsforfait = $libellelignehorsforfait;
-    
+
         return $this;
     }
 
@@ -134,6 +146,33 @@ class LigneFraisHorsForfait
     public function getLibellelignehorsforfait()
     {
         return $this->libellelignehorsforfait;
+    }
+
+    /**
+     * Set justificatif
+     *
+     * @param string $justificatif
+     *
+     * @return LigneFraisHorsForfait
+     */
+    public function setJustificatif()
+    {
+
+        $nomOriginal = $this->file->getClientOriginalName();
+
+        $this->justificatif = $this->getUploadRootDir()."/".strval($this->id)."/".$nomOriginal;
+
+        return $this;
+    }
+
+    /**
+     * Get justificatif
+     *
+     * @return string
+     */
+    public function getJustificatif()
+    {
+        return $this->justificatif;
     }
 
     /**
@@ -156,7 +195,7 @@ class LigneFraisHorsForfait
     public function setIdfichefrais(\GestionFraisBundle\Entity\FicheFrais $idfichefrais = null)
     {
         $this->idfichefrais = $idfichefrais;
-    
+
         return $this;
     }
 
@@ -180,7 +219,7 @@ class LigneFraisHorsForfait
     public function setIdetatlignefrais(\GestionFraisBundle\Entity\EtatLigneFrais $idetatlignefrais = null)
     {
         $this->idetatlignefrais = $idetatlignefrais;
-    
+
         return $this;
     }
 
@@ -192,5 +231,48 @@ class LigneFraisHorsForfait
     public function getIdetatlignefrais()
     {
         return $this->idetatlignefrais;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    public function getUploadDir()
+    {
+        return '/uploads/justificatifs/'.$this->idfichefrais->getMois();
+    }
+
+    public function getUploadRootDir()
+    {
+        return "C:/wamp/www/ProjetCastor/web".$this->getUploadDir();
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->justificatif ? null : $this->getUploadDir().'/'.$this->justificatif;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->justificatif ? null : $this->getUploadRootDir().'/'.$this->justificatif;
+    }
+    public function sauvgarderFichier()
+    {
+        if (!file_exists($this->getUploadRootDir()))
+        {
+            mkdir($this->getUploadRootDir());
+        }
+        if(!file_exists($this->getUploadRootDir().'/'.strval($this->id)))
+        {
+            mkdir($this->getUploadRootDir().'/'.strval($this->id));
+        }
+        $this->setJustificatif();
+        rename($this->file, $this->getJustificatif());
     }
 }

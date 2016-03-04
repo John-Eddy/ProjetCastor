@@ -8,15 +8,9 @@
             <div class="bandeau"></div>
 
             {% for uneFicheFrais in lesFicheFrais %}
-                {% set action = "" %}
                 {% set libelleMois = [uneFicheFrais.mois[0:2],uneFicheFrais.mois[2:]]|join('/') %}
-                        {% if uneFicheFrais.getIdetatfichefrais().getLibelle() != "Fiche créée, saisie en cours" %}
-                            {% set action = "ficheFrais_consulter" %}
-                        {% else %}
-                            {% set action = "ficheFrais_renseigner" %}
-                        {% endif %}
 
-                <a class="lien-fiche" href="{{ path(action, {id: uneFicheFrais.id}) }}">
+                <a class="lien-fiche" href="{{ path('fichefrais_afficher', {id: uneFicheFrais.id}) }}">
                     <div class="row" id = "{{ uneFicheFrais.id }}">
                         <div class="col-sm-6">
                             <p>Mois : {{ libelleMois }}</p>

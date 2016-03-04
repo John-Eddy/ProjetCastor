@@ -98,7 +98,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
 
         $this->setRequestData('POST', array(), array('param1' => array(
             'name' => array(
-                'field' => 'upload.txt',
+                'field' => 'uploads.txt',
             ),
             'type' => array(
                 'field' => 'text/plain',
@@ -118,7 +118,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
             ->method('submit')
             ->with(array(
                 'field' => array(
-                    'name' => 'upload.txt',
+                    'name' => 'uploads.txt',
                     'type' => 'text/plain',
                     'tmp_name' => 'owfdskjasdfsa',
                     'error' => UPLOAD_ERR_OK,
@@ -135,7 +135,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
 
         $this->setRequestData('POST', array(), array('param1' => array(
             'name' => array(
-                'field' => array('subfield' => 'upload.txt'),
+                'field' => array('subfield' => 'uploads.txt'),
             ),
             'type' => array(
                 'field' => array('subfield' => 'text/plain'),
@@ -156,7 +156,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
             ->with(array(
                 'field' => array(
                     'subfield' => array(
-                        'name' => 'upload.txt',
+                        'name' => 'uploads.txt',
                         'type' => 'text/plain',
                         'tmp_name' => 'owfdskjasdfsa',
                         'error' => UPLOAD_ERR_OK,
@@ -209,7 +209,7 @@ class NativeRequestHandlerTest extends AbstractRequestHandlerTest
     protected function getMockFile($suffix = '')
     {
         return array(
-            'name' => 'upload'.$suffix.'.txt',
+            'name' => 'uploads'.$suffix.'.txt',
             'type' => 'text/plain',
             'tmp_name' => 'owfdskjasdfsa'.$suffix,
             'error' => UPLOAD_ERR_OK,

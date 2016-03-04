@@ -48,7 +48,7 @@ class LegacyBindRequestListenerTest extends \PHPUnit_Framework_TestCase
         $this->filesPlain = array(
             'image' => array(
                 'error' => UPLOAD_ERR_OK,
-                'name' => 'upload.png',
+                'name' => 'uploads.png',
                 'size' => 123,
                 'tmp_name' => $path,
                 'type' => 'image/png',
@@ -57,13 +57,13 @@ class LegacyBindRequestListenerTest extends \PHPUnit_Framework_TestCase
 
         $this->filesNested = array(
             'error' => array('image' => UPLOAD_ERR_OK),
-            'name' => array('image' => 'upload.png'),
+            'name' => array('image' => 'uploads.png'),
             'size' => array('image' => 123),
             'tmp_name' => array('image' => $path),
             'type' => array('image' => 'image/png'),
         );
 
-        $this->uploadedFile = new UploadedFile($path, 'upload.png', 'image/png', 123, UPLOAD_ERR_OK);
+        $this->uploadedFile = new UploadedFile($path, 'uploads.png', 'image/png', 123, UPLOAD_ERR_OK);
     }
 
     protected function tearDown()

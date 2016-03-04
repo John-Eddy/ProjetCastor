@@ -2,6 +2,10 @@ fichefrais_index:
     path:     /
     defaults: { _controller: "GestionFraisBundle:Utilisateur:Index" }
 
+fichefrais_afficher:
+    path:    /afficher/{id}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:Afficher" }
+
 ficheFrais_consulter:
     path:    /consulter/{id}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:Consulter" }
