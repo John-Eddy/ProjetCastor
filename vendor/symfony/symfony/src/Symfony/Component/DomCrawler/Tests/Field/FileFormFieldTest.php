@@ -82,7 +82,7 @@ class FileFormFieldTest extends FormFieldTestCase
     {
         return array(
             array('setValue'),
-            array('upload'),
+            array('uploads'),
         );
     }
 

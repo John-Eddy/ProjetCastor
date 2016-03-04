@@ -42,7 +42,7 @@ class LigneFraisHorsForfaitUtilisateurController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('lignefraishorsforfait_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $entity->getIdfichefrais())));
         }
 
         return $this->render('GestionFraisBundle:LigneFraisHorsForfait:new.html.twig', array(
@@ -77,7 +77,6 @@ class LigneFraisHorsForfaitUtilisateurController extends Controller
     public function newAction($id)
     {
         $entity = new LigneFraisHorsForfait();
-        $entity->setIdfichefrais($id);
         $form   = $this->createCreateForm($entity);
 
         return $this->render('GestionFraisBundle:LigneFraisHorsForfait:new.html.twig', array(

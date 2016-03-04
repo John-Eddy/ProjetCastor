@@ -4,11 +4,11 @@ lignefraishorsforfait:
 
 lignefraishorsforfait_show:
     path:    /show/{id}
-    defaults: { _controller: "GestionFraisBundle::LigneFraisHorsForfait:show" }
+    defaults: { _controller: "GestionFraisBundle:LigneFraisHorsForfait:show" }
 
 lignefraishorsforfait_new:
     path:     /new/{id}
-    defaults: { _controller: "GestionFraisBundle:LigneFraisHorsForfait:new" }
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:ajouterLigneFraisHorsForfait" }
 
 lignefraishorsforfait_create:
     path:     /create
@@ -17,7 +17,7 @@ lignefraishorsforfait_create:
 
 lignefraishorsforfait_edit:
     path:     /edit/{id}
-    defaults: { _controller: "GestionFraisBundle:LigneFraisHorsForfaitUtilisateur:edit" }
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:modifierLigneFraisHorsForfait" }
 
 lignefraishorsforfait_update:
     path:     /update/{id}

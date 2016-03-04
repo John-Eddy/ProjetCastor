@@ -79,7 +79,7 @@ class UploadedFile extends File
      * @param string $originalName The original file name
      * @param string $mimeType     The type of the file as provided by PHP
      * @param int    $size         The file size
-     * @param int    $error        The error constant of the upload (one of PHP's UPLOAD_ERR_XXX constants)
+     * @param int    $error        The error constant of the uploads (one of PHP's UPLOAD_ERR_XXX constants)
      * @param bool   $test         Whether the test mode is active
      *
      * @throws FileException         If file_uploads is disabled
@@ -179,12 +179,12 @@ class UploadedFile extends File
     }
 
     /**
-     * Returns the upload error.
+     * Returns the uploads error.
      *
-     * If the upload was successful, the constant UPLOAD_ERR_OK is returned.
+     * If the uploads was successful, the constant UPLOAD_ERR_OK is returned.
      * Otherwise one of the other UPLOAD_ERR_XXX constants is returned.
      *
-     * @return int The upload error
+     * @return int The uploads error
      */
     public function getError()
     {
@@ -268,7 +268,7 @@ class UploadedFile extends File
     }
 
     /**
-     * Returns an informative upload error message.
+     * Returns an informative uploads error message.
      *
      * @return string The error message regarding the specified error code
      */

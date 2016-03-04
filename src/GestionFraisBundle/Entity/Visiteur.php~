@@ -3,7 +3,6 @@
 namespace GestionFraisBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * Visiteur
@@ -11,181 +10,164 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table(name="visiteur", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_4EA587B892FC23A8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_4EA587B8A0D96FBF", columns={"email_canonical"})})
  * @ORM\Entity
  */
-class Visiteur extends BaseUser
+class Visiteur
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    protected $id;
-
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
      */
     private $prenom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
     private $adresse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cp", type="string", length=5, precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="cp", type="string", length=5, nullable=false)
      */
     private $cp;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=100, precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="ville", type="string", length=100, nullable=false)
      */
     private $ville;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255, nullable=false)
+     */
+    private $username;
 
     /**
-     * Set nom
+     * @var string
      *
-     * @param string $nom
-     *
-     * @return Visiteur
+     * @ORM\Column(name="username_canonical", type="string", length=255, nullable=false)
      */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    
-        return $this;
-    }
+    private $usernameCanonical;
 
     /**
-     * Get nom
+     * @var string
      *
-     * @return string
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
-    public function getNom()
-    {
-        return $this->nom;
-    }
+    private $email;
 
     /**
-     * Set prenom
+     * @var string
      *
-     * @param string $prenom
-     *
-     * @return Visiteur
+     * @ORM\Column(name="email_canonical", type="string", length=255, nullable=false)
      */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-    
-        return $this;
-    }
+    private $emailCanonical;
 
     /**
-     * Get prenom
+     * @var boolean
      *
-     * @return string
+     * @ORM\Column(name="enabled", type="boolean", nullable=false)
      */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
+    private $enabled;
 
     /**
-     * Set adresse
+     * @var string
      *
-     * @param string $adresse
-     *
-     * @return Visiteur
+     * @ORM\Column(name="salt", type="string", length=255, nullable=false)
      */
-    public function setAdresse($adresse)
-    {
-        $this->adresse = $adresse;
-    
-        return $this;
-    }
+    private $salt;
 
     /**
-     * Get adresse
+     * @var string
      *
-     * @return string
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
+    private $password;
 
     /**
-     * Set cp
+     * @var \DateTime
      *
-     * @param string $cp
-     *
-     * @return Visiteur
+     * @ORM\Column(name="last_login", type="datetime", nullable=true)
      */
-    public function setCp($cp)
-    {
-        $this->cp = $cp;
-    
-        return $this;
-    }
+    private $lastLogin;
 
     /**
-     * Get cp
+     * @var boolean
      *
-     * @return string
+     * @ORM\Column(name="locked", type="boolean", nullable=false)
      */
-    public function getCp()
-    {
-        return $this->cp;
-    }
+    private $locked;
 
     /**
-     * Set ville
+     * @var boolean
      *
-     * @param string $ville
-     *
-     * @return Visiteur
+     * @ORM\Column(name="expired", type="boolean", nullable=false)
      */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-    
-        return $this;
-    }
+    private $expired;
 
     /**
-     * Get ville
+     * @var \DateTime
      *
-     * @return string
+     * @ORM\Column(name="expires_at", type="datetime", nullable=true)
      */
-    public function getVille()
-    {
-        return $this->ville;
-    }
+    private $expiresAt;
 
     /**
-     * Get id
+     * @var string
      *
-     * @return integer
+     * @ORM\Column(name="confirmation_token", type="string", length=255, nullable=true)
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $confirmationToken;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="password_requested_at", type="datetime", nullable=true)
+     */
+    private $passwordRequestedAt;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="array", nullable=false)
+     */
+    private $roles;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="credentials_expired", type="boolean", nullable=false)
+     */
+    private $credentialsExpired;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="credentials_expire_at", type="datetime", nullable=true)
+     */
+    private $credentialsExpireAt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
 }
+

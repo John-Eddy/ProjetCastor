@@ -48,8 +48,7 @@
                                     <td><p>{{ uneLigneFraisForfait.getIdfraisforfait().getLibellefraisforfait }}</p></td>
                                     <td>
                                         <input type="number"
-                                               value="{{ uneLigneFraisForfait.quantite }}"
-                                               name="{{ uneLigneFraisForfait.Id }}"
+                                               value="{{ uneLigneFraisForfait.quantite }}"            name="{{ uneLigneFraisForfait.Id }}"
                                                min="0"
                                                class="form-control "
                                                onblur="verifChampNumerique(this)" >
@@ -94,7 +93,7 @@
 
                             {% endfor %}
                         </table>
-                        <a class = "label label-default" href = "{{ path('lignefraishorsforfait_new') }}">Ajouter</a>
+                        <a class = "label label-default" href = "{{ path('lignefraishorsforfait_new',{id: uneFicheFrais.id}) }}">Ajouter</a>
                     </div>
                     <div class="bandeau-small"></div>
                 </form>

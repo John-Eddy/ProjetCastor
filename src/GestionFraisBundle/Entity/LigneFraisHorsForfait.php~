@@ -34,6 +34,13 @@ class LigneFraisHorsForfait
     private $libellelignehorsforfait;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="justificatif", type="string", length=255, nullable=false)
+     */
+    private $justificatif;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -63,134 +70,5 @@ class LigneFraisHorsForfait
     private $idetatlignefrais;
 
 
-
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return LigneFraisHorsForfait
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Set montant
-     *
-     * @param float $montant
-     *
-     * @return LigneFraisHorsForfait
-     */
-    public function setMontant($montant)
-    {
-        $this->montant = $montant;
-    
-        return $this;
-    }
-
-    /**
-     * Get montant
-     *
-     * @return float
-     */
-    public function getMontant()
-    {
-        return $this->montant;
-    }
-
-    /**
-     * Set libellelignehorsforfait
-     *
-     * @param string $libellelignehorsforfait
-     *
-     * @return LigneFraisHorsForfait
-     */
-    public function setLibellelignehorsforfait($libellelignehorsforfait)
-    {
-        $this->libellelignehorsforfait = $libellelignehorsforfait;
-    
-        return $this;
-    }
-
-    /**
-     * Get libellelignehorsforfait
-     *
-     * @return string
-     */
-    public function getLibellelignehorsforfait()
-    {
-        return $this->libellelignehorsforfait;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set idfichefrais
-     *
-     * @param \GestionFraisBundle\Entity\FicheFrais $idfichefrais
-     *
-     * @return LigneFraisHorsForfait
-     */
-    public function setIdfichefrais(\GestionFraisBundle\Entity\FicheFrais $idfichefrais = null)
-    {
-        $this->idfichefrais = $idfichefrais;
-    
-        return $this;
-    }
-
-    /**
-     * Get idfichefrais
-     *
-     * @return \GestionFraisBundle\Entity\FicheFrais
-     */
-    public function getIdfichefrais()
-    {
-        return $this->idfichefrais;
-    }
-
-    /**
-     * Set idetatlignefrais
-     *
-     * @param \GestionFraisBundle\Entity\EtatLigneFrais $idetatlignefrais
-     *
-     * @return LigneFraisHorsForfait
-     */
-    public function setIdetatlignefrais(\GestionFraisBundle\Entity\EtatLigneFrais $idetatlignefrais = null)
-    {
-        $this->idetatlignefrais = $idetatlignefrais;
-    
-        return $this;
-    }
-
-    /**
-     * Get idetatlignefrais
-     *
-     * @return \GestionFraisBundle\Entity\EtatLigneFrais
-     */
-    public function getIdetatlignefrais()
-    {
-        return $this->idetatlignefrais;
-    }
 }
+
