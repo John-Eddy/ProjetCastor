@@ -25,6 +25,11 @@ class LigneFraisHorsForfait
      * @var float
      *
      * @ORM\Column(name="montant", type="float", precision=10, scale=0, nullable=false)
+     *
+     *@Assert\Range(
+     *     min = 0,
+     *     minMessage = "Le montant doit être supérieur a 0.",
+     *     )
      */
     private $montant;
 
@@ -32,6 +37,7 @@ class LigneFraisHorsForfait
      * @var string
      *
      * @ORM\Column(name="libelleLigneHorsForfait", type="string", length=255, nullable=false)
+     *
      */
     private $libellelignehorsforfait;
 
@@ -39,6 +45,11 @@ class LigneFraisHorsForfait
      * @var string
      *
      * @ORM\Column(name="justificatif", type="string", length=255, nullable=false)
+     *
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Le libellé ne doit pas depasser les 255 caractères"
+     * )
      */
     private $justificatif;
 
@@ -72,7 +83,11 @@ class LigneFraisHorsForfait
     private $idetatlignefrais;
 
     /**
-     * @Assert\File(maxSize="1000k")
+     @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Mauvais, veuillez envoyer un fichier au format pdf."
+     * )
      */
     public $file;
 
@@ -268,7 +283,11 @@ class LigneFraisHorsForfait
         {
             mkdir($this->getUploadRootDir());
         }
-        mkdir($this->getUploadRootDir().'/'.strval($this->id));
+
+        if(!file_exists($this->getUploadRootDir().'/'.strval($this->id)))
+        {
+            mkdir($this->getUploadRootDir().'/'.strval($this->id));
+        }
 
         $this->setJustificatif();
         rename($this->file, $this->getJustificatif());

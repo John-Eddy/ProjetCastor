@@ -1,8 +1,8 @@
-fichefrais_index:
+ficheFrais_index:
     path:     /
     defaults: { _controller: "GestionFraisBundle:Utilisateur:Index" }
 
-fichefrais_afficher:
+ficheFrais_afficher:
     path:    /afficher/{id}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:Afficher" }
 

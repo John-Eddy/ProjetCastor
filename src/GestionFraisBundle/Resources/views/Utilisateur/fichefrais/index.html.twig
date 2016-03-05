@@ -10,7 +10,7 @@
             {% for uneFicheFrais in lesFicheFrais %}
                 {% set libelleMois = [uneFicheFrais.mois[0:2],uneFicheFrais.mois[2:]]|join('/') %}
 
-                <a class="lien-fiche" href="{{ path('fichefrais_afficher', {id: uneFicheFrais.id}) }}">
+                <a class="lien-fiche" href="{{ path('ficheFrais_afficher', {id: uneFicheFrais.id}) }}">
                     <div class="row" id = "{{ uneFicheFrais.id }}">
                         <div class="col-sm-6">
                             <p>Mois : {{ libelleMois }}</p>
