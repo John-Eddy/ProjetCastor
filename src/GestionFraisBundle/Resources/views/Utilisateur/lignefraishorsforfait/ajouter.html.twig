@@ -30,14 +30,11 @@
     {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
 
     {# Génération automatique des champs pas encore écrits.
-    Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-    et tous les champs cachés (type « hidden »). #}
+       Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+       et tous les champs cachés (type « hidden »). #}
     {{ form_rest(form) }}
 
     {# Fermeture de la balise <form> du formulaire HTML #}
     {{ form_end(form) }}
-    <div class="col-sm-offset-11 col-xs-offset-10">
-    <a class="btn-link" href="{{ path('lignefraishorsforfait_delete', {id: ligneFraisHF.id}) }}">Supprimer</a>
-    </div>
 
 {% endblock %}
