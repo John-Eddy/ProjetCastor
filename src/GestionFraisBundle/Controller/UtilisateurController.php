@@ -43,22 +43,6 @@ class UtilisateurController extends Controller
         ));
     }
 
-    public function afficherAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $uneFicheFrais=$em->getRepository("GestionFraisBundle:FicheFrais")->findOneById($id);
-
-        if($uneFicheFrais->getIdetatfichefrais()->getLibelle() == "Fiche créée, saisie en cours")
-        {
-            return $this->renseignerAction($id);
-        }
-        else
-        {
-            return $this->consulterAction($id);
-        }
-    }
-
     /*
      * Action consulter de la classe Utilisateur
      *
@@ -282,7 +266,7 @@ class UtilisateurController extends Controller
             $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
 
             // On redirige vers la fiche frais
-            return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $id)));
+            return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $uneFicheFrais->getId())));
         }
 
         // À ce stade, le formulaire n'est pas valide car :
@@ -302,7 +286,6 @@ class UtilisateurController extends Controller
 
         $uneLigneFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findOneById($id);
 
-
         // On crée le FormBuilder grâce au service form factory
         $formBuilder = $this->get('form.factory')->createBuilder('form', $uneLigneFraisHorsForfait);
 
@@ -311,7 +294,7 @@ class UtilisateurController extends Controller
             ->add('date', 'date')
             ->add('montant', 'money')
             ->add('libellelignehorsforfait', 'textarea')
-            ->add('file', 'file', array('label' => 'Justificatif', 'required' => false))
+            ->add('file', 'file', array('label' => 'Justificatif', 'required' => true))
             ->add('save', 'submit');
         // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
 
@@ -326,11 +309,7 @@ class UtilisateurController extends Controller
         // On vérifie que les valeurs entrées sont correctes
         if ($form->isValid())
         {
-            if(isset($uneLigneFraisHorsForfait->file))
-            {
-                unlink($uneLigneFraisHorsForfait->getJustificatif());
-                $uneLigneFraisHorsForfait->sauvgarderFichier();//fonction qui deplace le justificatif pour le conservé
-            }
+            $uneLigneFraisHorsForfait->sauvgarderFichier();//fonction qui deplace le justificatif pour le conservé
 
             $em->persist($uneLigneFraisHorsForfait);//On enregistre la ligne la ligne frais
             $em->flush();
@@ -338,7 +317,7 @@ class UtilisateurController extends Controller
             $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
 
             // On redirige vers la fiche frais
-            return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $uneLigneFraisHorsForfait->getIdfichefrais()->getId())));
+            return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $uneFicheFrais->getId())));
         }
 
         // À ce stade, le formulaire n'est pas valide car :
@@ -346,28 +325,8 @@ class UtilisateurController extends Controller
         // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
         // On passe la méthode createView() du formulaire à la vue
         // afin qu'elle puisse afficher le formulaire toute seule
-        return $this->render('GestionFraisBundle:Utilisateur:lignefraishorsforfait\modifier.html.twig', array(
+        return $this->render('GestionFraisBundle:Utilisateur:lignefraishorsforfait\renseigner.html.twig', array(
             'form' => $form->createView(),
-            'ligneFraisHF'=>$uneLigneFraisHorsForfait,
         ));
-    }
-
-    public function supprimerLigneFraisHorsForfaitAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $uneLigneFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findOneById($id);
-
-        $idFicheFrais = $uneLigneFraisHorsForfait->getIdfichefrais()->getId();
-        if(is_file($uneLigneFraisHorsForfait->getJustificatif()))
-        {
-            unlink($uneLigneFraisHorsForfait->getJustificatif());
-            rmdir($uneLigneFraisHorsForfait->getUploadRootDir().'/'.strval($uneLigneFraisHorsForfait->getId()));
-        }
-        $em->remove($uneLigneFraisHorsForfait);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $idFicheFrais)));
-
     }
 }

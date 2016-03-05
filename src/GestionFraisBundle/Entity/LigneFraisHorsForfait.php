@@ -268,10 +268,8 @@ class LigneFraisHorsForfait
         {
             mkdir($this->getUploadRootDir());
         }
-        if(!file_exists($this->getUploadRootDir().'/'.strval($this->id)))
-        {
-            mkdir($this->getUploadRootDir().'/'.strval($this->id));
-        }
+        mkdir($this->getUploadRootDir().'/'.strval($this->id));
+
         $this->setJustificatif();
         rename($this->file, $this->getJustificatif());
     }

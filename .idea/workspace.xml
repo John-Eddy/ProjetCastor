@@ -5,18 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="516bf967-51ec-4d7f-926b-ebf72ba08d88" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/symfony2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/afficher.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/modifier.html.twig" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/uploads/justificatifs/022016/18/Convention de stage Rahmani Eddy.pdf" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FOS/UserBundle/Model/Group.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/FOS/UserBundle/Model/User.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/renseigner.html.twig" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/Visiteurold.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/doctrine/EtatFicheFrais.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/doctrine/EtatLigneFrais.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/doctrine/FicheFrais.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/doctrine/FraisForfait.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/doctrine/LigneFraisForfait.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/doctrine/LigneFraisHorsForfait.orm.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/doctrine/Visiteur.orm.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/security.yml" afterPath="$PROJECT_DIR$/app/config/security.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/logs/dev.log" afterPath="$PROJECT_DIR$/app/logs/dev.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Controller/DefaultController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Controller/LigneFraisHorsForfaitUtilisateurController.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Controller/LigneFraisHorsForfaitUtilisateurController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Controller/UtilisateurController.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Controller/UtilisateurController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/EtatFicheFrais.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/EtatFicheFrais.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/EtatLigneFrais.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/EtatLigneFrais.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/FicheFrais.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/FicheFrais.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/FraisForfait.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/FraisForfait.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/LigneFraisForfait.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/LigneFraisForfait.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/LigneFraisHorsForfait.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/LigneFraisHorsForfait.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/fichefrais.yml" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/fichefrais.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/Visiteur.php" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Entity/Visiteur.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/lignefraishorsforfait.yml" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/lignefraishorsforfait.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/consulter.html.twig" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/consulter.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/index.html.twig" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/renseigner.html.twig" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/renseigner.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/vueTest.html.twig" afterPath="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/vueTest.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/doctrine/instantiator/.travis.yml" afterPath="$PROJECT_DIR$/vendor/doctrine/instantiator/.travis.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/incenteev/composer-parameter-handler/.travis.yml" afterPath="$PROJECT_DIR$/vendor/incenteev/composer-parameter-handler/.travis.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/DomCrawler/Tests/Field/FileFormFieldTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/DomCrawler/Tests/Field/FileFormFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Extension/Core/Type/FormType.php" afterPath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Extension/Core/Type/FormType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/NativeRequestHandler.php" afterPath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/NativeRequestHandler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Tests/CompoundFormTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Tests/CompoundFormTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Tests/Extension/HttpFoundation/EventListener/LegacyBindRequestListenerTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Tests/Extension/HttpFoundation/EventListener/LegacyBindRequestListenerTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Tests/NativeRequestHandlerTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Tests/NativeRequestHandlerTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/File/Exception/UploadException.php" afterPath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/File/Exception/UploadException.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/File/UploadedFile.php" afterPath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/File/UploadedFile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Constraints/File.php" afterPath="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Constraints/File.php" />
     </list>
     <ignored path="CastorJunior.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,65 +81,32 @@
       <file leaf-file-name="UtilisateurController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Controller/UtilisateurController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="24.038462">
-              <caret line="53" column="19" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
+            <state vertical-scroll-proportion="-39.26923">
+              <caret line="317" column="0" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
               <folding>
                 <element signature="e#130#182#0#PHP" expanded="true" />
-                <element signature="e#888#919#1#PHP" expanded="true" />
-                <element signature="e#1157#1192#1#PHP" expanded="true" />
-                <element signature="e#1508#1539#1#PHP" expanded="true" />
-                <element signature="e#2545#2576#1#PHP" expanded="true" />
-                <element signature="e#2900#2938#1#PHP" expanded="true" />
-                <element signature="e#3160#3202#1#PHP" expanded="true" />
-                <element signature="e#4442#4473#1#PHP" expanded="true" />
-                <element signature="e#4790#4819#1#PHP" expanded="true" />
-                <element signature="e#4999#5034#1#PHP" expanded="true" />
-                <element signature="e#5500#5538#1#PHP" expanded="true" />
-                <element signature="e#5760#5802#1#PHP" expanded="true" />
-                <element signature="e#6498#6531#1#PHP" expanded="true" />
-                <element signature="e#7005#7043#1#PHP" expanded="true" />
-                <element signature="e#7829#7860#1#PHP" expanded="true" />
-                <element signature="e#8546#8577#1#PHP" expanded="true" />
-                <element signature="e#8645#8680#1#PHP" expanded="true" />
-                <element signature="e#11233#11308#0#PHP" expanded="true" />
-                <element signature="e#11595#11637#1#PHP" expanded="true" />
-                <element signature="e#13864#13937#0#PHP" expanded="true" />
-                <element signature="e#14237#14279#1#PHP" expanded="true" />
-                <element signature="e#14766#14789#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="consulter.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/consulter.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3764045">
-              <caret line="68" column="112" selection-start-line="68" selection-start-column="86" selection-end-line="68" selection-end-column="112" />
-              <folding>
-                <element signature="e#2915#2941#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="afficher.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/afficher.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-35.576923">
-              <caret line="55" column="14" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
-              <folding>
-                <element signature="e#2662#2690#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fichefrais.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/fichefrais.yml">
+      <file leaf-file-name="LigneFraisHorsForfait.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Entity/LigneFraisHorsForfait.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="74" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
+              <caret line="160" column="34" selection-start-line="160" selection-start-column="34" selection-end-line="160" selection-end-column="34" />
+              <folding>
+                <element signature="e#45#77#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lignefraishorsforfait.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/lignefraishorsforfait.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.43766937">
+              <caret line="19" column="64" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -164,9 +158,14 @@
       <GitPushTagMode />
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.txt" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Class/LigneFraisHorsForfait.php" />
+        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Class/LigneFraisForfait.php" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Controller/LigneFraisForfaitController.php" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/fichefrais.yml" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Controller/FicheFraisController.php" />
@@ -198,26 +197,24 @@
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Entity/EtatLigneFrais.php" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Form/LigneFraisForfaitType.php" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Form/LigneFraisHorsForfaitType.php" />
+        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/consulter.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/index.html.twig" />
         <option value="$PROJECT_DIR$/app/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Entity/FicheFrais.php" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Controller/Utilisateur/LigneFraisHorsForfaitUtilisateurController.php" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Controller/LigneFraisHorsForfaitUtilisateurController.php" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/vueTest.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/fichefrais.yml" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Entity/Visiteur.php" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/renseigner.html.twig" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/renseigner.html.twig" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/vueTest.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Entity/LigneFraisHorsForfait.php" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/app/config/security.yml" />
-        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Entity/LigneFraisHorsForfait.php" />
-        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/modifier.html.twig" />
-        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/lignefraishorsforfait.yml" />
-        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/fichefrais.yml" />
-        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/index.html.twig" />
         <option value="$PROJECT_DIR$/src/GestionFraisBundle/Controller/UtilisateurController.php" />
-        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/afficher.html.twig" />
-        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/consulter.html.twig" />
+        <option value="$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/lignefraishorsforfait.yml" />
       </list>
     </option>
   </component>
@@ -261,6 +258,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -315,6 +313,14 @@
               <option name="myItemId" value="justificatifs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="022016" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="18" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -345,6 +351,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="GestionFraisBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CastorJunior" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjetCastor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GestionFraisBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -370,7 +398,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -396,135 +424,56 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CastorJunior" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProjetCastor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GestionFraisBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="routing" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Utilisateur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CastorJunior" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjetCastor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GestionFraisBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utilisateur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lignefraishorsforfait" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CastorJunior" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjetCastor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GestionFraisBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Utilisateur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fichefrais" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CastorJunior" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjetCastor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GestionFraisBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CastorJunior" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ProjetCastor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GestionFraisBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
@@ -533,19 +482,19 @@
     <key name="OPEN_URL_DIALOG">
       <recent name="https://github.com/Marquand/ProjetCastor" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\views\Utilisateur" />
-      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\views" />
-      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Controller" />
-      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\config\routing" />
-      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\views\Erreur" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Controller\ControleurUtilisateur" />
       <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\config\routing\Comptable" />
       <recent name="C:\wamp\www\ProjetCastor\src\TestFormBundle\Entity" />
       <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Entity" />
       <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\views\Utilisateur" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\views\Utilisateur" />
+      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\views" />
+      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Controller" />
+      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\config\routing" />
+      <recent name="C:\wamp\www\ProjetCastor\src\GestionFraisBundle\Resources\views\Erreur" />
     </key>
   </component>
   <component name="RunManager">
@@ -644,13 +593,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.254375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.254375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.49506173" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3381201" sideWeight="0.51625" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16442543" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3211488" sideWeight="0.48375" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.4925926" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33034715" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -660,7 +610,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3211488" sideWeight="0.48375" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3381201" sideWeight="0.48655257" order="1" side_tool="false" content_ui="tabs" />
@@ -698,6 +647,27 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/renseigner.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/RenseignerLigneFraisHorsForfait.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/FicheFrais/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.769231">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../Projet-AppliFrais/vendor/symfony/symfony/src/Symfony/Component/Config/Loader/FileLoader.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-21.192308">
@@ -783,6 +753,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/consulter.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70037454">
+          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.5272727">
@@ -808,6 +785,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4878587">
           <caret line="13" column="20" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.0">
+          <caret line="18" column="82" selection-start-line="18" selection-start-column="60" selection-end-line="18" selection-end-column="82" />
         </state>
       </provider>
     </entry>
@@ -903,6 +887,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/fichefrais.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18428184">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/utilisateur.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2303523">
@@ -959,10 +950,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/renseigner.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4536517">
+          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/renseigner.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.076923">
+          <caret line="20" column="70" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/vueTest.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Entity/LigneFraisHorsForfait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="160" column="34" selection-start-line="160" selection-start-column="34" selection-end-line="160" selection-end-column="34" />
+          <folding>
+            <element signature="e#45#77#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -970,6 +986,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8157182">
           <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -977,130 +994,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5491573">
           <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/renseigner.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5828652">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/renseigner.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Controller/UtilisateurController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.346153">
-          <caret line="95" column="74" selection-start-line="95" selection-start-column="74" selection-end-line="95" selection-end-column="74" />
+        <state vertical-scroll-proportion="-39.26923">
+          <caret line="317" column="0" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
           <folding>
-            <element signature="e#4050#4076#0#Twig" expanded="true" />
-            <element signature="e#4672#4697#0#Twig" expanded="true" />
+            <element signature="e#130#182#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/lignefraishorsforfait.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.43766937">
+          <caret line="19" column="64" selection-start-line="19" selection-start-column="64" selection-end-line="19" selection-end-column="64" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/config/routing/Utilisateur/fichefrais.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="74" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Entity/EtatFicheFrais.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.477306">
-          <caret line="51" column="30" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537">
-          <caret line="12" column="72" selection-start-line="12" selection-start-column="72" selection-end-line="12" selection-end-column="72" />
-          <folding>
-            <element signature="e#523#542#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/modifier.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7977528">
-          <caret line="51" column="22" selection-start-line="0" selection-start-column="0" selection-end-line="55" selection-end-column="14" />
-          <folding>
-            <element signature="e#2662#2690#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/lignefraishorsforfait/afficher.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-35.576923">
-          <caret line="55" column="14" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
-          <folding>
-            <element signature="e#2662#2690#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Controller/UtilisateurController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="24.038462">
-          <caret line="53" column="19" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
-          <folding>
-            <element signature="e#130#182#0#PHP" expanded="true" />
-            <element signature="e#888#919#1#PHP" expanded="true" />
-            <element signature="e#1157#1192#1#PHP" expanded="true" />
-            <element signature="e#1508#1539#1#PHP" expanded="true" />
-            <element signature="e#2545#2576#1#PHP" expanded="true" />
-            <element signature="e#2900#2938#1#PHP" expanded="true" />
-            <element signature="e#3160#3202#1#PHP" expanded="true" />
-            <element signature="e#4442#4473#1#PHP" expanded="true" />
-            <element signature="e#4790#4819#1#PHP" expanded="true" />
-            <element signature="e#4999#5034#1#PHP" expanded="true" />
-            <element signature="e#5500#5538#1#PHP" expanded="true" />
-            <element signature="e#5760#5802#1#PHP" expanded="true" />
-            <element signature="e#6498#6531#1#PHP" expanded="true" />
-            <element signature="e#7005#7043#1#PHP" expanded="true" />
-            <element signature="e#7829#7860#1#PHP" expanded="true" />
-            <element signature="e#8546#8577#1#PHP" expanded="true" />
-            <element signature="e#8645#8680#1#PHP" expanded="true" />
-            <element signature="e#11233#11308#0#PHP" expanded="true" />
-            <element signature="e#11595#11637#1#PHP" expanded="true" />
-            <element signature="e#13864#13937#0#PHP" expanded="true" />
-            <element signature="e#14237#14279#1#PHP" expanded="true" />
-            <element signature="e#14766#14789#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Entity/LigneFraisHorsForfait.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38213763">
-          <caret line="35" column="36" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="36" />
-          <folding>
-            <element signature="e#45#77#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GestionFraisBundle/Resources/views/Utilisateur/fichefrais/consulter.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3764045">
-          <caret line="68" column="112" selection-start-line="68" selection-start-column="86" selection-end-line="68" selection-end-column="112" />
-          <folding>
-            <element signature="e#2915#2941#0#Twig" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
