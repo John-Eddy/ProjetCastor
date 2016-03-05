@@ -282,6 +282,7 @@ class UtilisateurController extends Controller
             $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
 
             // On redirige vers la fiche frais
+<<<<<<< HEAD
             return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $id)));
         }
 
@@ -368,6 +369,69 @@ class UtilisateurController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $idFicheFrais)));
+=======
+            return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $uneFicheFrais->getId())));
+        }
+>>>>>>> 9d5b8790dd52b77ef84721f4333f59ebe0edefd2
 
+        // À ce stade, le formulaire n'est pas valide car :
+        // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
+        // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
+        // On passe la méthode createView() du formulaire à la vue
+        // afin qu'elle puisse afficher le formulaire toute seule
+        return $this->render('GestionFraisBundle:Utilisateur:lignefraishorsforfait\renseigner.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function modifierLigneFraisHorsForfaitAction($id, Request $request)
+    {
+        //Connection BDD
+        $em = $this->getDoctrine()->getManager();
+
+        $uneLigneFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findOneById($id);
+
+        // On crée le FormBuilder grâce au service form factory
+        $formBuilder = $this->get('form.factory')->createBuilder('form', $uneLigneFraisHorsForfait);
+
+        // On ajoute les champs de l'entité que l'on veut à notre formulaire
+        $formBuilder
+            ->add('date', 'date')
+            ->add('montant', 'money')
+            ->add('libellelignehorsforfait', 'textarea')
+            ->add('file', 'file', array('label' => 'Justificatif', 'required' => true))
+            ->add('save', 'submit');
+        // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
+
+        // À partir du formBuilder, on génère le formulaire
+        $form = $formBuilder->getForm();
+
+        // On fait le lien Requête <-> Formulaire
+        $form->handleRequest($request);
+
+        // À partir de maintenant, la variable $uneLigneFraisHorsForfait contient les valeurs entrées dans le formulaire par le visiteur
+
+        // On vérifie que les valeurs entrées sont correctes
+        if ($form->isValid())
+        {
+            $uneLigneFraisHorsForfait->sauvgarderFichier();//fonction qui deplace le justificatif pour le conservé
+
+            $em->persist($uneLigneFraisHorsForfait);//On enregistre la ligne la ligne frais
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
+
+            // On redirige vers la fiche frais
+            return $this->redirect($this->generateUrl('ficheFrais_renseigner', array('id' => $uneFicheFrais->getId())));
+        }
+
+        // À ce stade, le formulaire n'est pas valide car :
+        // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
+        // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
+        // On passe la méthode createView() du formulaire à la vue
+        // afin qu'elle puisse afficher le formulaire toute seule
+        return $this->render('GestionFraisBundle:Utilisateur:lignefraishorsforfait\renseigner.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }
