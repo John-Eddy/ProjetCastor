@@ -4,7 +4,7 @@ lignefraishorsforfait:
 
 lignefraishorsforfait_show:
     path:    /show/{id}
-    defaults: { _controller: "GestionFraisBundle:LigneFraisHorsForfait:show" }
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:afficherLigneFraisHorsForfait" }
 
 lignefraishorsforfait_new:
     path:     /new/{id}

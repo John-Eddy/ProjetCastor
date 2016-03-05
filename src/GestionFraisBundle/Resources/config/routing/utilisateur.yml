@@ -7,5 +7,5 @@ utilisateur_fichefrais:
      prefix:   /fichefrais
 
 gestion_frais_lignefraishorsforfait:
-    resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/lignefraishorsforfait.yml"
-    prefix:   /lignefraishorsforfait
+    resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/LigneFraisHorsForfait.yml"
+    prefix:   /LigneFraisHorsForfait
