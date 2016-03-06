@@ -8,6 +8,7 @@
 
 namespace GestionFraisBundle\Controller;
 
+use GestionFraisBundle\Entity\FicheFrais;
 use GestionFraisBundle\Entity\LigneFraisHorsForfait;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,24 +26,51 @@ class UtilisateurController extends Controller
      */
     public function indexAction(){
 
-        $visiteur = $this->get('security.context')->getToken()->getUser();//Visiteur connecté
+        $visiteur = $this->getUser();//Visiteur connecté
 
         $em = $this->getDoctrine()->getManager();
 
         //recupération des  fiches frais triées par mois
         $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findBy(
             array('idvisiteur' => $visiteur->getId()),
-            array('datemodif' => 'DESC')
+            array('datecreation' => 'DESC')
         );
 
-        //Recupération de toutes les colone de la table etatFicheFrais
-        $lesEtatFicheFrais = $em->getRepository('GestionFraisBundle:EtatFicheFrais')->findAll();
 
         return $this->render('GestionFraisBundle:Utilisateur\fichefrais:index.html.twig', array(
             "lesFicheFrais" =>$lesFicheFrais,
         ));
     }
 
+    public function ajouterFicheFraisAction()
+    {
+        $visiteur = $this->getUser();//Visiteur connecté
+
+        $em = $this->getDoctrine()->getManager();
+
+        //recupération de la derniere fiche frais
+        $derniereFiche = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(
+            array('idvisiteur' => $visiteur->getId()),
+            array('datecreation' => 'DESC')
+        );
+
+
+        if( $derniereFiche == null )
+        {
+            $nouvelleFicheFrais = new FicheFrais($visiteur);// on crée une nouvelle fiche
+            return $this->redirect($this->generateUrl('ficheFrais_index'));
+        }
+        else if(!$derniereFiche->estValide())
+        {
+            $nouvelleFicheFrais = new FicheFrais($visiteur);// on crée une nouvelle fiche
+            return $this->redirect($this->generateUrl('ficheFrais_index'));
+        }
+        else
+        {
+            throw $this->createNotFoundException('Fiche existe deja.');
+        }
+
+    }
     public function afficherAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -158,6 +186,8 @@ class UtilisateurController extends Controller
 
     Public function ajouterLigneFraisHorsForfaitAction($id, Request $request)
     {
+
+        $idEtatLigneFraisDefaut = 3;
         //Connection BDD
         $em = $this->getDoctrine()->getManager();
 
@@ -177,7 +207,7 @@ class UtilisateurController extends Controller
         }
 
         //on récupere l'etatLigneFrais "Enregistré"
-        $unEtatLigneFrais = $em->getRepository('GestionFraisBundle:EtatLigneFrais')->findOneById(3);
+        $unEtatLigneFrais = $em->getRepository('GestionFraisBundle:EtatLigneFrais')->findOneById($idEtatLigneFraisDefaut);
 
         $uneLigneFraisHorsForfait = new LigneFraisHorsForfait();//On créé une nouvelle ligneFraishorsForfait
         $uneLigneFraisHorsForfait->setIdfichefrais($uneFicheFrais);//On attribut cette ligne à la fiche frais

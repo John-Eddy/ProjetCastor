@@ -8,7 +8,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 /**
  * Visiteur
  *
- * @ORM\Table(name="visiteur", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_4EA587B892FC23A8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_4EA587B8A0D96FBF", columns={"email_canonical"})})
+ * @ORM\Table(name="visiteur", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_username", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_email", columns={"email_canonical"})})
  * @ORM\Entity
  */
 class Visiteur extends BaseUser
@@ -56,8 +56,6 @@ class Visiteur extends BaseUser
      * @ORM\Column(name="ville", type="string", length=100, precision=0, scale=0, nullable=false, unique=false)
      */
     private $ville;
-
-
 
     /**
      * Set nom
