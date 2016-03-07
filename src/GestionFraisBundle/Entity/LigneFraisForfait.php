@@ -3,6 +3,8 @@
 namespace GestionFraisBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Proxies\__CG__\GestionFraisBundle\Entity\FicheFrais;
+use Proxies\__CG__\GestionFraisBundle\Entity\FraisForfait;
 
 /**
  * LigneFraisForfait
@@ -59,6 +61,16 @@ class LigneFraisForfait
     private $idfraisforfait;
 
 
+    public function __construct(FicheFrais $uneFicheFrais, FraisForfait $unFraisForfait)
+    {
+        $idEtatLigneFraisDefaut = 3;
+        $em = $this->getDoctrine()->getManager();
+
+        $this->idfichefrais = $uneFicheFrais;
+        $this->idfraisforfait = $unFraisForfait;
+        $this->idetatlignefrais = $em->getRepository("GestionFraisBundle:EtatLigneFrais")->findOneById($idEtatLigneFraisDefaut);
+        $this->quantite = 0;
+    }
 
     /**
      * Set quantite
