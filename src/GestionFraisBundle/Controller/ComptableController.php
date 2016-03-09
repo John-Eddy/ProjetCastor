@@ -14,7 +14,17 @@ class ComptableController extends Controller
 {
     public function indexAction(){
 
-        return $this->render('GestionFraisBundle:Comptable:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        //recupération des  fiches frais triées par mois
+        $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findAll(
+            array('datecreation' => 'DESC')
+        );
+
+
+        return $this->render('GestionFraisBundle:Comptable:index.html.twig', array(
+            'lesFicheFrais' => $lesFicheFrais
+        ));
     }
     /*
      * Affiche la fiche frais correspondant au parametres fournis avec la possibilité de modifier l'etat des lignes et de la fiche

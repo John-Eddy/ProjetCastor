@@ -48,26 +48,31 @@ class UtilisateurController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $gestionaireFiche =$this->container->get('gestionfrais.gestionairefiche');
+
         //recupération de la derniere fiche frais
-        $derniereFiche = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(
+        $lesFichesFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findAll(
             array('idvisiteur' => $visiteur->getId()),
             array('datecreation' => 'DESC')
         );
-
+        $derniereFiche = $lesFichesFrais[0];
 
         if( $derniereFiche == null )
         {
-            $nouvelleFicheFrais = new FicheFrais($visiteur);// on crée une nouvelle fiche
+            $nouvelleFicheFrais = $gestionaireFiche->creeFiche($visiteur, $em);// on crée une nouvelle fiche
             return $this->redirect($this->generateUrl('ficheFrais_index'));
         }
-        else if(!$derniereFiche->estValide())
+        else if(!$gestionaireFiche->estValide($derniereFiche))
         {
-            $nouvelleFicheFrais = new FicheFrais($visiteur);// on crée une nouvelle fiche
+            $nouvelleFicheFrais = $gestionaireFiche->creeFiche($visiteur,$em );// on crée une nouvelle fiche
             return $this->redirect($this->generateUrl('ficheFrais_index'));
         }
         else
         {
-            throw $this->createNotFoundException('Fiche existe deja.');
+            return $this->render('GestionFraisBundle:Utilisateur\fichefrais:index.html.twig', array(
+                "lesFicheFrais" => $lesFichesFrais,
+                "erreurFicheExistante"=>"Une fixe existe déjà pour le mois en cours",
+            ));
         }
 
     }
@@ -213,6 +218,7 @@ class UtilisateurController extends Controller
         $uneLigneFraisHorsForfait->setIdfichefrais($uneFicheFrais);//On attribut cette ligne à la fiche frais
         $uneLigneFraisHorsForfait->setIdetatlignefrais($unEtatLigneFrais);//On lui donne l'etat enregistré
         $uneLigneFraisHorsForfait->setDate(new \DateTime());//on lui passe la date du jour
+
 
         // On crée le FormBuilder grâce au service form factory
         $formBuilder = $this->get('form.factory')->createBuilder('form', $uneLigneFraisHorsForfait);

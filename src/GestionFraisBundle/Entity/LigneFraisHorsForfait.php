@@ -175,7 +175,7 @@ class LigneFraisHorsForfait
 
         $nomOriginal = $this->file->getClientOriginalName();
 
-        $this->justificatif = $this->getUploadRootDir()."/".strval($this->id)."/".$nomOriginal;
+        $this->justificatif = $this->getUploadDir()."/".$nomOriginal;
 
         return $this;
     }
@@ -260,12 +260,14 @@ class LigneFraisHorsForfait
 
     public function getUploadDir()
     {
-        return '/uploads/justificatifs/'.$this->idfichefrais->getMois();
+        return $this->getGlobalUploadDir().$this->idfichefrais->getMois()."/".strval($this->id);
     }
 
-    public function getUploadRootDir()
+    public function getGlobalUploadDir()
     {
-        return "C:/wamp/www/ProjetCastor/web".$this->getUploadDir();
+        $chemin = __DIR__;
+        $chemin = str_replace("\src\GestionFraisBundle\Entity","", $chemin);
+        return $chemin."/web/uploads/justificatifs/";
     }
 
     public function getWebPath()
@@ -279,14 +281,24 @@ class LigneFraisHorsForfait
     }
     public function sauvgarderFichier()
     {
-        if (!file_exists($this->getUploadRootDir()))
-        {
-            mkdir($this->getUploadRootDir());
-        }
+        $chemin = __DIR__;
+        $chemin = str_replace("\src\GestionFraisBundle\Entity","", $chemin);
 
-        if(!file_exists($this->getUploadRootDir().'/'.strval($this->id)))
+        if (!file_exists($chemin."\web\uploads"))
         {
-            mkdir($this->getUploadRootDir().'/'.strval($this->id));
+            mkdir($chemin."\web\uploads");
+        }
+        if (!file_exists($chemin."\web\uploads\justificatifs"))
+        {
+            mkdir($chemin."\web\uploads\justificatifs");
+        }
+        if (!file_exists($chemin."\web\uploads\justificatifs/".$this->getIdfichefrais()->getMois()))
+        {
+            mkdir($chemin."\web\uploads\justificatifs/".$this->getIdfichefrais()->getMois());
+        }
+        if(!file_exists($chemin."\web\uploads\justificatifs/".$this->getIdfichefrais()->getMois().'/'.strval($this->id)))
+        {
+            mkdir($chemin."\web\uploads\justificatifs/".$this->getIdfichefrais()->getMois().'/'.strval($this->id));
         }
 
         $this->setJustificatif();
