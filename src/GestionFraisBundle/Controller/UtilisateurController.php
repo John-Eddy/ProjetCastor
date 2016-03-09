@@ -48,6 +48,8 @@ class UtilisateurController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $gestionaireFiche =$this->container->get('gestionfrais.gestionairefiche');
+
         //recupération de la derniere fiche frais
         $derniereFiche = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(
             array('idvisiteur' => $visiteur->getId()),
@@ -57,12 +59,12 @@ class UtilisateurController extends Controller
 
         if( $derniereFiche == null )
         {
-            $nouvelleFicheFrais = new FicheFrais($visiteur);// on crée une nouvelle fiche
+            $nouvelleFicheFrais = $gestionaireFiche->creeFiche($visiteur);// on crée une nouvelle fiche
             return $this->redirect($this->generateUrl('ficheFrais_index'));
         }
-        else if(!$derniereFiche->estValide())
+        else if(!$gestionaireFiche->estValide($derniereFiche))
         {
-            $nouvelleFicheFrais = new FicheFrais($visiteur);// on crée une nouvelle fiche
+            $nouvelleFicheFrais = $gestionaireFiche->creeFiche($visiteur);// on crée une nouvelle fiche
             return $this->redirect($this->generateUrl('ficheFrais_index'));
         }
         else
