@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $roles = $this->get('security.context')->getToken()->getUser()->getRoles();
+        $roles = $this->getUser()->getRoles();
 
         echo(serialize($roles));
 
