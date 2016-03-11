@@ -388,8 +388,8 @@ class UtilisateurController extends Controller
         //Si le fichier joint exister
         if(is_file($uneLigneFraisHorsForfait->getJustificatif()))
         {
-            unlink($uneLigneFraisHorsForfait->getJustificatif());//on supprime le fichier
-            rmdir($uneLigneFraisHorsForfait->getUploadRootDir().'/'.strval($uneLigneFraisHorsForfait->getId()));//on supprime le répértoire
+            unlink($uneLigneFraisHorsForfait->getJustificatif());//on supprime le 
+            rmdir($uneLigneFraisHorsForfait->get));//on supprime le répértoire
         }
         $em->remove($uneLigneFraisHorsForfait);//on supprime la ligneFraisHF
         $em->flush();
