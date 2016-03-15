@@ -1,29 +1,15 @@
-lignefraishorsforfait:
-    path:     /
-    defaults: { _controller: "GestionFraisBundle:LigneFraisHorsForfait:index" }
-
-lignefraishorsforfait_show:
-    path:    /show/{id}
+lignefraishorsforfait_afficher:
+    path:    /afficher/{id}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:afficherLigneFraisHorsForfait" }
 
-lignefraishorsforfait_new:
-    path:     /new/{id}
+lignefraishorsforfait_ajouter:
+    path:     /ajouter/{id}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:ajouterLigneFraisHorsForfait" }
 
-lignefraishorsforfait_create:
-    path:     /create
-    defaults: { _controller: "GestionFraisBundle:LigneFraisHorsForfait:create" }
-    methods:  POST
-
-lignefraishorsforfait_edit:
-    path:     /edit/{id}
+lignefraishorsforfait_modifier:
+    path:     /modifier/{id}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:modifierLigneFraisHorsForfait" }
 
-lignefraishorsforfait_update:
-    path:     /update/{id}
-    defaults: { _controller: "GestionFraisBundle:LigneFraisHorsForfait:update" }
-    methods:  [POST, PUT]
-
-lignefraishorsforfait_delete:
-    path:     /delete/{id}
+lignefraishorsforfait_supprimer:
+    path:     /supprimer/{id}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:supprimerLigneFraisHorsForfait" }

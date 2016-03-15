@@ -27,6 +27,11 @@ div.bandeau-small
 	min-height: 100%
 
 }
+ #form_mois_day
+ {
+	 visibility: hidden;
+	 width: 0px;
+ }
 .lien-fiche {
 	display: block;
 	color: black;

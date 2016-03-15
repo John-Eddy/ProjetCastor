@@ -37,7 +37,7 @@
     {# Fermeture de la balise <form> du formulaire HTML #}
     {{ form_end(form) }}
     <div class="col-sm-offset-11 col-xs-offset-10">
-    <a class="btn-link" href="{{ path('lignefraishorsforfait_delete', {id: ligneFraisHF.id}) }}">Supprimer</a>
+    <a class="btn-link" href="{{ path('lignefraishorsforfait_supprimer', {id: ligneFraisHF.id}) }}">Supprimer</a>
     </div>
 
 {% endblock %}
