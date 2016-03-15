@@ -1,14 +1,14 @@
-fichefrais:
+fichefrais_index:
     path:     /
-    defaults: { _controller: "GestionFraisBundle:FicheFrais:index" }
+    defaults: { _controller: "GestionFraisBundle:Comptable:index" }
 
-fichefrais_show:
-    path:     /{id}/show
-    defaults: { _controller: "GestionFraisBundle:FicheFrais:show" }
+fichefrais_valider:
+    path:     /{id}/valider
+    defaults: { _controller: "GestionFraisBundle:Comptable:valider" }
 
-fichefrais_new:
+fichefrais_modifier:
     path:     /new
-    defaults: { _controller: "GestionFraisBundle:FicheFrais:new" }
+    defaults: { _controller: "GestionFraisBundle:Comptable:modifier" }
 
 fichefrais_create:
     path:     /create

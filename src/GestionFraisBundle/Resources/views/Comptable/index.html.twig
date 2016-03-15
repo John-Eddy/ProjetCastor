@@ -5,6 +5,32 @@
         <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="contenu" >
             <h3 class="text-center">Index Comptable !</h3>
 
+            <div class="bandeau"></div>
+            {% for uneFicheFrais in lesFicheFrais %}
+                {% set libelleMois = [uneFicheFrais.mois[0:2],uneFicheFrais.mois[2:]]|join('/') %}
+
+            <a class="lien-fiche" href="{{ path('ficheFrais_afficher', {id: uneFicheFrais.id}) }}">
+                <div class="row" id = "{{ uneFicheFrais.id }}">
+                    <div class="col-sm-6">
+                        <p>Visiteur : {{ uneFicheFrais.getIdvisiteur().getNom() }} {{ uneFicheFrais.getIdvisiteur().getPrenom() }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>Mois : {{ libelleMois }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>Date de modification : {{ uneFicheFrais.dateModif|date("d/m/Y") }}</p>
+                    </div>
+                    <div class="col-xs-12">
+                        <p>Etat : {{uneFicheFrais.getIdetatfichefrais().getLibelle() }}</p>
+
+                    </div>
+                </div>
+            </a>
+            <div class="bandeau-small"></div>
+
+            {% endfor %}
+
+
         </div>
     </div>
 

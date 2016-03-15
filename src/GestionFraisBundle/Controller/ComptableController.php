@@ -21,6 +21,8 @@ class ComptableController extends Controller
             array('datecreation' => 'DESC')
         );
 
+        //création du formulaire de recherche de fiche
+
 
         return $this->render('GestionFraisBundle:Comptable:index.html.twig', array(
             'lesFicheFrais' => $lesFicheFrais
@@ -31,6 +33,8 @@ class ComptableController extends Controller
      *
      */
     public function validerFicheAction($visiteur, $mois)
+
+
     {
 
     }
