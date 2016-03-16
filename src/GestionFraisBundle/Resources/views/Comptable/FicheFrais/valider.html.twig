@@ -1,0 +1,103 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('Css/form.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">{% endblock %}
+
+{%  block body %}
+    <div class="bandeau"></div>
+    <div class="container">
+        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 " id="contenu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-6">
+                        <p>{{ uneFicheFrais.getIdVisiteur().getNom() }} {{ uneFicheFrais.getIdVisiteur().getPrenom() }}</p>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        {% set libelleMois = [uneFicheFrais.mois[0:2],uneFicheFrais.mois[2:]]|join('/') %}
+                        <p> Mois : {{ libelleMois }}</p>
+                    </div>
+
+                    <div class="col-sm-6 col-xs-12">
+                        <p>Date modification : {{ uneFicheFrais.dateModif|date("d/m/Y") }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-xs-12">
+                        <p> Etat : {{ uneFicheFrais.getIdetatfichefrais().getlibelle() }}</p>
+                    </div>
+                </div>
+
+                <div class="row" id ="fraisForfait">
+                    <h3>Frais Forfait</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th><p>Libelle</p></th>
+                            <th><p>Quantité</p></th>
+                            <th><p>Etat</p></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for uneLigneFraisForfait in lesLignesFraisForfait %}
+                            <tr class="lien-tableau" onclick="location.href='{{ path('lignefraisforfait_valider', {idLigneFraisForfait: uneLigneFraisForfait.id}) }}">
+                                <td>
+                                    <p>{{ uneLigneFraisForfait.getIdfraisforfait().getLibellefraisforfait }}</p>
+                                </td>
+                                <td>
+                                    <p name = "{{ uneLigneFraisForfait.getIdfraisforfait().getLibellefraisforfait }}"> {{ uneLigneFraisForfait.quantite }} </p>
+                                </td>
+                                <td>
+                                    <p>{{ uneLigneFraisForfait.getIdetatlignefrais().getLibelleetatlignefrais() }} </p>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bandeau-small"></div>
+
+                <div class="row">
+                    <h3>Frais Hors Forfait</h3>
+                    <table class="table table-bordered" >
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Montant</th>
+                            <th>Etat</th>
+                        </tr>
+                        </thead>
+                        {% for uneLigneFraisHorsForfait in lesLignesFraisHorsForfait %}
+                            <tbody >
+
+                            <tr class="lien-tableau" onclick="location.href='{{ path('lignefraishorsforfait_afficher', {id: uneLigneFraisHorsForfait.id}) }}'">
+                                <td> {{ uneLigneFraisHorsForfait.date|date("d/m/Y")}} </td>
+                                <td>{{ uneLigneFraisHorsForfait.montant }} €</td>
+                                <td>{{ uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
+                                <td class="block">{{ uneLigneFraisHorsForfait.libellelignehorsforfait }}</td>
+                            </tr>
+
+                            </tbody>
+
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="bandeau-small"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script language="javascript" src="{{ asset('JavaScript/fraisHF.js') }}"></script>
+
+    <script language="javascript" src="{{ asset('JavaScript/verificationFiche.js') }}"></script>
+
+
+
+{% endblock  %}
+{% block javascripts %}
+
+
+
+{% endblock %}

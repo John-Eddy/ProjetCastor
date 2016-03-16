@@ -37,7 +37,7 @@ class ComptableController extends Controller
                 array(
                     'format' => 'yyyy-MM-dd',
                     'placeholder' => array(
-                        'year' => 'Year', 'month' => 'Month'
+                        'year' => 'Année', 'month' => 'Mois'
                     ),
                     'days' => range(1,1),
                 )
@@ -51,7 +51,7 @@ class ComptableController extends Controller
         // On fait le lien Requête <-> Formulaire
         $form->handleRequest($request);
 
-        // À partir de maintenant, la variable $valeurForm contient les valeurs entrées dans le formulaire par le visiteur
+        // À partir de maintenant, la variable $form contient les valeurs entrées dans le formulaire par le visiteur
 
         // On vérifie que les valeurs entrées sont correctes
         if ($form->isValid())
@@ -88,11 +88,44 @@ class ComptableController extends Controller
      * Affiche la fiche frais correspondant au parametres fournis avec la possibilité de modifier l'etat des lignes et de la fiche
      *
      */
-    public function validerFicheAction($visiteur, $mois)
-
-
+    public function validerFicheAction($idFicheFrais)
     {
+        $em = $this->getDoctrine()->getManager();
 
+        //recupération de la fiche frais
+        $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(array(
+            'id' => $idFicheFrais));
+
+        //verification de l'éxistance de la fiche de frais :
+        if (!$uneFicheFrais) {
+            throw $this->createNotFoundException('Fiche introuvable.');
+        }
+
+        //recupération des ligne de frais forfait de cette fiche
+        $lesLignesFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(
+            array(
+                'idfichefrais' => $idFicheFrais,
+            )
+        );
+
+        //recupération des ligne de frais hors forfait de cette fiche
+        $lesLignesFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findBy(
+            array(
+                'idfichefrais' => $idFicheFrais,
+            )
+        );
+
+        //retourne la vue validé fiche
+        return $this->render('GestionFraisBundle:Comptable/FicheFrais:valider.html.twig', array(
+            'uneFicheFrais' => $uneFicheFrais,
+            'lesLignesFraisForfait' => $lesLignesFraisForfait,
+            'lesLignesFraisHorsForfait' => $lesLignesFraisHorsForfait,
+        ));
+    }
+
+    public function validerLigneFraisForfait($idLigneFraisForfait)
+    {
+        throw $this->createNotFoundException('Ligne Frais GG Liza.');
     }
 
 }

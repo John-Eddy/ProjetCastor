@@ -34,15 +34,21 @@
                         <tr>
                             <th><p>Libelle</p></th>
                             <th><p>Quantité</p></th>
+                            <th><p>Etat</p></th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for uneLigneFraisForfait in lesLignesFraisForfait %}
                             <tr>
 
-                                <td><p>{{ uneLigneFraisForfait.getIdfraisforfait().getLibellefraisforfait }}</p></td>
+                                <td>
+                                    <p>{{ uneLigneFraisForfait.getIdfraisforfait().getLibellefraisforfait }}</p>
+                                </td>
                                 <td>
                                     <p name = "{{ uneLigneFraisForfait.getIdfraisforfait().getLibellefraisforfait }}"> {{ uneLigneFraisForfait.quantite }} </p>
+                                </td>
+                                <td>
+                                    <p>{{ uneLigneFraisForfait.getIdetatlignefrais().getLibelleetatlignefrais() }} </p>
                                 </td>
 
                             </tr>

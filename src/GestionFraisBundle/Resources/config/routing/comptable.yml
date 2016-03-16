@@ -2,3 +2,11 @@ comptable_index:
     path:     /
     defaults: { _controller: "GestionFraisBundle:Comptable:Index" }
 
+comptable_fichefrais:
+     resource: "@GestionFraisBundle/Resources/config/routing/comptable/fichefrais.yml"
+     prefix:   /fichefrais
+
+
+gestion_frais_lignefraisforfait:
+    resource: "@GestionFraisBundle/Resources/config/routing/comptable/lignefraisforfait.yml"
+    prefix:   /ligneFraisForfait

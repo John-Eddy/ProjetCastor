@@ -1,30 +1,8 @@
 fichefrais_index:
     path:     /
-    defaults: { _controller: "GestionFraisBundle:Comptable:index" }
+    defaults: { _controller: "GestionFraisBundle:Comptable:Index" }
 
-fichefrais_valider:
-    path:     /{id}/valider
-    defaults: { _controller: "GestionFraisBundle:Comptable:valider" }
+ficheFrais_valider:
+    path:     /valider/{idFicheFrais}
+    defaults: { _controller: "GestionFraisBundle:Comptable:ValiderFiche" }
 
-fichefrais_modifier:
-    path:     /new
-    defaults: { _controller: "GestionFraisBundle:Comptable:modifier" }
-
-fichefrais_create:
-    path:     /create
-    defaults: { _controller: "GestionFraisBundle:FicheFrais:create" }
-    methods:  POST
-
-fichefrais_edit:
-    path:     /{id}/edit
-    defaults: { _controller: "GestionFraisBundle:FicheFrais:edit" }
-
-fichefrais_update:
-    path:     /{id}/update
-    defaults: { _controller: "GestionFraisBundle:FicheFrais:update" }
-    methods:  [POST, PUT]
-
-fichefrais_delete:
-    path:     /{id}/delete
-    defaults: { _controller: "GestionFraisBundle:FicheFrais:delete" }
-    methods:  [POST, DELETE]

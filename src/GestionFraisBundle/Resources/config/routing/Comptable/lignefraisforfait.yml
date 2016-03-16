@@ -1,0 +1,3 @@
+lignefraisforfait_valider:
+    path:    /valider/{idLigneFraisForfait}
+    defaults: { _controller: "GestionFraisBundle:Comptable:validerLigneFraisForfait" }
