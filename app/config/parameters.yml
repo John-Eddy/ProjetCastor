@@ -10,4 +10,7 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: c78c41b414fef57bf9448c79402f6dca6ecac0ed
+    idEtatFicheFraisDefaut: 1
+    idEtatFicheFraisCloture:  2
+    idEtatLigneFraisDefaut: 3
 

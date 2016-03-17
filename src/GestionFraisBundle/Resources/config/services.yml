@@ -5,4 +5,5 @@ services:
 
 services:
     gestion_frais.gestionairefiche:
-        class: GestionFraisBundle\GestionFiche\GestionFiche
+        class: GestionFraisBundle\GestionFiche\GestionFicheController
+        arguments: ["@service_container"]
