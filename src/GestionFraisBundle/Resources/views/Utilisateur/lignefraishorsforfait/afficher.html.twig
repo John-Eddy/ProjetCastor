@@ -27,5 +27,10 @@
             </tr>
         </tbody>
     </table>
+    {{ dump(app.request.getBaseURL()) }}
+    {% set urlJustificatif = uneLigneFraisHorsForfait.justificatif  %}
+    <a href="{{ urlJustificatif }}">Piece Jointe</a>
+
+
 
 {% endblock %}

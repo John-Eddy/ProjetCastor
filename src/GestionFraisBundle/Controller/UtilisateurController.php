@@ -11,6 +11,7 @@ namespace GestionFraisBundle\Controller;
 use GestionFraisBundle\Entity\FicheFrais;
 use GestionFraisBundle\Entity\LigneFraisHorsForfait;
 use GestionFraisBundle\Entity\Visiteur;
+use GestionFraisBundle\Form\RechercherFicheFraisType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,7 +38,7 @@ class UtilisateurController extends Controller
             array('idvisiteur' => $visiteur->getId()),
             array('datecreation' => 'DESC')
         );
-
+/*
         // On crée le FormBuilder grâce au service form factory
         $formBuilder = $this->get('form.factory')->createBuilder('form');
 
@@ -53,9 +54,11 @@ class UtilisateurController extends Controller
                 )
             )
             ->add('Rechercher', 'submit');
+*/
+
 
         // À partir du formBuilder, on génère le formulaire
-        $form = $formBuilder->getForm();
+        $form = $this->createForm( new RechercherFicheFraisType());
 
         // On fait le lien Requête <-> Formulaire
         $form->handleRequest($request);
@@ -90,6 +93,9 @@ class UtilisateurController extends Controller
         ));
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function ajouterFicheFraisAction()
     {
         $visiteur = $this->getUser();//Visiteur connecté
@@ -124,7 +130,11 @@ class UtilisateurController extends Controller
 
     }
 
-    public function afficherAction($id)
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function afficherFicheFraisAction($id)
     {
 
         $idEtatFicheFraisDefaut = $this->container->getParameter('idEtatFicheFraisDefaut');
@@ -186,6 +196,10 @@ class UtilisateurController extends Controller
 
     // Fonction qui vérifie les données recupérer depuis la fiche et les enregistre si elle son valide
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function enregistrerAction($id)
     {
 
@@ -238,6 +252,11 @@ class UtilisateurController extends Controller
     }
 
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     Public function ajouterLigneFraisHorsForfaitAction($id, Request $request)
     {
 
@@ -314,6 +333,10 @@ class UtilisateurController extends Controller
         ));
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function afficherLigneFraisHorsForfaitAction($id)
     {
         //Connection BDD
@@ -339,6 +362,11 @@ class UtilisateurController extends Controller
 
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function modifierLigneFraisHorsForfaitAction($id, Request $request)
     {
         //Connection BDD
@@ -404,6 +432,10 @@ class UtilisateurController extends Controller
         ));
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function supprimerLigneFraisHorsForfaitAction($id)
     {
         //Conection BDD
@@ -426,14 +458,17 @@ class UtilisateurController extends Controller
         $idFicheFrais = $uneLigneFraisHorsForfait->getIdfichefrais()->getId();
 
         //Si le fichier joint exister
-        if (is_file($uneLigneFraisHorsForfait->getJustificatif())) {
-            unlink($uneLigneFraisHorsForfait->getJustificatif());//on supprime le
-            rmdir($uneLigneFraisHorsForfait->getUploadDir());//on supprime le répértoire
-        }
         $em->remove($uneLigneFraisHorsForfait);//on supprime la ligneFraisHF
         $em->flush();
 
         //on redirige vers la ficheFrais
         return $this->redirect($this->generateUrl('ficheFrais_afficher', array('id' => $idFicheFrais)));
     }
-}              
+
+
+    public function getDerniereFicheFrais(Visiteur $unVisiteur)
+    {
+
+    }
+
+}

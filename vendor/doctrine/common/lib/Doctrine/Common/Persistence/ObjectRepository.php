@@ -78,4 +78,5 @@ interface ObjectRepository
      * @return string
      */
     public function getClassName();
+
 }

@@ -8,11 +8,11 @@ ficheFrais_ajouter:
 
 ficheFrais_afficher:
     path:    /afficher/{id}
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:Afficher" }
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:afficherFicheFrais" }
 
 ficheFrais_consulter:
     path:    /consulter/{id}
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:Consulter" }
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:ConsulterFicheFrais" }
 
 ficheFrais_renseigner:
     path:    /renseigner/{id}
