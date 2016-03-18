@@ -8,6 +8,7 @@
 
 namespace GestionFraisBundle\Controller;
 
+use GestionFraisBundle\Form\RechercherFicheFraisType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,30 +24,15 @@ class ComptableController extends Controller
             array('datecreation' => 'DESC')
         );
 
-        //création du formulaire de recherche de fiche
-        // On crée le FormBuilder grâce au service form factory
-        $formBuilder = $this->get('form.factory')->createBuilder('form');
 
-        // On ajoute les champs de l'entité que l'on veut à notre formulaire
-        $formBuilder
-            ->add('Visiteur','entity', array(
-                'class' => 'GestionFraisBundle:Visiteur',
-                'choice_label' => 'username',
-            ))
-            ->add('mois', 'date',
-                array(
-                    'format' => 'yyyy-MM-dd',
-                    'placeholder' => array(
-                        'year' => 'Année', 'month' => 'Mois'
-                    ),
-                    'days' => range(1,1),
-                )
-            )
-            ->add('Rechercher', 'submit' )
-        ;
 
         // À partir du formBuilder, on génère le formulaire
-        $form = $formBuilder->getForm();
+        $form = $this->createForm(
+            new RechercherFicheFraisType(),
+            null,
+            array(
+                'type'=> 'comptable'
+            ));
 
         // On fait le lien Requête <-> Formulaire
         $form->handleRequest($request);
@@ -57,25 +43,37 @@ class ComptableController extends Controller
         if ($form->isValid())
         {
             //On récupere la date du formulaire et on la transforme en chaine de caractères
-            $dateForm = date_format($form->getData()['mois'], 'Y-m-d H:i:s');
+
 
             $visiteurForm = $form->getData()['Visiteur'];
 
-            $mois  = substr($dateForm,5,2).substr($dateForm,0,4); // on extrait le mois et l'année de la chaine et on les mets au format mmaaaa
 
+
+
+            $criteres = array();
+            if($visiteurForm){
+                $criteres['idvisiteur' ]= $visiteurForm->getId();
+            }
+            if($form->getData()['mois']){
+                $dateForm = date_format($form->getData()['mois'], 'Y-m-d H:i:s');
+                $mois  = substr($dateForm,5,2).substr($dateForm,0,4); // on extrait le mois et l'année de la chaine et on les mets au format mmaaaa
+                $criteres['mois']= $mois;
+            }
             //recupération de la  fiches frais corespondant au mois
-            $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(array(
-                'idvisiteur' => $visiteurForm->getId(),
-                'mois' => $mois
-            ));
+            $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findby($criteres);
 
-            //verification de l'éxistance de la fiche de frais :
+          /*  //verification de l'éxistance de la fiche de frais :
             if (!$uneFicheFrais) {
                 throw $this->createNotFoundException('Fiche introuvable.');
             }
 
             // On redirige vers la fiche frais
             return $this->redirect($this->generateUrl('ficheFrais_afficher', array('id' => $uneFicheFrais->getId())));
+          */
+            return $this->render('GestionFraisBundle:Comptable:index.html.twig', array(
+                'lesFicheFrais' => $lesFicheFrais,
+                'form' => $form->createView(),
+            ));
         }
 
 

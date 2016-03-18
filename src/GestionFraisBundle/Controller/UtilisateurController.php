@@ -11,6 +11,7 @@ namespace GestionFraisBundle\Controller;
 use GestionFraisBundle\Entity\FicheFrais;
 use GestionFraisBundle\Entity\LigneFraisHorsForfait;
 use GestionFraisBundle\Entity\Visiteur;
+use GestionFraisBundle\Form\RechercherFicheFraisType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,7 +38,7 @@ class UtilisateurController extends Controller
             array('idvisiteur' => $visiteur->getId()),
             array('datecreation' => 'DESC')
         );
-
+/*
         // On crée le FormBuilder grâce au service form factory
         $formBuilder = $this->get('form.factory')->createBuilder('form');
 
@@ -53,9 +54,11 @@ class UtilisateurController extends Controller
                 )
             )
             ->add('Rechercher', 'submit');
+*/
+
 
         // À partir du formBuilder, on génère le formulaire
-        $form = $formBuilder->getForm();
+        $form = $this->createForm( new RechercherFicheFraisType());
 
         // On fait le lien Requête <-> Formulaire
         $form->handleRequest($request);
@@ -426,10 +429,6 @@ class UtilisateurController extends Controller
         $idFicheFrais = $uneLigneFraisHorsForfait->getIdfichefrais()->getId();
 
         //Si le fichier joint exister
-        if (is_file($uneLigneFraisHorsForfait->getJustificatif())) {
-            unlink($uneLigneFraisHorsForfait->getJustificatif());//on supprime le
-            rmdir($uneLigneFraisHorsForfait->getUploadDir());//on supprime le répértoire
-        }
         $em->remove($uneLigneFraisHorsForfait);//on supprime la ligneFraisHF
         $em->flush();
 
