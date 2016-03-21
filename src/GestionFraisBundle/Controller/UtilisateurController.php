@@ -38,27 +38,28 @@ class UtilisateurController extends Controller
             array('idvisiteur' => $visiteur->getId()),
             array('datecreation' => 'DESC')
         );
-/*
-        // On crée le FormBuilder grâce au service form factory
-        $formBuilder = $this->get('form.factory')->createBuilder('form');
+        /*
+                // On crée le FormBuilder grâce au service form factory
+                $formBuilder = $this->get('form.factory')->createBuilder('form');
 
-        // On ajoute les champs de l'entité que l'on veut à notre formulaire
-        $formBuilder
-            ->add('mois', 'date',
-                array(
-                    'format' => 'yyyy-MM-dd',
-                    'placeholder' => array(
-                        'year' => 'Année', 'month' => 'Mois'
-                    ),
-                    'days' => range(1, 1),
-                )
-            )
-            ->add('Rechercher', 'submit');
-*/
+                // On ajoute les champs de l'entité que l'on veut à notre formulaire
+                $formBuilder
+                    ->add('mois', 'date',
+                        array(
+                            'format' => 'yyyy-MM-dd',
+                            'placeholder' => array(
+                                'year' => 'Année', 'month' => 'Mois'
+                            ),
+                            'days' => range(1, 1),
+                        )
+                    )
+                    ->add('Rechercher', 'submit');
+        */
 
 
         // À partir du formBuilder, on génère le formulaire
-        $form = $this->createForm( new RechercherFicheFraisType());
+        // À partir du formBuilder, on génère le formulaire
+        $form = $this->createForm(new RechercherFicheFraisType());
 
         // On fait le lien Requête <-> Formulaire
         $form->handleRequest($request);
@@ -110,8 +111,7 @@ class UtilisateurController extends Controller
         if ($lesFichesFrais[0] == null) {
             $nouvelleFicheFrais = $gestionaireFiche->creeFiche($visiteur, $em);// on crée une nouvelle fiche
             return $this->redirect($this->generateUrl('ficheFrais_index'));
-        }
-        else if (!$gestionaireFiche->estValide($lesFichesFrais[count($lesFichesFrais) - 1])) {
+        } else if (!$gestionaireFiche->estValide($lesFichesFrais[count($lesFichesFrais) - 1])) {
             $dernierFiche = $lesFichesFrais[count($lesFichesFrais) - 1];
             $nouvelleFicheFrais = $gestionaireFiche->creeFiche($visiteur, $em);// on crée une nouvelle fiche
             //on modifie l'etat de l'avant derniere fiche
@@ -119,9 +119,7 @@ class UtilisateurController extends Controller
             $em->persist($dernierFiche);
             $em->flush();
             return $this->redirect($this->generateUrl('ficheFrais_index'));
-        }
-        else
-        {
+        } else {
             return $this->redirectToRoute("ficheFrais_index");
         }
 
@@ -360,20 +358,8 @@ class UtilisateurController extends Controller
             throw $this->createAccessDeniedException('Accès interdit');
         }
 
-        // On crée le FormBuilder grâce au service form factory
-        $formBuilder = $this->get('form.factory')->createBuilder('form', $uneLigneFraisHorsForfait);
-
-        // On ajoute les champs de l'entité que l'on veut à notre formulaire
-        $formBuilder
-            ->add('date', 'date')
-            ->add('montant', 'money')
-            ->add('libellelignehorsforfait', 'textarea')
-            ->add('file', 'file', array('label' => 'Justificatif', 'required' => false))
-            ->add('save', 'submit');
-        // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
-
         // À partir du formBuilder, on génère le formulaire
-        $form = $formBuilder->getForm();
+        $form = $this->createForm(new LigneFraisHorsForfait(), null, array('type'=> 'comptable'));
 
         // On fait le lien Requête <-> Formulaire
         $form->handleRequest($request);
@@ -435,4 +421,4 @@ class UtilisateurController extends Controller
         //on redirige vers la ficheFrais
         return $this->redirect($this->generateUrl('ficheFrais_afficher', array('id' => $idFicheFrais)));
     }
-}              
+}

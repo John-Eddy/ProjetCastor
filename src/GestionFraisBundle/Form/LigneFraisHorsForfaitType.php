@@ -14,10 +14,36 @@ class LigneFraisHorsForfaitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if ($options['role'] == 'utilisateur')
+        {
+            if($options['action'] == 'modifier')
+            {
+                $builder
+                    ->add('date', 'date')
+                    ->add('montant', 'money')
+                    ->add('libellelignehorsforfait', 'textarea')
+                    ->add('file', 'file', array('label' => 'Justificatif', 'required' => false));
+            }
+            elseif($options['action'] == 'modifier')
+            {
+                $builder
+                    ->add('date', 'date')
+                    ->add('montant', 'money')
+                    ->add('libellelignehorsforfait', 'textarea')
+                    ->add('file', 'file', array('label' => 'Justificatif', 'required' => true));
+
+            }
+        }
+        elseif($options['role'] == 'comptable')
+        {
+            if($options['action']=='valider') {
+                $i=0;
+            }
+        }
+
+
         $builder
-            ->add('date')
-            ->add('montant')
-            ->add('libellelignehorsforfait')
+            ->add('Enregistrer', 'submit');
         ;
     }
     

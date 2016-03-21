@@ -12,6 +12,15 @@
                     {# Les erreurs générales du formulaire. #}
                     {{ form_errors(form) }}
 
+
+                    <div class="form-group ">
+                        {{ form_label(form.Visiteur, "Visiteur", {'label_attr': {'class': ' '}}) }}
+                        {# Affichage des erreurs pour ce champ précis. #}
+
+                        {{ form_errors(form.Visiteur) }}
+                        {# Génération de l'input. #}
+                        {{ form_widget(form.Visiteur, {'attr': {'class': 'form-control' } }) }}
+                    </div>
                     <div class="form-group">
                         {{ form_label(form.mois, "Date", {'label_attr': {'class': ''}}) }}
                         {# Affichage des erreurs pour ce champ précis. #}
@@ -22,15 +31,6 @@
                             {{ form_widget(form.mois, {'attr': {'class': ' ' } }) }}
                         </div>
                     </div>
-                    <div class="form-group ">
-                        {{ form_label(form.Visiteur, "Visiteur", {'label_attr': {'class': ' '}}) }}
-                        {# Affichage des erreurs pour ce champ précis. #}
-
-                        {{ form_errors(form.Visiteur) }}
-                        {# Génération de l'input. #}
-                        {{ form_widget(form.Visiteur, {'attr': {'class': 'form-control' } }) }}
-                    </div>
-
                     <div class="form-group ">
                         {{ form_widget(form.Rechercher, {'attr': {'class': 'btn btn-default' } }) }}
 

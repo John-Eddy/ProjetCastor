@@ -44,11 +44,7 @@ class ComptableController extends Controller
         {
             //On récupere la date du formulaire et on la transforme en chaine de caractères
 
-
             $visiteurForm = $form->getData()['Visiteur'];
-
-
-
 
             $criteres = array();
             if($visiteurForm){
