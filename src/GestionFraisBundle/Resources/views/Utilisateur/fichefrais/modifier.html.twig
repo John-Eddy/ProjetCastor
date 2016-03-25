@@ -13,8 +13,7 @@
                         <p>{{ uneFicheFrais.getIdVisiteur().getNom() }} {{ uneFicheFrais.getIdVisiteur().getPrenom() }}</p>
                     </div>
                     <div class="col-sm-3 col-xs-6">
-                        {% set libelleMois = [uneFicheFrais.mois[0:2],uneFicheFrais.mois[2:]]|join('/') %}
-                        <p> Mois : {{ libelleMois }}</p>
+                        <p> Mois : {{ uneFicheFrais.mois }}/{{ uneFicheFrais.annee }}</p>
                     </div>
 
                     <div class="col-sm-6 col-xs-12">
@@ -26,79 +25,93 @@
                             <p> Etat : {{ uneFicheFrais.getIdetatfichefrais().getlibelle() }}</p>
                     </div>
                 </div>
-
-                <form name="ficheFrais"
-                      method="post"
-                      action="{{ path('ficheFrais_enregistrer', {id: uneFicheFrais.id}) }}"
-                      onsubmit="return verifFiche(this)"
-                      onblur="verifChampNumerique(this)">
-
-                    <div class="row" id ="fraisForfait">
-                        <h3>Frais Forfait</h3>
-                        <table class="table table-bordered">
-                            <thead>
+                <div class="row" id ="fraisForfait">
+                    <h3>Frais Forfait</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th><p>Date</p></th>
+                            <th><p>Libelle</p></th>
+                            <th><p>Quantité</p></th>
+                            <th><p>Montant</p></th>
+                            <th><p>Etat</p></th>
+                            <th><p>Modifier</p></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for uneLigneFraisForfait in uneFicheFrais.lignesFraisForfaits %}
                             <tr>
-                                <th><p>Libelle</p></th>
-                                <th><p>Quantité</p></th>
-                                <th><p>Etat</p></th>
+                                <td>
+                                    <p>{{ uneLigneFraisForfait.date|date("d/m/Y")}}</p>
+                                </td>
+                                <td>
+                                    <p>{{ uneLigneFraisForfait.getIdfraisforfait().getLibellefraisforfait }}</p>
+                                </td>
+                                <td>
+                                    <p> {{ uneLigneFraisForfait.quantite }} </p>
+                                </td>
+                                <td>
+                                    <p> {{ uneLigneFraisForfait.montant }} €</p>
+                                </td>
+                                <td>
+                                    <p>{{ uneLigneFraisForfait.getIdetatlignefrais().getLibelleetatlignefrais() }} </p>
+                                </td>
+                                <td>
+                                    <a href="{{ path('lignefraisforfait_modifier', {'id': uneLigneFraisForfait.id}) }}">modifier</a>
+                                    <a
+                                            href="{{ path('lignefraisforfait_supprimer', {'id': uneLigneFraisForfait.id}) }}"
+                                            onclick="return confirm('Etes vous sûre de vouloir supprimer ce frais ?')"
+                                    >
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            {% for uneLigneFraisForfait in lesLignesFraisForfait %}
-                                <tr>
-                                    <td><p>{{ uneLigneFraisForfait.getIdfraisforfait().getLibellefraisforfait }}</p></td>
-                                    <td>
-                                        <input type="number"
-                                               value="{{ uneLigneFraisForfait.quantite }}"
-                                               name="{{ uneLigneFraisForfait.Id }}"
-                                               min="0"
-                                               class="form-control "
-                                               onblur="verifChampNumerique(this)" >
-                                    </td>
-                                    <td>{{ uneLigneFraisForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
-                                </tr>
-                            {% endfor %}
+                        {% endfor %}
 
+                        </tbody>
+                    </table>
+                    <a class = "btn btn-default" href = "{{ path('lignefraisforfait_ajouter',{id: uneFicheFrais.id}) }}">Ajouter</a>
+                </div>
+
+                <div class="bandeau-small"></div>
+
+                <div class="row">
+                    <h3>Frais Hors Forfait</h3>
+                    <table class="table table-bordered" >
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Montant</th>
+                            <th>Libellé</th>
+                            <th>Etat</th>
+                            <th><p>Modifier</p></th>
+
+                        </tr>
+                        </thead>
+                        {% for uneLigneFraisHorsForfait in uneFicheFrais.lignesFraisHorsForfaits %}
+                            <tbody >
+
+                            <tr class="lien-tableau" onclick="location.href='{{ path('lignefraishorsforfait_afficher', {id: uneLigneFraisHorsForfait.id}) }}'">
+                                <td> {{ uneLigneFraisHorsForfait.date|date("d/m/Y")}} </td>
+                                <td>{{ uneLigneFraisHorsForfait.montant }} €</td>
+                                <td class="block">{{ uneLigneFraisHorsForfait.libellelignehorsforfait }}</td>
+                                <td>{{ uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
+                                <td>
+                                    <a href="{{ path('lignefraishorsforfait_modifier', {'id': uneLigneFraisHorsForfait.id}) }}">modifier</a>
+                                    <a
+                                            href="{{ path('lignefraishorsforfait_supprimer',{'id': uneLigneFraisHorsForfait.id}) }}"
+                                            onclick="return confirm('Etes vous sûre de vouloir supprimer ce frais ?')"
+                                    >
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </td>
+                            </tr>
                             </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-2 col-xs-offset-5">
-                            <input type="submit" value="Enregistrer" class="btn btn-default "></input>
-                        </div>
-                    </div>
-                    </form>
-
-                    <div class="bandeau-small"></div>
-
-
-                    <div class="row">
-                        <h3>Frais Hors Forfait</h3>
-                        <table class="table table-bordered" >
-                            <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Montant</th>
-                                <th>Etat</th>
-                            </tr>
-                            </thead>
-                        {% for uneLigneFraisHorsForfait in lesLignesFraisHorsForfait %}
-                                <tbody >
-
-                                    <tr class="lien-tableau" onclick="location.href='{{ path('lignefraishorsforfait_modifier', {id: uneLigneFraisHorsForfait.id}) }}'">
-                                        <td> {{ uneLigneFraisHorsForfait.date|date("d/m/Y")}} </td>
-                                        <td>{{ uneLigneFraisHorsForfait.montant }} €</td>
-                                        <td>{{ uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
-                                    </tr>
-
-                                </tbody>
-
-                            {% endfor %}
-                        </table>
-                        <a class = "label label-default" href = "{{ path('lignefraishorsforfait_ajouter',{id: uneFicheFrais.id}) }}">Ajouter</a>
-                    </div>
-                    <div class="bandeau-small"></div>
-                </form>
+                        {% endfor %}
+                    </table>
+                    <a class = "btn btn-default" href = "{{ path('lignefraishorsforfait_ajouter',{id: uneFicheFrais.id}) }}">Ajouter</a>
+                </div>
+                <div class="bandeau-small"></div>
             </div>
         </div>
     </div>

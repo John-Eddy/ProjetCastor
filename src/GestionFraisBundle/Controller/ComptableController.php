@@ -50,10 +50,13 @@ class ComptableController extends Controller
             if($visiteurForm){
                 $criteres['idvisiteur' ]= $visiteurForm->getId();
             }
-            if($form->getData()['mois']){
+            if($form->getData()['mois'])
                 $dateForm = date_format($form->getData()['mois'], 'Y-m-d H:i:s');
-                $mois  = substr($dateForm,5,2).substr($dateForm,0,4); // on extrait le mois et l'année de la chaine et on les mets au format mmaaaa
+                $mois = substr($dateForm, 5, 2);
+                $annee =substr($dateForm, 0, 4); // on extrait le mois et l'année de la chaine et on les mets au format mmaaaa
                 $criteres['mois']= $mois;
+                $criteres['annee'] =$annee;
+
             }
             //recupération de la  fiches frais corespondant au mois
             $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findby($criteres);
@@ -71,12 +74,6 @@ class ComptableController extends Controller
                 'form' => $form->createView(),
             ));
         }
-
-
-        return $this->render('GestionFraisBundle:Comptable:index.html.twig', array(
-            'lesFicheFrais' => $lesFicheFrais,
-            'form' => $form->createView(),
-        ));
     }
     /*
      * Affiche la fiche frais correspondant au parametres fournis avec la possibilité de modifier l'etat des lignes et de la fiche

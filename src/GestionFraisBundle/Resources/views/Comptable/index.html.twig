@@ -42,15 +42,13 @@
             <div class="bandeau"></div>
             <h4>Dernieres fiches :</h4>
             {% for uneFicheFrais in lesFicheFrais %}
-                {% set libelleMois = [uneFicheFrais.mois[0:2],uneFicheFrais.mois[2:]]|join('/') %}
-
                 <a class="lien-fiche" href="{{ path('ficheFrais_valider', {idFicheFrais: uneFicheFrais.id})}}">
                     <div class="row" id = "{{ uneFicheFrais.id }}">
                         <div class="col-sm-6">
                             <p>Visiteur : {{ uneFicheFrais.getIdvisiteur().getNom() }} {{ uneFicheFrais.getIdvisiteur().getPrenom() }}</p>
                         </div>
                         <div class="col-sm-6">
-                            <p>Mois : {{ libelleMois }}</p>
+                            <p>Mois : {{ uneFicheFrais.mois }}/{{ uneFicheFrais.annee }}</p>
                         </div>
                         <div class="col-sm-6">
                             <p>Date de modification : {{ uneFicheFrais.dateModif|date("d/m/Y") }}</p>
@@ -63,7 +61,7 @@
                 </a>
                 <div class="bandeau-small"></div>
                 {% else %}
-                 <p>aucune</p>
+                 <p>Aucune fiches trouvées</p>
             {% endfor %}
         </div>
     </div>

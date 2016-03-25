@@ -39,7 +39,6 @@ class RechercherFicheFraisType extends AbstractType
                     'days' => array(1),
                     'empty_value' => array('year' => 'Année', 'month' => 'Mois', 'day' => '----'),
                     'required' => false,
-                    'with_days'  => false,
                 )
             );
 

@@ -16,7 +16,7 @@ class LigneFraisHorsForfaitType extends AbstractType
     {
         if ($options['role'] == 'utilisateur')
         {
-            if($options['action'] == 'modifier')
+            if($options['action'] == 'ajouter')
             {
                 $builder
                     ->add('date', 'date')
@@ -30,7 +30,7 @@ class LigneFraisHorsForfaitType extends AbstractType
                     ->add('date', 'date')
                     ->add('montant', 'money')
                     ->add('libellelignehorsforfait', 'textarea')
-                    ->add('file', 'file', array('label' => 'Justificatif', 'required' => true));
+                    ->add('file', 'file', array('label' => 'Justificatif', 'required' => false));
 
             }
         }
@@ -54,6 +54,9 @@ class LigneFraisHorsForfaitType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'GestionFraisBundle\Entity\LigneFraisHorsForfait'
+        ));
+        $resolver->setDefaults(array(
+            'role' => 'utilisateur',
         ));
     }
 
