@@ -15,16 +15,9 @@ class FicheFrais
     /**
      * @var string
      *
-     * @ORM\Column(name="mois", type="string", length=2, nullable=false)
+     * @ORM\Column(name="mois", type="string", length=6, nullable=false)
      */
     private $mois;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="annee", type="string", length=4, nullable=false)
-     */
-    private $annee;
 
     /**
      * @var \DateTime
@@ -66,7 +59,6 @@ class FicheFrais
      */
     private $idetatfichefrais;
 
-
     /**
      * @var \GestionFraisBundle\Entity\Visiteur
      *
@@ -76,10 +68,6 @@ class FicheFrais
      * })
      */
     private $idvisiteur;
-
-    private $lignesFraisForfaits = array();
-
-    private $lignesFraisHorsForfaits = array();
 
 
     /**
@@ -104,22 +92,6 @@ class FicheFrais
     public function getMois()
     {
         return $this->mois;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAnnee()
-    {
-        return $this->annee;
-    }
-
-    /**
-     * @param string $annee
-     */
-    public function setAnnee($annee)
-    {
-        $this->annee = $annee;
     }
 
     /**
@@ -242,38 +214,6 @@ class FicheFrais
     public function getIdvisiteur()
     {
         return $this->idvisiteur;
-    }
-
-    /**
-     * @return array
-     */
-    public function getLignesFraisForfaits()
-    {
-        return $this->lignesFraisForfaits;
-    }
-
-    /**
-     * @param array $lignesFraisForfaits
-     */
-    public function setLignesFraisForfaits($lignesFraisForfaits)
-    {
-        $this->lignesFraisForfaits = $lignesFraisForfaits;
-    }
-
-    /**
-     * @return array
-     */
-    public function getLignesFraisHorsForfaits()
-    {
-        return $this->lignesFraisHorsForfaits;
-    }
-
-    /**
-     * @param array $lignesFraisHorsForfaits
-     */
-    public function setLignesFraisHorsForfaits($lignesFraisHorsForfaits)
-    {
-        $this->lignesFraisHorsForfaits = $lignesFraisHorsForfaits;
     }
 
 

@@ -1,27 +1,11 @@
 utilisateur_index:
       path:     /
-      defaults: { _controller: "GestionFraisBundle:Utilisateur:saisirFrais" }
-
-utilisateur_saisirFrais:
-    path:     /saisirfrais
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:saisirFrais" }
-
-utilisateur_rechercherFiche:
-    path:     /rechercherfiche
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:RercherFicheFrais" }
-
-utilisateur_afficherFiche:
-    path:    /afficherfiche/{id}
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:AfficherFicheFrais" }
-
-gestion_frais_lignefraishorsforfait:
-    resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/LigneFraisHorsForfait.yml"
-    prefix:   /lignefraishorsforfait
-
-gestion_frais_lignefraisforfait:
-    resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/LigneFraisForfait.yml"
-    prefix:   /lignefraisforfait
+      defaults: { _controller: "GestionFraisBundle:Utilisateur:Index" }
 
 utilisateur_fichefrais:
      resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/fichefrais.yml"
      prefix:   /fichefrais
+
+gestion_frais_lignefraishorsforfait:
+    resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/LigneFraisHorsForfait.yml"
+    prefix:   /ligneFraisHorsForfait

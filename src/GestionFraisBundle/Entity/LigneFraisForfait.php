@@ -58,21 +58,6 @@ class LigneFraisForfait
      */
     private $idfraisforfait;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="datetime", nullable=false)
-     */
-    private $date;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="montant", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $montant;
-
-
 
 
     /**
@@ -179,37 +164,5 @@ class LigneFraisForfait
     public function getIdfraisforfait()
     {
         return $this->idfraisforfait;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param \DateTime $date
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * @return float
-     */
-    public function getMontant()
-    {
-        return $this->montant;
-    }
-
-    /**
-     * @param float $montant
-     */
-    public function setMontant($montant)
-    {
-        $this->montant = $montant;
     }
 }

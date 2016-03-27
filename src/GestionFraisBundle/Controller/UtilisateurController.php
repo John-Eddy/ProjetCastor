@@ -8,37 +8,16 @@
 
 namespace GestionFraisBundle\Controller;
 
-use Doctrine\DBAL\Exception\DatabaseObjectNotFoundException;
 use GestionFraisBundle\Entity\FicheFrais;
-use GestionFraisBundle\Entity\LigneFraisForfait;
 use GestionFraisBundle\Entity\LigneFraisHorsForfait;
 use GestionFraisBundle\Entity\Visiteur;
-use GestionFraisBundle\Form\LigneFraisHorsForfaitType;
-use GestionFraisBundle\Form\LigneFraisForfaitType;
 use GestionFraisBundle\Form\RechercherFicheFraisType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 class UtilisateurController extends Controller
 {
-
-    public function saisirFraisAction()
-    {
-        $visiteurConnecter = $this->getUser();//Visiteur connecté
-        $gestionaireFiche = $this->container->get('gestion_frais.gestionairefiche');//recuperation du service gestionaire de fiche
-
-        $em = $this->getDoctrine()->getManager();//connexion bdd
-        $uneFicheFrais = $gestionaireFiche->getDerniereFicheFraisValide($visiteurConnecter, $em);
-        $uneFicheFrais = $gestionaireFiche->chargerLignesFrais($uneFicheFrais,$em);
-
-        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
-            'uneFicheFrais' => $uneFicheFrais,
-        ));
-    }
-
     /*
      * Récupere les fiche de l'utilisateur connecté et tout les etat de la table etatFicheFrais
      *  depuis la BDD et les transmet a la vue Utilisateur:index.html.twig
@@ -47,8 +26,9 @@ class UtilisateurController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function RercherFicheFraisAction(Request $request)
+    public function indexAction(Request $request)
     {
+
         $visiteur = $this->getUser();//Visiteur connecté
 
         $em = $this->getDoctrine()->getManager();
@@ -58,10 +38,27 @@ class UtilisateurController extends Controller
             array('idvisiteur' => $visiteur->getId()),
             array('datecreation' => 'DESC')
         );
+/*
+        // On crée le FormBuilder grâce au service form factory
+        $formBuilder = $this->get('form.factory')->createBuilder('form');
+
+        // On ajoute les champs de l'entité que l'on veut à notre formulaire
+        $formBuilder
+            ->add('mois', 'date',
+                array(
+                    'format' => 'yyyy-MM-dd',
+                    'placeholder' => array(
+                        'year' => 'Année', 'month' => 'Mois'
+                    ),
+                    'days' => range(1, 1),
+                )
+            )
+            ->add('Rechercher', 'submit');
+*/
+
 
         // À partir du formBuilder, on génère le formulaire
-        // À partir du formBuilder, on génère le formulaire
-        $form = $this->createForm(new RechercherFicheFraisType());
+        $form = $this->createForm( new RechercherFicheFraisType());
 
         // On fait le lien Requête <-> Formulaire
         $form->handleRequest($request);
@@ -70,34 +67,67 @@ class UtilisateurController extends Controller
 
         // On vérifie que les valeurs entrées sont correctes
         if ($form->isValid()) {
-
             //On récupere la date du formulaire et on la transforme en chaine de caractères
-            $criteres['idvisiteur'] =$visiteur->getId();
             $dateForm = date_format($form->getData()['mois'], 'Y-m-d H:i:s');
 
-            if($form->getData()['mois'])
-            {
-                $mois = substr($dateForm, 5, 2);
-                $annee =substr($dateForm, 0, 4); // on extrait le mois et l'année de la chaine et on les mets au format mmaaaa
-                $criteres['mois']= $mois;
-                $criteres['annee'] =$annee;
-                }
-                //recupération de la  fiches frais corespondant au mois
-                $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy($criteres);
+            $mois = substr($dateForm, 5, 2) . substr($dateForm, 0, 4); // on extrait le mois et l'année de la chaine et on les mets au format mmaaaa
 
-                //verification de l'éxistance de la fiche de frais :
-                if (!$uneFicheFrais) {
-                    throw new NotFoundHttpException('Fiche introuvable.');
-                }
+            //recupération de la  fiches frais corespondant au mois
+            $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(array(
+                'idvisiteur' => $visiteur->getId(),
+                'mois' => $mois
+            ));
 
-                // On redirige vers la fiche frais
-                return $this->redirect($this->generateUrl('utilisateur_afficherFiche', array('id' => $uneFicheFrais->getId())));
+            //verification de l'éxistance de la fiche de frais :
+            if (!$uneFicheFrais) {
+                throw $this->createNotFoundException('Fiche introuvable.');
             }
 
-        return $this->render('GestionFraisBundle:Utilisateur\fichefrais:rechercher.html.twig', array(
+            // On redirige vers la fiche frais
+            return $this->redirect($this->generateUrl('ficheFrais_afficher', array('id' => $uneFicheFrais->getId())));
+        }
+
+        return $this->render('GestionFraisBundle:Utilisateur\fichefrais:index.html.twig', array(
             "lesFicheFrais" => $lesFicheFrais,
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function ajouterFicheFraisAction()
+    {
+        $visiteur = $this->getUser();//Visiteur connecté
+
+        $em = $this->getDoctrine()->getManager();
+
+        $gestionaireFiche = $this->container->get('gestionfrais.gestionairefiche');
+
+        //recupération de la derniere fiche frais
+        $lesFichesFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findAll(
+            array('idvisiteur' => $visiteur->getId()),
+            array('datecreation' => 'DESC')
+        );
+
+        if ($lesFichesFrais[0] == null) {
+            $nouvelleFicheFrais = $gestionaireFiche->creeFiche($visiteur, $em);// on crée une nouvelle fiche
+            return $this->redirect($this->generateUrl('ficheFrais_index'));
+        }
+        else if (!$gestionaireFiche->estValide($lesFichesFrais[count($lesFichesFrais) - 1])) {
+            $dernierFiche = $lesFichesFrais[count($lesFichesFrais) - 1];
+            $nouvelleFicheFrais = $gestionaireFiche->creeFiche($visiteur, $em);// on crée une nouvelle fiche
+            //on modifie l'etat de l'avant derniere fiche
+            $dernierFiche->setIdetatfichefrais($lesFichesFrais = $em->getRepository('GestionFraisBundle:EtatFicheFrais')->findOneById($this->container->getParameter('idEtatFicheFraisCloture')));
+            $em->persist($dernierFiche);
+            $em->flush();
+            return $this->redirect($this->generateUrl('ficheFrais_index'));
+        }
+        else
+        {
+            return $this->redirectToRoute("ficheFrais_index");
+        }
+
     }
 
     /**
@@ -106,8 +136,12 @@ class UtilisateurController extends Controller
      */
     public function afficherFicheFraisAction($id)
     {
-        $gestionaireFiche = $this->container->get('gestion_frais.gestionairefiche');//recuperation du service gestionaire de fiche
+
+        $idEtatFicheFraisDefaut = $this->container->getParameter('idEtatFicheFraisDefaut');
+
         $em = $this->getDoctrine()->getManager();
+
+        $gestionaireFiche = $this->container->get('gestionfrais.gestionairefiche');
 
         //recupération de la fiche frais
         $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(array(
@@ -115,23 +149,117 @@ class UtilisateurController extends Controller
 
         //verification de l'éxistance de la fiche de frais :
         if (!$uneFicheFrais) {
-            throw new DatabaseObjectNotFoundException('Cette fiche n\'existe pas.');
+            throw $this->createNotFoundException('Fiche introuvable.');
         }
+
         //On vérifie que la fiche apartient bien à l'utilisateur connecté
-        elseif ($this->getUser()->getId() != $uneFicheFrais->getIdvisiteur()->getId()) {
-            throw new AccessDeniedException('Impossible d’accéder à cette fiche.');
+        if ($this->getUser()->getId() != $uneFicheFrais->getIdvisiteur()->getId()) {
+            throw $this->createAccessDeniedException('Accès interdit');
         }
 
-        $uneFicheFrais = $gestionaireFiche->chargerLignesFrais($uneFicheFrais, $em);
+        //recupération des ligne de frais forfait de cette fiche
+        $lesLignesFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(
+            array(
+                'idfichefrais' => $id,
+            )
+        );
 
+        //recupération des ligne de frais hors forfait de cette fiche
+        $lesLignesFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findBy(
+            array(
+                'idfichefrais' => $id,
+            )
+        );
+        //si la date de modification de la fiche est dépassé
+        if (!$gestionaireFiche->estValide($uneFicheFrais)) {
+            //on modifie l'etat de l'avant derniere fiche
+            $uneFicheFrais->setIdetatfichefrais($lesFichesFrais = $em->getRepository('GestionFraisBundle:EtatFicheFrais')->findOneById($this->container->getParameter('idEtatFicheFraisCloture')));
+            $em->persist($uneFicheFrais);
+            $em->flush();
+        }
+
+        if ($uneFicheFrais->getIdetatfichefrais()->getId() == $idEtatFicheFraisDefaut) {
+            return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+                'uneFicheFrais' => $uneFicheFrais,
+                'lesLignesFraisForfait' => $lesLignesFraisForfait,
+                'lesLignesFraisHorsForfait' => $lesLignesFraisHorsForfait,
+            ));
+        } else {
             return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:afficher.html.twig', array(
                 'uneFicheFrais' => $uneFicheFrais,
+                'lesLignesFraisForfait' => $lesLignesFraisForfait,
+                'lesLignesFraisHorsForfait' => $lesLignesFraisHorsForfait,
             ));
-
+        }
     }
 
-    Public function ajouterligneFraisForfaitAction($id, Request $request)
+
+    // Fonction qui vérifie les données recupérer depuis la fiche et les enregistre si elle son valide
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function enregistrerAction($id)
     {
+
+        //Connection BDD
+        $em = $this->getDoctrine()->getManager();
+
+        //recupération de la fiche frais
+        $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneById($id);
+
+        //verification de l'éxistance de la fiche de frais :
+        if (!$uneFicheFrais) {
+            throw $this->createNotFoundException('Fiche introuvable.');
+        }
+
+        //Si l'un des champs n'est pas definit, n'est pas un entier ou est inférieur a 0 on retourne  un message d'erreur
+        foreach ($_POST as $unId => $uneQuantite) {
+            // dump($_POST);die();
+            if (!isset($_POST[$unId]) || $uneQuantite < 0) {
+                throw $this->createNotFoundException('Erreur champs.');
+            }
+        }
+
+        //recupération des ligne de frais forfait de cette fiche
+        $lesLignesFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(array('idfichefrais' => $id));
+
+        //On parcourt les ligne frais reccupéré
+        foreach ($lesLignesFraisForfait as $uneLigneFraisForfait) {
+            foreach ($_POST as $unId => $uneQuantite)// On parcour les données recupéré depuis le formulaire
+            {
+                if ($unId == $uneLigneFraisForfait->getId())//si l'id de la ligne recupéré depuis le formulaire corespond a celui de la ligne de la fiche
+                {
+                    $uneLigneFraisForfait->setquantite($uneQuantite);//on met a jour la quantité de cette ligne
+                    $em->persist($uneLigneFraisForfait);//on enregistre la ligne en base de donnée
+                }
+            }
+        }
+
+        //Modification de la date de modification de la fiche
+        $dateActuel = new \DateTime("now");
+        $uneFicheFrais->setDateModif($dateActuel);
+
+        //Enregistrement des la fiche mis a jour en base de donnée
+        $em->persist($uneFicheFrais);
+
+        $em->flush();
+
+        return $this->redirectToRoute("ficheFrais_afficher", array(
+            'id' => $uneFicheFrais->getId()
+        ));
+    }
+
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    Public function ajouterLigneFraisHorsForfaitAction($id, Request $request)
+    {
+
         $idEtatLigneFraisDefaut = $this->container->getParameter('idEtatLigneFraisDefaut');
 
         //Connection BDD
@@ -141,93 +269,58 @@ class UtilisateurController extends Controller
         $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneById($id);
 
         //verification de l'éxistance de la fiche de frais :
-        if ($uneFicheFrais == null) {
-            throw new AccessDeniedException('Impossible d\'ajouter un frais forfait à cette fiche.');
+        if (!$uneFicheFrais) {
+            throw $this->createNotFoundException('Fiche introuvable.');
         }
+
         //On vérifie que la fiche apartient bien à l'utilisateur connecté
-        elseif ($this->getUser()->getId() != $uneFicheFrais->getIdvisiteur()->getId()) {
-            throw new AccessDeniedException('Impossible d\'ajouter un frais forfait à cette fiche.');
+        if ($this->getUser()->getId() != $uneFicheFrais->getIdvisiteur()->getId()) {
+            throw $this->createAccessDeniedException('Accès interdit');
         }
 
         //on récupere l'etatLigneFrais "Enregistré"
         $unEtatLigneFrais = $em->getRepository('GestionFraisBundle:EtatLigneFrais')->findOneById($idEtatLigneFraisDefaut);
 
-        $uneligneFraisForfait = new LigneFraisForfait();//On créé une nouvelle ligneFraisForfait
-        $uneligneFraisForfait->setIdfichefrais($uneFicheFrais);//On attribut cette ligne à la fiche frais
-        $uneligneFraisForfait->setIdetatlignefrais($unEtatLigneFrais);//On lui donne l'etat enregistré
-        $uneligneFraisForfait->setDate(new \DateTime());//on lui passe la date du jour
+        $uneLigneFraisHorsForfait = new LigneFraisHorsForfait();//On créé une nouvelle ligneFraishorsForfait
+        $uneLigneFraisHorsForfait->setIdfichefrais($uneFicheFrais);//On attribut cette ligne à la fiche frais
+        $uneLigneFraisHorsForfait->setIdetatlignefrais($unEtatLigneFrais);//On lui donne l'etat enregistré
+        $uneLigneFraisHorsForfait->setDate(new \DateTime());//on lui passe la date du jour
 
+
+        // On crée le FormBuilder grâce au service form factory
+        $formBuilder = $this->get('form.factory')->createBuilder('form', $uneLigneFraisHorsForfait);
+
+        // On ajoute les champs de l'entité que l'on veut à notre formulaire
+        $formBuilder
+            ->add('date', 'date')
+            ->add('montant', 'money')
+            ->add('libellelignehorsforfait', 'textarea')
+            ->add('file', 'file', array('label' => 'Justificatif', 'required' => true))
+            ->add('save', 'submit');
+        // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
 
         // À partir du formBuilder, on génère le formulaire
-        $form = $this->createForm(new ligneFraisForfaitType,$uneligneFraisForfait,array('role'=> 'utilisateur', 'action' => 'modifier'));
+        $form = $formBuilder->getForm();
 
         // On fait le lien Requête <-> Formulaire
         $form->handleRequest($request);
 
-        // À partir de maintenant, la variable $uneligneFraisForfait contient les valeurs entrées dans le formulaire par le visiteur
-
-        // On vérifie que les valeurs entrées sont co
-        //rrectes
-        if ($form->isValid()) {
-            dump($id);
-            dump($uneFicheFrais);die();
-            //Calcul du montant de la ligne
-            $montantLigne = $uneligneFraisForfait->getQuantite()*$uneligneFraisForfait->getIdfraisforfait()->getMontant();
-            $uneligneFraisForfait->setMontant($montantLigne);
-            $em->persist($uneligneFraisForfait);//On enregistre la ligne la ligne frais
-            $em->flush();
-
-            $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
-            // On redirige vers la fiche frais
-            dump($uneligneFraisForfait);die();
-            //$this->forward('GestionFraisBundle:Utilisateur:saisirFrais',array('id'=>$uneligneFraisForfait->getIdfichefrais()->getId()));
-            return $this->redirect($this->generateUrl('utilisateur_saisirFrais', array('id' => $uneligneFraisForfait->getIdfichefrais()->getId())));
-        }
-
-        return $this->render('GestionFraisBundle:Utilisateur/lignefraisforfait:form.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }
-
-    public function modifierligneFraisForfaitAction($id, Request $request)
-    {
-        //Connection BDD
-        $em = $this->getDoctrine()->getManager();
-
-        //On récupère la ligneFraisHF
-        $uneligneFraisForfait = $em->getRepository('GestionFraisBundle:ligneFraisForfait')->findOneById($id);
-
-        //verification de l'éxistance de la ligneFraisHF :
-        if (!$uneligneFraisForfait) {
-            $this->erreurAction('Ce frais forfait n\'existe pas.');
-        }
-
-        //On vérifie que la ligneFraisHF apartient bien à l'utilisateur connecté
-        elseif ($this->getUser()->getId() != $uneligneFraisForfait->getIdfichefrais()->getIdvisiteur()->getId()) {
-            $this->erreurAction('Impossible d’accéder à ce frais forfait.');
-        }
-
-        // À partir du formBuilder, on génère le formulaire
-        $form = $this->createForm(new ligneFraisForfaitType($uneligneFraisForfait, null, array('role'=> 'utilisateur','action' => 'modifier')));
-
-        // On fait le lien Requête <-> Formulaire
-        $form->handleRequest($request);
-
-        // À partir de maintenant, la variable $uneligneFraisForfait contient les valeurs entrées dans le formulaire par le visiteur
+        // À partir de maintenant, la variable $uneLigneFraisHorsForfait contient les valeurs entrées dans le formulaire par le visiteur
 
         // On vérifie que les valeurs entrées sont correctes
         if ($form->isValid()) {
+            $em->persist($uneLigneFraisHorsForfait);//On enregistre la ligne la ligne frais
+            $em->flush();
 
-            $montantLigne = $uneligneFraisForfait->getQuantite()*$uneligneFraisForfait->getIdfraisforfait()->getMontant();
-            $uneligneFraisForfait->setMontant($montantLigne);
+            $uneLigneFraisHorsForfait->sauvgarderFichier();//fonction qui deplace le justificatif pour le conservé
 
-            $em->persist($uneligneFraisForfait);//On enregistre la ligne la ligne frais
+            $em->persist($uneLigneFraisHorsForfait);//On enregistre la ligne la ligne frais
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
 
             // On redirige vers la fiche frais
-            return $this->redirect($this->generateUrl('utilisateur_saisirFrais', array('id' => $uneligneFraisForfait->getIdfichefrais()->getId())));
+            return $this->redirect($this->generateUrl('ficheFrais_afficher', array('id' => $id)));
         }
 
         // À ce stade, le formulaire n'est pas valide car :
@@ -235,156 +328,15 @@ class UtilisateurController extends Controller
         // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
         // On passe la méthode createView() du formulaire à la vue
         // afin qu'elle puisse afficher le formulaire toute seule
-        return $this->render('GestionFraisBundle:Utilisateur\lignefraisforfait:form.html.twig', array(
-            'form' => $form->createView(),
-            'ligneFraisHF' => $uneligneFraisForfait,
-        ));
-    }
-
-    public function afficherligneFraisForfaitAction($id, Request $request)
-    {
-        //Connection BDD
-        $em = $this->getDoctrine()->getManager();
-
-        //On récupère la ligneFraisHF
-        $uneligneFraisForfait = $em->getRepository('GestionFraisBundle:ligneFraisForfait')->findOneById($id);
-
-        //verification de l'éxistance de la ligneFraisHF :
-        if (!$uneligneFraisForfait) {
-            $this->erreurAction('Ce frais hors forfait n\'existe pas.');
-        }
-
-        //On vérifie que la ligneFraisHF apartient bien à l'utilisateur connecté
-        elseif ($this->getUser()->getId() != $uneligneFraisForfait->getIdfichefrais()->getIdvisiteur()->getId()) {
-            $this->erreurAction('Impossible d’accéder à ce frais hors forfait.');
-        }
-
-        // À partir du formBuilder, on génère le formulaire
-        $form = $this->createForm(new ligneFraisForfaitType($uneligneFraisForfait, null, array('role'=> 'utilisateur','action' => 'consulter')));
-
-        // On fait le lien Requête <-> Formulaire
-        $form->handleRequest($request);
-
-        // À partir de maintenant, la variable $uneligneFraisForfait contient les valeurs entrées dans le formulaire par le visiteur
-
-        // On vérifie que les valeurs entrées sont correctes
-        if ($form->isValid()) {
-            return $this->redirect($this->generateUrl('utilisateur_saisirFrais', array('id' => $uneligneFraisForfait->getIdfichefrais()->getId())));
-        }
-
-        return $this->render('GestionFraisBundle:Utilisateur/ligneFraisForfait:afficher.html.twig', array(
-            'form' => $form,
-        ));
-    }
-
-    public function supprimerligneFraisForfaitAction($id)
-    {
-        //Conection BDD
-        $em = $this->getDoctrine()->getManager();
-
-        //On récupère la ligneFraisHF
-        $uneligneFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findOneById($id);
-
-        //verification de l'éxistance de la ligneFraisHF :
-        if (!$uneligneFraisForfait) {
-            $this->erreurAction('Ce frais forfait n\'existe pas.');
-        }
-
-        //On vérifie que la ligneFraisHF apartient bien à l'utilisateur connecté
-        elseif ($this->getUser()->getId() != $uneligneFraisForfait->getIdfichefrais()->getIdvisiteur()->getId()) {
-            $this->erreurAction('Impossible d’accéder à ce frais forfait.');
-        }
-
-        //On enregistre l'id de la ficheFrais avant de suprimer la ligne pour pouvoir rediriger vers la ficheFrais
-        $idFicheFrais = $uneligneFraisForfait->getIdfichefrais()->getId();
-
-        //Si le fichier joint exister
-        $em->remove($uneligneFraisForfait);//on supprime la ligneFraisforfait
-        $em->flush();
-
-        //on redirige vers la ficheFrais
-        return $this->redirect($this->generateUrl('utilisateur_saisirFrais', array('id' => $idFicheFrais)));
-    }
-
-    Public function ajouterLigneFraisHorsForfaitAction(Request $request)
-    {
-        $idEtatLigneFraisDefaut = $this->container->getParameter('idEtatLigneFraisDefaut');
-        $gestionaireFiche = $this->container->get('gestion_frais.gestionairefiche');//recuperation du service gestionaire de fiche
-
-        //Connection BDD
-        $em = $this->getDoctrine()->getManager();
-
-        $visiteurConnecter = $this->getUser();//Visiteur connecté
-
-        //on récupere l'etatLigneFrais "Enregistré"
-        $unEtatLigneFrais = $em->getRepository('GestionFraisBundle:EtatLigneFrais')->findOneById($idEtatLigneFraisDefaut);
-        $uneLigneFraisHorsForfait = new LigneFraisHorsForfait();//On créé une nouvelle ligneFraishorsForfait
-        $uneLigneFraisHorsForfait->setIdetatlignefrais($unEtatLigneFrais);//On lui donne l'etat enregistré
-        $uneLigneFraisHorsForfait->setIdfichefrais($gestionaireFiche->getDerniereFicheFraisValide($visiteurConnecter, $em));//On attribut cette ligne à la fiche frais
-
-        $optionForm = array('visiteur'=> 'utilisateur', 'action' => 'ajouter');
-        // À partir du formBuilder, on génère le formulaire
-        $form = $this->createForm(new LigneFraisHorsForfaitType,$uneLigneFraisHorsForfait,array('role'=> 'utilisateur', 'action' => 'ajouter'));
-        // On fait le lien Requête <-> Formulaire
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em->persist($uneLigneFraisHorsForfait);//On enregistre la ligne la ligne frais
-            $em->flush();
-            //$uneLigneFraisHorsForfait->sauvgarderFichier();//fonction qui deplace le justificatif pour le conservé
-            $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
-            // On redirige vers la fiche frais
-            return $this->redirect($this->generateUrl('utilisateur_saisirFrais'));
-        }
-
-        return $this->render('GestionFraisBundle:Utilisateur/lignefraishorsforfait:form.html.twig', array(
+        return $this->render('GestionFraisBundle:Utilisateur/LigneFraisHorsForfait:ajouter.html.twig', array(
             'form' => $form->createView(),
         ));
     }
 
-    public function modifierLigneFraisHorsForfaitAction($id, Request $request)
-    {
-        //Connection BDD
-        $em = $this->getDoctrine()->getManager();
-
-        //On récupère la ligneFraisHF
-        $uneLigneFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findOneById($id);
-
-        //verification de l'éxistance de la ligneFraisHF :
-        if (null == $uneLigneFraisHorsForfait) {
-            $this->erreurAction('Ce frais hors forfait n\'existe pas.');
-        } //On vérifie que la ligneFraisHF apartient bien à l'utilisateur connecté
-        elseif ($this->getUser()->getId() != $uneLigneFraisHorsForfait->getIdfichefrais()->getIdvisiteur()->getId()) {
-            $this->erreurAction('Impossible d’accéder à ce frais hors forfait.');
-        }
-
-        $optionForm = array('role' => 'utilisateur', 'action' => 'modifier');
-
-        $form = $this->createForm(new LigneFraisHorsForfaitType, $uneLigneFraisHorsForfait, $optionForm);
-
-        // On fait le lien Requête <-> Formulaire
-        $form->handleRequest($request);
-        // On vérifie que les valeurs entrées sont correctes
-        if ($form->isValid()) {
-
-           /* if (isset($uneLigneFraisHorsForfait->file)) {
-                unlink($uneLigneFraisHorsForfait->getJustificatif());
-                $uneLigneFraisHorsForfait->sauvgarderFichier();//fonction qui deplace le justificatif pour le conservé
-            }*/
-            $em->persist($uneLigneFraisHorsForfait);//On enregistre la ligne la ligne frais
-            $em->flush();
-
-            $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
-
-            // On redirige vers la fiche frais
-            return $this->redirect($this->generateUrl('utilisateur_saisirFrais'));
-        }
-        return $this->render('GestionFraisBundle:Utilisateur\LigneFraisHorsForfait:form.html.twig', array(
-            'form' => $form->createView(),
-            'ligneFraisHF' => $uneLigneFraisHorsForfait,
-        ));
-    }
-
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function afficherLigneFraisHorsForfaitAction($id)
     {
         //Connection BDD
@@ -395,19 +347,95 @@ class UtilisateurController extends Controller
 
         //verification de l'éxistance de la ligneFraisHF :
         if (!$uneLigneFraisHorsForfait) {
-            $this->erreurAction('Ce frais hors forfait n\'existe pas.');
+            throw $this->createNotFoundException('Frais hors forfait introuvable.');
         }
 
         //On vérifie que la ligneFraisHF apartient bien à l'utilisateur connecté
-       elseif ($this->getUser()->getId() != $uneLigneFraisHorsForfait->getIdfichefrais()->getIdvisiteur()->getId()) {
-            $this->erreurAction('Impossible d’accéder à ce frais hors forfait.');
-       }
+        if ($this->getUser()->getId() != $uneLigneFraisHorsForfait->getIdfichefrais()->getIdvisiteur()->getId()) {
+            throw $this->createAccessDeniedException('Accès interdit');
+        }
 
         return $this->render('GestionFraisBundle:Utilisateur/LigneFraisHorsForfait:afficher.html.twig', array(
             'uneLigneFraisHorsForfait' => $uneLigneFraisHorsForfait,
         ));
+
+
     }
 
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function modifierLigneFraisHorsForfaitAction($id, Request $request)
+    {
+        //Connection BDD
+        $em = $this->getDoctrine()->getManager();
+
+        //On récupère la ligneFraisHF
+        $uneLigneFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findOneById($id);
+
+        //verification de l'éxistance de la ligneFraisHF :
+        if (!$uneLigneFraisHorsForfait) {
+            throw $this->createNotFoundException('Frais hors forfait introuvable.');
+        }
+
+        //On vérifie que la ligneFraisHF apartient bien à l'utilisateur connecté
+        if ($this->getUser()->getId() != $uneLigneFraisHorsForfait->getIdfichefrais()->getIdvisiteur()->getId()) {
+            throw $this->createAccessDeniedException('Accès interdit');
+        }
+
+        // On crée le FormBuilder grâce au service form factory
+        $formBuilder = $this->get('form.factory')->createBuilder('form', $uneLigneFraisHorsForfait);
+
+        // On ajoute les champs de l'entité que l'on veut à notre formulaire
+        $formBuilder
+            ->add('date', 'date')
+            ->add('montant', 'money')
+            ->add('libellelignehorsforfait', 'textarea')
+            ->add('file', 'file', array('label' => 'Justificatif', 'required' => false))
+            ->add('save', 'submit');
+        // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
+
+        // À partir du formBuilder, on génère le formulaire
+        $form = $formBuilder->getForm();
+
+        // On fait le lien Requête <-> Formulaire
+        $form->handleRequest($request);
+
+        // À partir de maintenant, la variable $uneLigneFraisHorsForfait contient les valeurs entrées dans le formulaire par le visiteur
+
+        // On vérifie que les valeurs entrées sont correctes
+        if ($form->isValid()) {
+            if (isset($uneLigneFraisHorsForfait->file)) {
+                unlink($uneLigneFraisHorsForfait->getJustificatif());
+                $uneLigneFraisHorsForfait->sauvgarderFichier();//fonction qui deplace le justificatif pour le conservé
+            }
+
+            $em->persist($uneLigneFraisHorsForfait);//On enregistre la ligne la ligne frais
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
+
+            // On redirige vers la fiche frais
+            return $this->redirect($this->generateUrl('ficheFrais_afficher', array('id' => $uneLigneFraisHorsForfait->getIdfichefrais()->getId())));
+        }
+
+        // À ce stade, le formulaire n'est pas valide car :
+        // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
+        // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
+        // On passe la méthode createView() du formulaire à la vue
+        // afin qu'elle puisse afficher le formulaire toute seule
+        return $this->render('GestionFraisBundle:Utilisateur\LigneFraisHorsForfait:modifier.html.twig', array(
+            'form' => $form->createView(),
+            'ligneFraisHF' => $uneLigneFraisHorsForfait,
+        ));
+    }
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function supprimerLigneFraisHorsForfaitAction($id)
     {
         //Conection BDD
@@ -418,12 +446,12 @@ class UtilisateurController extends Controller
 
         //verification de l'éxistance de la ligneFraisHF :
         if (!$uneLigneFraisHorsForfait) {
-            throw new DatabaseObjectNotFoundException('Ce frais hors forfait n\'existe pas.');
+            throw $this->createNotFoundException('Frais hors forfait introuvable.');
         }
 
         //On vérifie que la ligneFraisHF apartient bien à l'utilisateur connecté
-        elseif ($this->getUser()->getId() != $uneLigneFraisHorsForfait->getIdfichefrais()->getIdvisiteur()->getId()) {
-            throw new AccessDeniedException('Impossible d’accéder à ce frais hors forfait.');
+        if ($this->getUser()->getId() != $uneLigneFraisHorsForfait->getIdfichefrais()->getIdvisiteur()->getId()) {
+            throw $this->createAccessDeniedException('Accès interdit');
         }
 
         //On enregistre l'id de la ficheFrais avant de suprimer la ligne pour pouvoir rediriger vers la ficheFrais
@@ -434,6 +462,13 @@ class UtilisateurController extends Controller
         $em->flush();
 
         //on redirige vers la ficheFrais
-        return $this->redirect($this->generateUrl('utilisateur_saisirFrais', array('id' => $idFicheFrais)));
+        return $this->redirect($this->generateUrl('ficheFrais_afficher', array('id' => $idFicheFrais)));
     }
+
+
+    public function getDerniereFicheFrais(Visiteur $unVisiteur)
+    {
+
+    }
+
 }

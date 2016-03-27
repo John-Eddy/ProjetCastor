@@ -7,6 +7,3 @@ services:
     gestion_frais.gestionairefiche:
         class: GestionFraisBundle\GestionFiche\GestionFicheController
         arguments: ["@service_container"]
-
-    gestion_frais.gestionairedate:
-            class: GestionFraisBundle\GestionDate\GestionDateController
