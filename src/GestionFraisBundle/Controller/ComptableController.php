@@ -51,6 +51,7 @@ class ComptableController extends Controller
                 $criteres['idvisiteur' ]= $visiteurForm->getId();
             }
             if($form->getData()['mois'])
+            {
                 $dateForm = date_format($form->getData()['mois'], 'Y-m-d H:i:s');
                 $mois = substr($dateForm, 5, 2);
                 $annee =substr($dateForm, 0, 4); // on extrait le mois et l'année de la chaine et on les mets au format mmaaaa
