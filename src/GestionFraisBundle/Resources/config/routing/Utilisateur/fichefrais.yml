@@ -1,10 +1,6 @@
-ficheFrais_index:
-    path:     /
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:Index" }
-
-ficheFrais_ajouter:
-    path:     /ajouter
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:ajouterFicheFrais" }
+ficheFrais_rechercher:
+    path:     /rechercher
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:RercherFicheFrais" }
 
 ficheFrais_afficher:
     path:    /afficher/{id}
@@ -13,11 +9,3 @@ ficheFrais_afficher:
 ficheFrais_consulter:
     path:    /consulter/{id}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:ConsulterFicheFrais" }
-
-ficheFrais_renseigner:
-    path:    /renseigner/{id}
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:Renseigner" }
-
-ficheFrais_enregistrer:
-    path:     /enregistrer/{id}
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:Enregistrer" }

@@ -1,0 +1,14 @@
+{% extends 'GestionFraisBundle:Utilisateur/LigneFraisHorsForfait:layout.html.twig' %}
+{% block contenu %}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+
+    {# Génération automatique des champs pas encore écrits.
+       Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+       et tous les champs cachés (type « hidden »). #}
+    {{ form_rest(form) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+    {{ form_end(form) }}
+
+{% endblock %}

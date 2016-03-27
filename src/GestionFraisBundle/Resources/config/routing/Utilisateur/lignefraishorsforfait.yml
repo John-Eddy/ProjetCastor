@@ -3,7 +3,7 @@ lignefraishorsforfait_afficher:
     defaults: { _controller: "GestionFraisBundle:Utilisateur:afficherLigneFraisHorsForfait" }
 
 lignefraishorsforfait_ajouter:
-    path:     /ajouter/{id}
+    path:     /ajouter
     defaults: { _controller: "GestionFraisBundle:Utilisateur:ajouterLigneFraisHorsForfait" }
 
 lignefraishorsforfait_modifier:
