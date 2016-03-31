@@ -4,6 +4,7 @@ namespace GestionFraisBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class LigneFraisForfaitType extends AbstractType
@@ -16,8 +17,10 @@ class LigneFraisForfaitType extends AbstractType
     {
         if ($options['role'] == 'utilisateur')
         {
-            if($options['action']=='modifier') {
+            if($options['operation']=='modifier') {
+
                 $builder
+
                     ->add('date', 'date')
                     ->add('idetatlignefrais', 'entity', array(
                         'class' => 'GestionFraisBundle:EtatLigneFrais',
@@ -34,13 +37,15 @@ class LigneFraisForfaitType extends AbstractType
                         'label' => 'Type de Frais'
                     ))
                     ->add('quantite', 'number')
+                    ->add('montant', 'text', array('disabled' => true))
                     ->add('Enregistrer', 'submit');
                 ;
             }
         }
         elseif($options['role'] == 'comptable') {
-            if ($options['action'] == 'modifier') {
+            if ($options['operation'] == 'modifier') {
                 $builder
+                    
                     ->add('date', 'date', array('disabled' => true))
                     ->add('idfraisforfait', 'entity', array(
                         'class' => 'GestionFraisBundle:FraisForfait',
@@ -60,7 +65,7 @@ class LigneFraisForfaitType extends AbstractType
                     ->add('Enregistrer', 'submit');
             }
         }
-        else if($options ['action']=='consulter') {
+        else if($options ['operation']=='consulter') {
             $builder
                 ->add('date', 'date', array('disabled' => true))
                 ->add('idfraisforfait', 'entity', array(
@@ -69,7 +74,7 @@ class LigneFraisForfaitType extends AbstractType
                     'disabled' => true,
                     'label' => 'Type de Frais'
                 ))
-                ->add('quantite', 'text', array('disaled' => true,))
+                ->add('quantite', 'text', array('disabled' => true,))
                 ->add('montant', 'text', array('disabled' => true))
                 ->add('idetatlignefrais', 'entity', array(
                     'class' => 'GestionFraisBundle:EtatLigneFrais',
@@ -84,13 +89,12 @@ class LigneFraisForfaitType extends AbstractType
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'GestionFraisBundle\Entity\LigneFraisForfait'
-        ));
-        $resolver->setDefaults(array(
+            'data_class' => 'GestionFraisBundle\Entity\LigneFraisForfait',
             'role' => null,
+            'operation' =>'consulter'
         ));
     }
 

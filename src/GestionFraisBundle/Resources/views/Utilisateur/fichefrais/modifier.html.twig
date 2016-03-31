@@ -1,12 +1,17 @@
-{% extends '::base.html.twig' %}
+{% extends 'GestionFraisBundle:Utilisateur:base.html.twig' %}
+{% block title %}Saisie frais{% endblock  %}
+
+
+{% block formRechercherFiche %}
+
+{% endblock %}
 
 {% block stylesheets %}
     <link href="{{ asset('Css/form.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">{% endblock %}
 
 {%  block body %}
-    <div class="bandeau"></div>
-    <div class="container">
-        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 " id="contenu">
+    <div class="container-fluid">
+        <div class="col-lg-8 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4 col-xs-12 " id="contenu">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3 col-xs-6">
@@ -26,49 +31,125 @@
                     </div>
                 </div>
                 <div class="row" id ="fraisForfait">
-                    <h3>Frais Forfait</h3>
+                    <h3>Frais forfaitaires</h3>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th><p>Date</p></th>
-                            <th><p>Libelle</p></th>
+                            <th><p>Type de Frais</p></th>
                             <th><p>Quantité</p></th>
                             <th><p>Montant</p></th>
                             <th><p>Etat</p></th>
-                            <th><p>Modifier</p></th>
+                            <th><p>Action</p></th>
                         </tr>
                         </thead>
-                        <tbody>
                         {% for uneLigneFraisForfait in uneFicheFrais.lignesFraisForfaits %}
-                            <tr>
-                                <td>
-                                    <p>{{ uneLigneFraisForfait.date|date("d/m/Y")}}</p>
-                                </td>
-                                <td>
-                                    <p>{{ uneLigneFraisForfait.getIdfraisforfait().getLibellefraisforfait }}</p>
-                                </td>
-                                <td>
-                                    <p> {{ uneLigneFraisForfait.quantite }} </p>
-                                </td>
-                                <td>
-                                    <p> {{ uneLigneFraisForfait.montant }} €</p>
-                                </td>
-                                <td>
-                                    <p>{{ uneLigneFraisForfait.getIdetatlignefrais().getLibelleetatlignefrais() }} </p>
-                                </td>
-                                <td>
-                                    <a href="{{ path('lignefraisforfait_modifier', {'id': uneLigneFraisForfait.id}) }}">modifier</a>
-                                    <a
-                                            href="{{ path('lignefraisforfait_supprimer', {'id': uneLigneFraisForfait.id}) }}"
-                                            onclick="return confirm('Etes vous sûre de vouloir supprimer ce frais ?')"
-                                    >
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
 
-                        </tbody>
+                            {% if formModifierLigneFraisForfait is defined and idLigne == uneLigneFraisForfait.id %}
+                                <tbody>
+                                {% set formulaireAfficher = true %}
+                                <tr>
+                                    {{ form_start(formModifierLigneFraisForfait)}}
+                                    {{ form_errors(formModifierLigneFraisForfait) }}
+
+                                    <td>
+                                        {{ form_errors(formModifierLigneFraisForfait.date) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.date, {'attr': {'class': '' } }) }}
+                                    </td>
+                                    <td>
+                                        {{ form_errors(formModifierLigneFraisForfait.idfraisforfait) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.idfraisforfait, {'attr': {'class': 'form-control' }}) }}
+
+                                       </td>
+                                    <td>
+                                        {{ form_errors(formModifierLigneFraisForfait.quantite) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.quantite, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                    </td>
+                                    <td >
+                                        {{ form_errors(formModifierLigneFraisForfait.montant) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.montant, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                    </td>
+                                    <td>
+                                        {{ form_errors(formModifierLigneFraisForfait.idetatlignefrais) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.idetatlignefrais, {'attr': {'class': 'form-control' }}) }}
+                                    </td>
+                                    <td>
+                                        {{ form_widget(formModifierLigneFraisForfait.Enregistrer, {'attr': {'class': 'form-control' }}) }}
+                                    </td>
+                                    {{ form_rest(formModifierLigneFraisForfait) }}
+                                    {{ form_end(formModifierLigneFraisForfait) }}
+                                </tr>
+                                </tbody>
+                            {% else %}
+                                <tbody>
+                                <tr>
+
+                                    <td>
+                                        <p>{{ uneLigneFraisForfait.date|date("d/m/Y")}}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ uneLigneFraisForfait.idfraisforfait.libellefraisforfait }}</p>
+                                    </td>
+                                    <td>
+                                        <p> {{ uneLigneFraisForfait.quantite }} </p>
+                                    </td>
+                                    <td>
+                                        <p> {{ uneLigneFraisForfait.montant }} €</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ uneLigneFraisForfait.getIdetatlignefrais().getLibelleetatlignefrais() }} </p>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('lignefraisforfait_modifier', {'id': uneLigneFraisForfait.id}) }}">modifier</a>
+                                        <a
+                                                href="{{ path('lignefraisforfait_supprimer', {'id': uneLigneFraisForfait.id}) }}"
+                                                onclick="return confirm('Etes vous sûre de vouloir supprimer ce frais ?')"
+                                        >
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            {% endif %}
+                        {% endfor %}
+                        {% if formAjouterLigneFraisForfait is defined   %}
+                            <tbody>
+                            <tr>
+                                {{ form_start(formAjouterLigneFraisForfait)}}
+                                {{ form_errors(formAjouterLigneFraisForfait) }}
+
+                                <td>
+                                    {{ form_errors(formAjouterLigneFraisForfait.date) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.date, {'attr': {'class': '' } }) }}
+                                </td>
+                                <td>
+                                    {{ form_errors(formAjouterLigneFraisForfait.idfraisforfait) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.idfraisforfait, {'attr': {'class': 'form-control' }}) }}
+
+                                </td>
+                                <td>
+                                    {{ form_errors(formAjouterLigneFraisForfait.quantite) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.quantite, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                </td>
+                                <td >
+                                    {{ form_errors(formAjouterLigneFraisForfait.montant) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.montant, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                </td>
+                                <td>
+                                    {{ form_errors(formAjouterLigneFraisForfait.idetatlignefrais) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.idetatlignefrais, {'attr': {'class': 'form-control' }}) }}
+                                </td>
+                                <td>
+                                    {{ form_widget(formAjouterLigneFraisForfait.Enregistrer, {'attr': {'class': 'form-control' }}) }}
+                                </td>
+
+                                {{ form_rest(formAjouterLigneFraisForfait) }}
+                                {{ form_end(formAjouterLigneFraisForfait) }}
+
+                            </tr>
+                            </tbody>
+                        {% endif %}
+
                     </table>
                     <a class = "btn btn-default" href = "{{ path('lignefraisforfait_ajouter',{id: uneFicheFrais.id}) }}">Ajouter</a>
                 </div>
@@ -76,7 +157,7 @@
                 <div class="bandeau-small"></div>
 
                 <div class="row">
-                    <h3>Frais Hors Forfait</h3>
+                    <h3>Frais non forfaitaires</h3>
                     <table class="table table-bordered" >
                         <thead>
                         <tr>
@@ -84,35 +165,99 @@
                             <th>Montant</th>
                             <th>Libellé</th>
                             <th>Etat</th>
-                            <th><p>Modifier</p></th>
+                            <th>Action</th>
 
                         </tr>
                         </thead>
                         {% for uneLigneFraisHorsForfait in uneFicheFrais.lignesFraisHorsForfaits %}
-                            <tbody >
+                            {% if formModifierLigneHorsForfait is defined and formModifierLigneHorsForfait.vars.value.id == uneLigneFraisHorsForfait.id %}
+                                    <tbody >
+                                    <tr>
+                                        {{ form_start(formModifierLigneHorsForfait)}}
+                                        {{ form_errors(formModifierLigneHorsForfait) }}
 
-                            <tr class="lien-tableau" onclick="location.href='{{ path('lignefraishorsforfait_afficher', {id: uneLigneFraisHorsForfait.id}) }}'">
-                                <td> {{ uneLigneFraisHorsForfait.date|date("d/m/Y")}} </td>
-                                <td>{{ uneLigneFraisHorsForfait.montant }} €</td>
-                                <td class="block">{{ uneLigneFraisHorsForfait.libellelignehorsforfait }}</td>
-                                <td>{{ uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
-                                <td>
-                                    <a href="{{ path('lignefraishorsforfait_modifier', {'id': uneLigneFraisHorsForfait.id}) }}">modifier</a>
-                                    <a
-                                            href="{{ path('lignefraishorsforfait_supprimer',{'id': uneLigneFraisHorsForfait.id}) }}"
-                                            onclick="return confirm('Etes vous sûre de vouloir supprimer ce frais ?')"
-                                    >
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            </tbody>
+                                        <td>
+                                            {{ form_errors(formModifierLigneHorsForfait.date) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.date, {'attr': {'class': '' } }) }}
+                                        </td>
+                                        <td>
+                                            {{ form_errors(formModifierLigneHorsForfait.montant) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.montant, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                        </td>
+                                        <td >
+                                            {{ form_errors(formModifierLigneHorsForfait.libellelignehorsforfait) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.libellelignehorsforfait, {'attr': {'class': 'form-control' }}) }}
+
+                                        </td>
+                                        <td>
+                                            {{ form_errors(formModifierLigneHorsForfait.idetatlignefrais) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.idetatlignefrais, {'attr': {'class': 'form-control' }}) }}
+                                        </td>
+                                        <td>
+                                            {{ form_widget(formModifierLigneHorsForfait.Enregistrer, {'attr': {'class': 'form-control' }}) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.file) }}
+                                        </td>
+                                        {{ form_rest(formModifierLigneHorsForfait) }}
+                                        {{ form_end(formModifierLigneHorsForfait) }}
+                                    </tr>
+                                    </tbody>
+                            {% else %}
+                                <tbody>
+                                <tr>
+                                    <td> {{ uneLigneFraisHorsForfait.date|date("d/m/Y")}} </td>
+                                    <td>{{ uneLigneFraisHorsForfait.montant }} €</td>
+                                    <td class="block">{{ uneLigneFraisHorsForfait.libellelignehorsforfait }}</td>
+                                    <td>{{ uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
+                                    <td>
+                                        <a href="{{ path('lignefraishorsforfait_modifier', {'id': uneLigneFraisHorsForfait.id}) }}">modifier</a>
+                                        <a
+                                                href="{{ path('lignefraishorsforfait_supprimer',{'id': uneLigneFraisHorsForfait.id}) }}"
+                                                onclick="return confirm('Etes vous sûre de vouloir supprimer ce frais ?')"
+                                        >
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            {% endif %}
                         {% endfor %}
+                        {% if formAjouterLigneHorsForfait is defined   %}
+                            <tbody>
+                                <tr>
+                                    {{ form_start(formAjouterLigneHorsForfait)}}
+                                    {{ form_errors(formAjouterLigneHorsForfait) }}
+
+                                    <td>
+                                        {{ form_errors(formAjouterLigneHorsForfait.date) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.date, {'attr': {'class': '' } }) }}
+                                    </td>
+                                    <td>
+                                        {{ form_errors(formAjouterLigneHorsForfait.montant) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.montant, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                    </td>
+                                    <td >
+                                        {{ form_errors(formAjouterLigneHorsForfait.libellelignehorsforfait) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.libellelignehorsforfait, {'attr': {'class': 'form-control' }}) }}
+
+                                    </td>
+                                    <td>
+                                        {{ form_errors(formAjouterLigneHorsForfait.idetatlignefrais) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.idetatlignefrais, {'attr': {'class': 'form-control' }}) }}
+                                    </td>
+                                    <td>
+                                        {{ form_widget(formAjouterLigneHorsForfait.Enregistrer, {'attr': {'class': 'form-control' }}) }}
+                                    </td>
+                                    {{ form_rest(formAjouterLigneHorsForfait) }}
+                                    {{ form_end(formAjouterLigneHorsForfait) }}
+                                </tr>
+                            </tbody>
+                        {% endif %}
                     </table>
                     <a class = "btn btn-default" href = "{{ path('lignefraishorsforfait_ajouter',{id: uneFicheFrais.id}) }}">Ajouter</a>
                 </div>
                 <div class="bandeau-small"></div>
             </div>
+
         </div>
     </div>
     <script language="javascript" src="{{ asset('JavaScript/fraisHF.js') }}"></script>

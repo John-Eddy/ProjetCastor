@@ -99,7 +99,7 @@ class GestionFicheController extends Controller
         if($this->estValide($derniereFicheValide)){
             return $derniereFicheValide;
         }
-        else $this->creeFiche($visiteur, $em);
+        else return$this->creeFiche($visiteur, $em);
     }
 
     /**

@@ -53,8 +53,8 @@ div.bandeau-small
 }
 img
 {
-	max-height: 100%;
-	height: 100px;
+	height: 130px;
+	width: auto%;
 }
 
 table, .table

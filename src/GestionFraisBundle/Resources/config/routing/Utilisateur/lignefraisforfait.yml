@@ -3,7 +3,7 @@ lignefraisforfait_afficher:
     defaults: { _controller: "GestionFraisBundle:Utilisateur:afficherlignefraisForfait" }
 
 lignefraisforfait_ajouter:
-    path:     /ajouter/{id}
+    path:     /ajouter
     defaults: { _controller: "GestionFraisBundle:Utilisateur:ajouterlignefraisForfait" }
 
 lignefraisforfait_modifier:

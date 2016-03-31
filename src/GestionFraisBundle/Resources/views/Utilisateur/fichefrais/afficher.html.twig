@@ -1,7 +1,5 @@
-{% extends '::base.html.twig' %}
+{% extends 'GestionFraisBundle:Utilisateur:base.html.twig' %}
 
-{% block stylesheets %}
-    <link href="{{ asset('Css/form.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">{% endblock %}
 
 {%  block body %}
     <div class="bandeau"></div>
@@ -102,15 +100,6 @@
             </div>
         </div>
     </div>
-    <script language="javascript" src="{{ asset('JavaScript/fraisHF.js') }}"></script>
-
-    <script language="javascript" src="{{ asset('JavaScript/verificationFiche.js') }}"></script>
-
 
 
 {% endblock  %}
-{% block javascripts %}
-
-
-
-{% endblock %}

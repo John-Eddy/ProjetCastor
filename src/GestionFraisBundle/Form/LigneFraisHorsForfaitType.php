@@ -16,27 +16,39 @@ class LigneFraisHorsForfaitType extends AbstractType
     {
         if ($options['role'] == 'utilisateur')
         {
-            if($options['action'] == 'ajouter')
+            if($options['operation'] == 'ajouter')
             {
                 $builder
                     ->add('date', 'date')
                     ->add('montant', 'money')
                     ->add('libellelignehorsforfait', 'textarea')
+                    ->add('idetatlignefrais', 'entity', array(
+                        'class' => 'GestionFraisBundle:EtatLigneFrais',
+                        'choice_label' => 'libelleetatlignefrais',
+                        'disabled' => true,
+                        'label' => 'Etat'
+                    ))
                     ->add('file', 'file', array('label' => 'Justificatif', 'required' => false));
             }
-            elseif($options['action'] == 'modifier')
+            elseif($options['operation'] == 'modifier')
             {
                 $builder
                     ->add('date', 'date')
                     ->add('montant', 'money')
                     ->add('libellelignehorsforfait', 'textarea')
+                    ->add('idetatlignefrais', 'entity', array(
+                        'class' => 'GestionFraisBundle:EtatLigneFrais',
+                        'choice_label' => 'libelleetatlignefrais',
+                        'disabled' => true,
+                        'label' => 'Etat'
+                    ))
                     ->add('file', 'file', array('label' => 'Justificatif', 'required' => false));
 
             }
         }
         elseif($options['role'] == 'comptable')
         {
-            if($options['action']=='valider') {
+            if($options['operation']=='valider') {
                 $i=0;
             }
         }
@@ -53,10 +65,9 @@ class LigneFraisHorsForfaitType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'GestionFraisBundle\Entity\LigneFraisHorsForfait'
-        ));
-        $resolver->setDefaults(array(
-            'role' => 'utilisateur',
+            'data_class' => 'GestionFraisBundle\Entity\LigneFraisHorsForfait',
+            'role' => null,
+            'operation' =>'consulter'
         ));
     }
 

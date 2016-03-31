@@ -77,10 +77,15 @@ class FicheFrais
      */
     private $idvisiteur;
 
-    private $lignesFraisForfaits = array();
+    /**
+     * @ORM\OneToMany(targetEntity="GestionFraisBundle\Entity\LigneFraisForfait", mappedBy="idfichefrais")
+     */
+    private $lignesFraisForfaits;
 
-    private $lignesFraisHorsForfaits = array();
-
+    /**
+     * @ORM\OneToMany(targetEntity="GestionFraisBundle\Entity\LigneFraisHorsForfait", mappedBy="idfichefrais")
+     */
+    private $lignesFraisHorsForfaits;
 
     /**
      * Set mois
@@ -277,4 +282,60 @@ class FicheFrais
     }
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lignesFraisForfaits = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->lignesFraisHorsForfaits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add lignesFraisForfait
+     *
+     * @param \GestionFraisBundle\Entity\LigneFraisForfait $lignesFraisForfait
+     *
+     * @return FicheFrais
+     */
+    public function addLignesFraisForfait(\GestionFraisBundle\Entity\LigneFraisForfait $lignesFraisForfait)
+    {
+        $this->lignesFraisForfaits[] = $lignesFraisForfait;
+    
+        return $this;
+    }
+
+    /**
+     * Remove lignesFraisForfait
+     *
+     * @param \GestionFraisBundle\Entity\LigneFraisForfait $lignesFraisForfait
+     */
+    public function removeLignesFraisForfait(\GestionFraisBundle\Entity\LigneFraisForfait $lignesFraisForfait)
+    {
+        $this->lignesFraisForfaits->removeElement($lignesFraisForfait);
+    }
+
+    /**
+     * Add lignesFraisHorsForfait
+     *
+     * @param \GestionFraisBundle\Entity\LigneFraisHorsForfait $lignesFraisHorsForfait
+     *
+     * @return FicheFrais
+     */
+    public function addLignesFraisHorsForfait(\GestionFraisBundle\Entity\LigneFraisHorsForfait $lignesFraisHorsForfait)
+    {
+        $this->lignesFraisHorsForfaits[] = $lignesFraisHorsForfait;
+    
+        return $this;
+    }
+
+    /**
+     * Remove lignesFraisHorsForfait
+     *
+     * @param \GestionFraisBundle\Entity\LigneFraisHorsForfait $lignesFraisHorsForfait
+     */
+    public function removeLignesFraisHorsForfait(\GestionFraisBundle\Entity\LigneFraisHorsForfait $lignesFraisHorsForfait)
+    {
+        $this->lignesFraisHorsForfaits->removeElement($lignesFraisHorsForfait);
+    }
 }

@@ -12,6 +12,11 @@
     <link href="{{ asset('Css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('Css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('Css/form.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+    <link href="{{ asset('Css/simple-sidebar.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+
+
+
 
     {% block stylesheets %}{% endblock %}
 
@@ -31,64 +36,14 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 
-<body id="body" onload="footerDown()">
-<header id="header">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ path('Gestion_frais_homepage') }}">
-                    <img onclick="footerDown()" alt="Brand" src="{{ asset('Images/logo_gsb.png') }}">
-                </a>
-            </div>
+<body id="body">
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
-                        <p class="navbar-text">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} </p>
-                       </ul>
-                {% else %}
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
-                    </ul>
-                {% endif %}
-
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-
-</header>
-
-
-
-
-
-
+    {% block navbar %}{% endblock %}
     {% block body %}{% endblock %}
 
-
-
-<div id="wrapper"></div>
-
-<footer class="container" id="footer">
-
-</footer>
-
-{% block javascripts %}{% endblock %}
-<script src="{{ asset('JavaScript/wrapper.js') }}"></script>
-
 </body>
+{% block javascripts %}{% endblock %}
+<script src="{{ asset('JavaScript/jquery.js') }}"></script>
 
+<script src="{{ asset('JavaScript/bootstrap.min.js') }}"></script>
 </html>
