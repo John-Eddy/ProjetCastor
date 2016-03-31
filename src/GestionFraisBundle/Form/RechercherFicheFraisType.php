@@ -20,6 +20,17 @@ class RechercherFicheFraisType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $annee = array();
+        for($i = date('Y'); $i>date('Y') - 5; $i-- )
+        {
+            $annee += array(strval($i) => strval($i)) ;
+        }
+        $mois = array(
+            '01' => 'Janvier', '02' => 'Février', '03' => 'Mars', '04' => 'Avril', '05' => 'Mai', '06' => 'Juin', '07' => 'Juillet',
+            '08' => 'Aout', '09' => 'Septembre', '10' => 'Octobre', '11' => 'Novembre', '12' => 'Decembre'
+        );
+
+
         if ($options['type'] == 'comptable') {
             $builder
                 ->add('Visiteur', 'entity', array(
@@ -31,19 +42,20 @@ class RechercherFicheFraisType extends AbstractType
                 ));
         }
         $builder
-            //->add('test', new EtatLigneFraisType())
-            ->add('mois', 'date',
-                array(
-                    'format' => 'yyyy-MM-dd',
-                    'years' => range(date('Y'), date('Y') - 5),
-                    'days' => array(1),
-                    'empty_value' => array('year' => 'Année', 'month' => 'Mois', 'day' => '----'),
-                    'required' => false,
-                )
-            );
 
-        $builder
-            ->add('Rechercher', 'submit');;
+            ->add('mois', 'choice', array(
+                'choices' => $mois,
+                'required' => false,
+                'placeholder' => 'Tous',
+                'empty_data' => null
+            ))
+            ->add('annee', 'choice', array(
+                'choices' => $annee,
+                'required' => false,
+                'placeholder' => 'Tous',
+                'empty_data' => null
+            ))
+        ->add('Rechercher', 'submit');;
 
     }
 

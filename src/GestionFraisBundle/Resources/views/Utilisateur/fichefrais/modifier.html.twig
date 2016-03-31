@@ -2,10 +2,6 @@
 {% block title %}Saisie frais{% endblock  %}
 
 
-{% block formRechercherFiche %}
-
-{% endblock %}
-
 {% block stylesheets %}
     <link href="{{ asset('Css/form.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">{% endblock %}
 
@@ -206,7 +202,7 @@
                                 <tr>
                                     <td> {{ uneLigneFraisHorsForfait.date|date("d/m/Y")}} </td>
                                     <td>{{ uneLigneFraisHorsForfait.montant }} €</td>
-                                    <td class="block">{{ uneLigneFraisHorsForfait.libellelignehorsforfait }}</td>
+                                    <td >{{ uneLigneFraisHorsForfait.libellelignehorsforfait|length > 20 ? uneLigneFraisHorsForfait.libellelignehorsforfait|slice(0,20)  ~ '...' : uneLigneFraisHorsForfait.libellelignehorsforfait  }}</td>
                                     <td>{{ uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
                                     <td>
                                         <a href="{{ path('lignefraishorsforfait_modifier', {'id': uneLigneFraisHorsForfait.id}) }}">modifier</a>

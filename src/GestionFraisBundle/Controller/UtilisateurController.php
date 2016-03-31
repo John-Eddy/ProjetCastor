@@ -71,30 +71,33 @@ class UtilisateurController extends Controller
 
             //On récupere la date du formulaire et on la transforme en chaine de caractères
             $criteres['idvisiteur'] =$visiteur->getId();
-            $dateForm = date_format($form->getData()['mois'], 'Y-m-d H:i:s');
 
             if($form->getData()['mois'])
             {
-                $mois = substr($dateForm, 5, 2);
-                $annee =substr($dateForm, 0, 4); // on extrait le mois et l'année de la chaine et on les mets au format mmaaaa
+                $mois = $form->getData()['mois'];
                 $criteres['mois']= $mois;
-                $criteres['annee'] =$annee;
-                }
-                //recupération de la  fiches frais corespondant au mois
-                $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy($criteres);
 
-                //verification de l'éxistance de la fiche de frais :
-                if (!$uneFicheFrais) {
-                    throw new NotFoundHttpException('Fiche introuvable.');
-                }
-
-                // On redirige vers la fiche frais
-                return $this->redirect($this->generateUrl('utilisateur_afficherFiche', array('id' => $uneFicheFrais->getId())));
+            }
+            if($form->getData()['annee'])
+            {
+                $annee = $form->getData()['annee'];
+                $criteres['annee']= strval($annee);
             }
 
+            //recupération de la  fiches frais corespondant au mois
+            $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findBy($criteres);
+
+            return $this->render('GestionFraisBundle:Utilisateur\fichefrais:rechercher.html.twig', array(
+                "lesFicheFrais" =>$lesFicheFrais,
+                'form' => $form->createView(),
+            ));
+
+
+        }
+
         return $this->render('GestionFraisBundle:Utilisateur\fichefrais:rechercher.html.twig', array(
-            "uneFicheFrais" => $gestionaireFiche->getDerniereFicheFraisValide($visiteur,$em),
-            'formRechercherFiche' => $form->createView(),
+            "lesFicheFrais" => $gestionaireFiche->getDerniereFicheFraisValide($visiteur,$em),
+            'form' => $form->createView(),
         ));
     }
 

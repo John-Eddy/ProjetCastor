@@ -1,10 +1,10 @@
-{% extends '::base.html.twig' %}
+{% extends 'GestionFraisBundle:Utilisateur:base.html.twig' %}
 {%  block body %}
 
     <div class="bandeau"></div>
     <div class="container">
-        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="contenu" >
-            <h2 class="">Fiche Frais</h2>
+        <div class="col-lg-8 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4 col-xs-12" id="contenu" >
+            <h2 class="">Rechercher fiche</h2>
                 <div class="bandeau-small"></div>
 
             <div class="row">
@@ -13,25 +13,10 @@
 
                     {# Les erreurs générales du formulaire. #}
                     {{ form_errors(form) }}
+                    {{ form_rest(form) }}
 
-                    {# Génération du label. #}
-                   <div class="form-group">
-                      {{ form_label(form.mois, "Date", {'label_attr': {'class': ''}}) }}
-                          {# Affichage des erreurs pour ce champ précis. #}
-                       <div class="form-group">
 
-                       {{ form_errors(form.mois) }}
-                          {# Génération de l'input. #}
-                          {{ form_widget(form.mois, {'attr': {'class': ' ' } }) }}
-                       </div>
-                   </div>
-
-                    <div class="form-group ">
-                        {# Fermeture de la balise <form> du formulaire HTML #}
-                        {{ form_widget(form.Rechercher, {'attr': {'class': 'btn btn-default' } }) }}
-
-                        {{ form_end(form) }}
-                    </div>
+                    {{ form_end(form) }}
                 </div>
             </div>
             <div class="bandeau"></div>
