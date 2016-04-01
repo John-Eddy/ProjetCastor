@@ -2,40 +2,38 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block stylesheets %}
+    <link href="{{ asset('Css/signing.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+{% endblock %}
 {% block body %}
 
+<section class="container-principale">
+    <div class="container">
+        <div class=" col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12" >
+            <div class="container">
+                <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
 
-<div class="container">
-    <div class=" col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" id="contenu" >
+                    <h2 class="form-signin-heading text-center">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</h2>
 
-        <div class="container">
+                    <label for="username" class="sr-only">{{ 'security.login.username'|trans }}</label>
+                    <input type="text" id="unsername"  class="form-control" placeholder="{{ 'security.login.username'|trans }}"
+                           autofocus="" name="_username" value="{{ last_username }}" required="required">
 
-            <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
-
-                <h3 class="text-center">Connection</h3>
-
-                <div class="bandeau-small"></div>
-
-                <label for="username" class="sr-only">{{ 'security.login.username'|trans }}</label>
-                <input type="text" id="unsername"  class="form-control" placeholder="{{ 'security.login.username'|trans }}"
-                       autofocus="" name="_username" value="{{ last_username }}" required="required">
-
-                <label for="password" class="sr-only"for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-                <input type="password" id="password" name="_password" class="form-control" placeholder="{{  'security.login.password'|trans }}" required="required">
-                {% if error %}
-                    <p style="color:red">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
-                {% endif %}
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="remember_me" name="_remember_me" value="on">{{ 'security.login.remember_me'|trans }}
-                    </label>
-                </div>
-                <div class="bandeau-small"></div>
-                <input class="btn btn-lg btn-primary btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-                <div class="bandeau-small"></div>
-            </form>
-        </div> <!-- /container -->
+                    <label for="password" class="sr-only"for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                    <input type="password" id="password" name="_password" class="form-control" placeholder="{{  'security.login.password'|trans }}" required="required">
+                    {% if error %}
+                        <p style="color:red">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                    {% endif %}
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on">{{ 'security.login.remember_me'|trans }}
+                        </label>
+                    </div>
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                </form>
+            </div> <!-- /container -->
+        </div>
     </div>
-</div>
+</section>
 {% endblock body %}

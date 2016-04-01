@@ -2,62 +2,19 @@
 
 {% block title %}{% endblock %}
 
-{% block navbar %}
-    <header id="header">
-
-        <div id="wrapper">
-
-            <!-- Sidebar -->
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a class="navbar-brand" href="{{ path('Gestion_frais_homepage') }}">
-                            <img onclick="footerDown()" alt="Brand" src="{{ asset('Images/logo_gsb.png') }}">
-                        </a>
-                    </li>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo">
-                                <i class="fa fa-fw fa-arrows-v"></i> {{  app.user.prenom }} {{  app.user.nom }} <i class="glyphicon glyphicon-cog "></i>
-                                <i class="fa fa-fw fa-caret-down"></i>
-                            </a>
-                            <ul id="demo" class="collapse">
-                                <li>
-                                    <a href="#">Changer mot de passe</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    {% else %}
-                            <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
-                    {% endif %}
-
-
-                    <li>
-                        <a href="{{ path('utilisateur_saisirFrais')}}">Acceuil</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('lignefraisforfait_ajouter')}}">Saisir frais forfaitaire</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('lignefraishorsforfait_ajouter')}}">Saisir frais non forfaitaire</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('utilisateur_rechercherFiche')}}">Rechercher fiche</a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-            <!-- /#sidebar-wrapper -->
-
-        </div>
-
-
+    {% block elementNavbar %}
+        <li>
+            <a href="{{ path('utilisateur_saisirFrais')}}">Acceuil</a>
+        </li>
+        <li>
+            <a href="{{ path('lignefraisforfait_ajouter')}}">Saisir frais forfaitaire</a>
+        </li>
+        <li>
+            <a href="{{ path('lignefraishorsforfait_ajouter')}}">Saisir frais non forfaitaire</a>
+        </li>
+        <li>
+            <a href="{{ path('utilisateur_rechercherFiche')}}">Rechercher fiche</a>
+        </li>
 
     </header>
 {% endblock %}

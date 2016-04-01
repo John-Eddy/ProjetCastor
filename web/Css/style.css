@@ -1,6 +1,7 @@
 body, html
 {
 	height: 100%;
+	background-color: #eee;
 }
 .container
 {
@@ -17,7 +18,7 @@ div.bandeau-small
 
 #contenu, .contenu
 {
-	background-color: #F5F5F5;
+	background-color: #fff;
 	border: 1px solid #DDDDDD;
 	border-width: 1px;
 	border-color: #DDDDDD;
@@ -27,6 +28,22 @@ div.bandeau-small
 	min-height: 100%
 
 }
+@media(min-width:768px){
+	.container-principale{
+		margin-left: 260px;
+	}
+}
+#menu-toggle {
+	background-color: transparent;
+	color: #FFFFFF;
+	font-size: 20px;
+	float: left;
+	position: absolute;
+	margin-left: 5px;
+	margin-top: 5px;
+	z-index: 98;
+}
+
  #form_mois_day
  {
 	 visibility: hidden;
@@ -54,7 +71,7 @@ div.bandeau-small
 img
 {
 	height: 130px;
-	width: auto%;
+	width: auto;
 }
 
 table, .table

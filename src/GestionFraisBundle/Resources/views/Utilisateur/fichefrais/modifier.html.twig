@@ -1,13 +1,12 @@
 {% extends 'GestionFraisBundle:Utilisateur:base.html.twig' %}
 {% block title %}Saisie frais{% endblock  %}
 
-
 {% block stylesheets %}
     <link href="{{ asset('Css/form.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">{% endblock %}
 
 {%  block body %}
     <div class="container-fluid">
-        <div class="col-lg-8 col-lg-offset-3 col-md-9 col-md-offset-3 col-sm-8 col-sm-offset-4 col-xs-12 " id="contenu">
+        <div class="col-lg-10 col-lg-offset-1 col-md-12 " id="contenu" >
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3 col-xs-6">
@@ -43,34 +42,33 @@
 
                             {% if formModifierLigneFraisForfait is defined and idLigne == uneLigneFraisForfait.id %}
                                 <tbody>
-                                {% set formulaireAfficher = true %}
                                 <tr>
                                     {{ form_start(formModifierLigneFraisForfait)}}
                                     {{ form_errors(formModifierLigneFraisForfait) }}
 
                                     <td>
                                         {{ form_errors(formModifierLigneFraisForfait.date) }}
-                                        {{ form_widget(formModifierLigneFraisForfait.date, {'attr': {'class': '' } }) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.date) }}
                                     </td>
                                     <td>
                                         {{ form_errors(formModifierLigneFraisForfait.idfraisforfait) }}
-                                        {{ form_widget(formModifierLigneFraisForfait.idfraisforfait, {'attr': {'class': 'form-control' }}) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.idfraisforfait) }}
 
                                        </td>
                                     <td>
                                         {{ form_errors(formModifierLigneFraisForfait.quantite) }}
-                                        {{ form_widget(formModifierLigneFraisForfait.quantite, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.quantite) }}
                                     </td>
                                     <td >
                                         {{ form_errors(formModifierLigneFraisForfait.montant) }}
-                                        {{ form_widget(formModifierLigneFraisForfait.montant, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.montant) }}
                                     </td>
                                     <td>
                                         {{ form_errors(formModifierLigneFraisForfait.idetatlignefrais) }}
-                                        {{ form_widget(formModifierLigneFraisForfait.idetatlignefrais, {'attr': {'class': 'form-control' }}) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.idetatlignefrais) }}
                                     </td>
                                     <td>
-                                        {{ form_widget(formModifierLigneFraisForfait.Enregistrer, {'attr': {'class': 'form-control' }}) }}
+                                        {{ form_widget(formModifierLigneFraisForfait.Enregistrer) }}
                                     </td>
                                     {{ form_rest(formModifierLigneFraisForfait) }}
                                     {{ form_end(formModifierLigneFraisForfait) }}
@@ -116,27 +114,27 @@
 
                                 <td>
                                     {{ form_errors(formAjouterLigneFraisForfait.date) }}
-                                    {{ form_widget(formAjouterLigneFraisForfait.date, {'attr': {'class': '' } }) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.date) }}
                                 </td>
                                 <td>
                                     {{ form_errors(formAjouterLigneFraisForfait.idfraisforfait) }}
-                                    {{ form_widget(formAjouterLigneFraisForfait.idfraisforfait, {'attr': {'class': 'form-control' }}) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.idfraisforfait) }}
 
                                 </td>
                                 <td>
                                     {{ form_errors(formAjouterLigneFraisForfait.quantite) }}
-                                    {{ form_widget(formAjouterLigneFraisForfait.quantite, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.quantite) }}
                                 </td>
                                 <td >
                                     {{ form_errors(formAjouterLigneFraisForfait.montant) }}
-                                    {{ form_widget(formAjouterLigneFraisForfait.montant, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.montant) }}
                                 </td>
                                 <td>
                                     {{ form_errors(formAjouterLigneFraisForfait.idetatlignefrais) }}
-                                    {{ form_widget(formAjouterLigneFraisForfait.idetatlignefrais, {'attr': {'class': 'form-control' }}) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.idetatlignefrais) }}
                                 </td>
                                 <td>
-                                    {{ form_widget(formAjouterLigneFraisForfait.Enregistrer, {'attr': {'class': 'form-control' }}) }}
+                                    {{ form_widget(formAjouterLigneFraisForfait.Enregistrer) }}
                                 </td>
 
                                 {{ form_rest(formAjouterLigneFraisForfait) }}
@@ -166,39 +164,38 @@
                         </tr>
                         </thead>
                         {% for uneLigneFraisHorsForfait in uneFicheFrais.lignesFraisHorsForfaits %}
+                            <tbody >
+
                             {% if formModifierLigneHorsForfait is defined and formModifierLigneHorsForfait.vars.value.id == uneLigneFraisHorsForfait.id %}
-                                    <tbody >
                                     <tr>
                                         {{ form_start(formModifierLigneHorsForfait)}}
                                         {{ form_errors(formModifierLigneHorsForfait) }}
 
                                         <td>
                                             {{ form_errors(formModifierLigneHorsForfait.date) }}
-                                            {{ form_widget(formModifierLigneHorsForfait.date, {'attr': {'class': '' } }) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.date) }}
                                         </td>
                                         <td>
                                             {{ form_errors(formModifierLigneHorsForfait.montant) }}
-                                            {{ form_widget(formModifierLigneHorsForfait.montant, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.montant) }}
                                         </td>
                                         <td >
                                             {{ form_errors(formModifierLigneHorsForfait.libellelignehorsforfait) }}
-                                            {{ form_widget(formModifierLigneHorsForfait.libellelignehorsforfait, {'attr': {'class': 'form-control' }}) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.libellelignehorsforfait) }}
 
                                         </td>
                                         <td>
                                             {{ form_errors(formModifierLigneHorsForfait.idetatlignefrais) }}
-                                            {{ form_widget(formModifierLigneHorsForfait.idetatlignefrais, {'attr': {'class': 'form-control' }}) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.idetatlignefrais) }}
                                         </td>
                                         <td>
-                                            {{ form_widget(formModifierLigneHorsForfait.Enregistrer, {'attr': {'class': 'form-control' }}) }}
+                                            {{ form_widget(formModifierLigneHorsForfait.Enregistrer) }}
                                             {{ form_widget(formModifierLigneHorsForfait.file) }}
                                         </td>
                                         {{ form_rest(formModifierLigneHorsForfait) }}
                                         {{ form_end(formModifierLigneHorsForfait) }}
                                     </tr>
-                                    </tbody>
                             {% else %}
-                                <tbody>
                                 <tr>
                                     <td> {{ uneLigneFraisHorsForfait.date|date("d/m/Y")}} </td>
                                     <td>{{ uneLigneFraisHorsForfait.montant }} €</td>
@@ -214,40 +211,41 @@
                                         </a>
                                     </td>
                                 </tr>
-                                </tbody>
                             {% endif %}
                         {% endfor %}
                         {% if formAjouterLigneHorsForfait is defined   %}
-                            <tbody>
                                 <tr>
                                     {{ form_start(formAjouterLigneHorsForfait)}}
                                     {{ form_errors(formAjouterLigneHorsForfait) }}
 
                                     <td>
                                         {{ form_errors(formAjouterLigneHorsForfait.date) }}
-                                        {{ form_widget(formAjouterLigneHorsForfait.date, {'attr': {'class': '' } }) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.date) }}
                                     </td>
                                     <td>
                                         {{ form_errors(formAjouterLigneHorsForfait.montant) }}
-                                        {{ form_widget(formAjouterLigneHorsForfait.montant, {'attr': {'class': 'form-control' ,'min': 0 } }) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.montant) }}
                                     </td>
                                     <td >
                                         {{ form_errors(formAjouterLigneHorsForfait.libellelignehorsforfait) }}
-                                        {{ form_widget(formAjouterLigneHorsForfait.libellelignehorsforfait, {'attr': {'class': 'form-control' }}) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.libellelignehorsforfait) }}
 
                                     </td>
                                     <td>
                                         {{ form_errors(formAjouterLigneHorsForfait.idetatlignefrais) }}
-                                        {{ form_widget(formAjouterLigneHorsForfait.idetatlignefrais, {'attr': {'class': 'form-control' }}) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.idetatlignefrais) }}
                                     </td>
                                     <td>
-                                        {{ form_widget(formAjouterLigneHorsForfait.Enregistrer, {'attr': {'class': 'form-control' }}) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.Enregistrer) }}
+                                        {{ form_widget(formAjouterLigneHorsForfait.file) }}
+
                                     </td>
                                     {{ form_rest(formAjouterLigneHorsForfait) }}
                                     {{ form_end(formAjouterLigneHorsForfait) }}
                                 </tr>
-                            </tbody>
+
                         {% endif %}
+                            </tbody>
                     </table>
                     <a class = "btn btn-default" href = "{{ path('lignefraishorsforfait_ajouter',{id: uneFicheFrais.id}) }}">Ajouter</a>
                 </div>
@@ -259,7 +257,6 @@
     <script language="javascript" src="{{ asset('JavaScript/fraisHF.js') }}"></script>
 
     <script language="javascript" src="{{ asset('JavaScript/verificationFiche.js') }}"></script>
-
 
 
 {% endblock  %}
