@@ -71,9 +71,7 @@ class LigneFraisForfait
      * @ORM\Column(name="montant", type="float", precision=10, scale=0, nullable=false)
      */
     private $montant;
-
-
-
+    
 
     /**
      * Set quantite

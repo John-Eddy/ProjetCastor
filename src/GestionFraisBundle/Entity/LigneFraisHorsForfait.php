@@ -4,7 +4,6 @@ namespace GestionFraisBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * LigneFraisHorsForfait
@@ -38,20 +37,14 @@ class LigneFraisHorsForfait
      *
      * @ORM\Column(name="libelleLigneHorsForfait", type="string", length=255, nullable=false)
      *
-     */
-    private $libellelignehorsforfait;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="justificatif", type="string", length=255, nullable=false)
-     *
-     * @Assert\Length(
+     *@Assert\Length(
      *      max = 255,
      *      maxMessage = "Le libellé ne doit pas depasser les 255 caractères"
      * )
+     *
      */
-    private $justificatif;
+    private $libellelignehorsforfait;
+
 
     /**
      * @var integer
@@ -83,13 +76,12 @@ class LigneFraisHorsForfait
     private $idetatlignefrais;
 
     /**
-     @Assert\File(
-     *     maxSize = "1024k",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Mauvais, veuillez envoyer un fichier au format pdf."
-     * )
+     * @var \GestionFraisBundle\Entity\Justificatif
+     *
+     *  @ORM\OneToOne(targetEntity="GestionFraisBundle\Entity\Justificatif", cascade={"persist"})
+     * 
      */
-    public $file;
+    public $justificatif;
 
     /**
      * Set date
@@ -164,33 +156,6 @@ class LigneFraisHorsForfait
     }
 
     /**
-     * Set justificatif
-     *
-     * @param string $justificatif
-     *
-     * @return LigneFraisHorsForfait
-     */
-    public function setJustificatif()
-    {
-
-        $nomOriginal = $this->file->getClientOriginalName();
-
-        $this->justificatif = $this->getUploadDir()."/".$nomOriginal;
-
-        return $this;
-    }
-
-    /**
-     * Get justificatif
-     *
-     * @return string
-     */
-    public function getJustificatif()
-    {
-        return $this->justificatif;
-    }
-
-    /**
      * Get id
      *
      * @return integer
@@ -248,60 +213,15 @@ class LigneFraisHorsForfait
         return $this->idetatlignefrais;
     }
 
-    public function getFile()
+    public function getJustificatif()
     {
-        return $this->file;
+        return $this->justificatif;
     }
 
-    public function setFile(UploadedFile $file = null)
+    public function setJustificatif($justificatif)
     {
-        $this->file = $file;
-    }
+        $this->justificatif = $justificatif;
 
-    public function getUploadDir()
-    {
-        return $this->getGlobalUploadDir().$this->idfichefrais->getMois()."/".strval($this->id);
-    }
-
-    public function getGlobalUploadDir()
-    {
-        $chemin = __DIR__;
-        $chemin = str_replace("\src\GestionFraisBundle\Entity","", $chemin);
-        return $chemin."/web/uploads/justificatifs/";
-    }
-
-    public function getWebPath()
-    {
-        return null === $this->justificatif ? null : $this->getUploadDir().'/'.$this->justificatif;
-    }
-
-    public function getAbsolutePath()
-    {
-        return null === $this->justificatif ? null : $this->getUploadRootDir().'/'.$this->justificatif;
-    }
-    public function sauvgarderFichier()
-    {
-        $chemin = __DIR__;
-        $chemin = str_replace("\src\GestionFraisBundle\Entity","", $chemin);
-
-        if (!file_exists($chemin."\web\uploads"))
-        {
-            mkdir($chemin."\web\uploads");
-        }
-        if (!file_exists($chemin."\web\uploads\justificatifs"))
-        {
-            mkdir($chemin."\web\uploads\justificatifs");
-        }
-        if (!file_exists($chemin."\web\uploads\justificatifs/".$this->getIdfichefrais()->getMois()))
-        {
-            mkdir($chemin."\web\uploads\justificatifs/".$this->getIdfichefrais()->getMois());
-        }
-        if(!file_exists($chemin."\web\uploads\justificatifs/".$this->getIdfichefrais()->getMois().'/'.strval($this->id)))
-        {
-            mkdir($chemin."\web\uploads\justificatifs/".$this->getIdfichefrais()->getMois().'/'.strval($this->id));
-        }
-
-        $this->setJustificatif();
-        rename($this->file, $this->getJustificatif());
+        return $this;
     }
 }

@@ -5,7 +5,6 @@ namespace GestionFraisBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class LigneFraisForfaitType extends AbstractType
 {
@@ -64,25 +63,6 @@ class LigneFraisForfaitType extends AbstractType
                     ))
                     ->add('Enregistrer', 'submit');
             }
-        }
-        else if($options ['operation']=='consulter') {
-            $builder
-                ->add('date', 'date', array('disabled' => true))
-                ->add('idfraisforfait', 'entity', array(
-                    'class' => 'GestionFraisBundle:FraisForfait',
-                    'choice_label' => 'libellefraisforfait',
-                    'disabled' => true,
-                    'label' => 'Type de Frais'
-                ))
-                ->add('quantite', 'text', array('disabled' => true,))
-                ->add('montant', 'text', array('disabled' => true))
-                ->add('idetatlignefrais', 'entity', array(
-                    'class' => 'GestionFraisBundle:EtatLigneFrais',
-                    'choice_label' => 'libelleetatlignefrais',
-                    'label' => 'Etat',
-                    'disabled' => true,
-                    'required' => false))
-                ->add('Retour', 'submit');
         }
     }
 

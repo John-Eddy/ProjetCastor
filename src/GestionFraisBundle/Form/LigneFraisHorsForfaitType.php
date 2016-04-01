@@ -14,46 +14,29 @@ class LigneFraisHorsForfaitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options['role'] == 'utilisateur')
-        {
-            if($options['operation'] == 'ajouter')
-            {
-                $builder
-                    ->add('date', 'date')
-                    ->add('montant', 'money')
-                    ->add('libellelignehorsforfait', 'textarea')
-                    ->add('idetatlignefrais', 'entity', array(
-                        'class' => 'GestionFraisBundle:EtatLigneFrais',
-                        'choice_label' => 'libelleetatlignefrais',
-                        'disabled' => true,
-                        'label' => 'Etat'
-                    ))
-                    ->add('file', 'file', array('label' => 'Justificatif', 'required' => false));
+        if ($options['role'] == 'utilisateur') {
+            $builder
+                ->add('date', 'date')
+                ->add('montant', 'money')
+                ->add('libellelignehorsforfait', 'textarea')
+                ->add('idetatlignefrais', 'entity', array(
+                    'class' => 'GestionFraisBundle:EtatLigneFrais',
+                    'choice_label' => 'libelleetatlignefrais',
+                    'disabled' => true,
+                    'label' => 'Etat'
+                ));
+            if($options['operation'] == 'ajouter') {
+
             }
-            elseif($options['operation'] == 'modifier')
-            {
-                $builder
-                    ->add('date', 'date')
-                    ->add('montant', 'money')
-                    ->add('libellelignehorsforfait', 'textarea')
-                    ->add('idetatlignefrais', 'entity', array(
-                        'class' => 'GestionFraisBundle:EtatLigneFrais',
-                        'choice_label' => 'libelleetatlignefrais',
-                        'disabled' => true,
-                        'label' => 'Etat'
-                    ))
-                    ->add('file', 'file', array('label' => 'Justificatif', 'required' => false));
+            elseif($options['operation'] == 'modifier') {
 
             }
         }
-        elseif($options['role'] == 'comptable')
-        {
+        elseif($options['role'] == 'comptable') {
             if($options['operation']=='valider') {
-                $i=0;
             }
         }
-
-
+        
         $builder
             ->add('Enregistrer', 'submit');
         ;

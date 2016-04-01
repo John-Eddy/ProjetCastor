@@ -155,11 +155,11 @@
                     <table class="table table-bordered" >
                         <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Montant</th>
-                            <th>Libellé</th>
-                            <th>Etat</th>
-                            <th>Action</th>
+                            <th><p>Date</p></th>
+                            <th><p>Montant</p></th>
+                            <th><p>Libellé</p></th>
+                            <th><p>Etat</p></th>
+                            <th><p>Action</p></th>
 
                         </tr>
                         </thead>
@@ -190,7 +190,6 @@
                                         </td>
                                         <td>
                                             {{ form_widget(formModifierLigneHorsForfait.Enregistrer) }}
-                                            {{ form_widget(formModifierLigneHorsForfait.file) }}
                                         </td>
                                         {{ form_rest(formModifierLigneHorsForfait) }}
                                         {{ form_end(formModifierLigneHorsForfait) }}
@@ -237,8 +236,6 @@
                                     </td>
                                     <td>
                                         {{ form_widget(formAjouterLigneHorsForfait.Enregistrer) }}
-                                        {{ form_widget(formAjouterLigneHorsForfait.file) }}
-
                                     </td>
                                     {{ form_rest(formAjouterLigneHorsForfait) }}
                                     {{ form_end(formAjouterLigneHorsForfait) }}
