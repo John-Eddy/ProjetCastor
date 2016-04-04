@@ -338,4 +338,5 @@ class FicheFrais
     {
         $this->lignesFraisHorsForfaits->removeElement($lignesFraisHorsForfait);
     }
+
 }

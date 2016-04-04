@@ -43,8 +43,8 @@ class GestionFicheController extends Controller
         $uneFicheFrais = new FicheFrais();
 
         $uneFicheFrais->setIdvisiteur($visiteur);
-        $uneFicheFrais->setMois($gestionaireDate->getMoisFicheEnCoursStr());
-        $uneFicheFrais->setAnnee($gestionaireDate->getAnneeFicheEnCoursStr());
+        $uneFicheFrais->setMois(date('m'));
+        $uneFicheFrais->setAnnee(date('Y'));
         $uneFicheFrais->setDatecreation(new \DateTime());
         $uneFicheFrais->setDatemodif(new \DateTime());
         $uneFicheFrais->setMontantvalide(0);
@@ -56,16 +56,43 @@ class GestionFicheController extends Controller
         return $uneFicheFrais;
     }
 
+    public function calculerMontantValider($uneFicheFrais)
+    {
+        $montantValide=0;
+        $idEtatLigneFraisValider = $this->container->getParameter('idetatlignefraisvalider');
+
+        foreach($uneFicheFrais->getLignesFraisForfaits() as $uneLigneFraisForfait)
+        {
+            foreach($uneFicheFrais->getLignesFraisForfaits() as $uneLigneFraisForfait){
+                if($uneLigneFraisForfait->getIdetatlignefrais()->getId() == $idEtatLigneFraisValider)
+                {
+                    $montantValide += $uneLigneFraisForfait->getMontant();
+                }
+            }
+            foreach($uneFicheFrais->getLignesFraisHorsForfaits() as $uneLigneFraisHorsForfait){
+                if($uneLigneFraisHorsForfait->getIdetatlignefrais()->getId() == $idEtatLigneFraisValider)
+                {
+                    $montantValide += $uneLigneFraisHorsForfait->getMontant();
+                }
+            }
+        }
+        return $montantValide;
+    }
     /**
      * @param $uneFicheFrais
      * @return bool
      */
     public function estValide($uneFicheFrais)
     {
-        $gestionaireDate =  $this->container->get("gestionfrais.gestionairedate");
+        $idEtatLigneFraisCloturer = $this->container->getParameter('idetatfichefraiscloture');//id de l'etat cloturé
 
 
-        if( $gestionaireDate->getMoisFicheEnCoursStr() == $uneFicheFrais->getMois() || $gestionaireDate->getAnneeFicheEnCoursStr() == $uneFicheFrais->getAnnee())
+
+         if($uneFicheFrais->getIdetatfichefrais()->getId() ==  $idEtatLigneFraisCloturer )
+         {
+             return false;
+         }
+         else if( $uneFicheFrais->getMois() == date('m') || strval(date('Y')) == $uneFicheFrais->getAnnee())
         {
             return true;
         }
@@ -87,19 +114,24 @@ class GestionFicheController extends Controller
             array('idvisiteur' => $visiteur->getId()),
             array('datecreation' => 'DESC')
         );
-
-
-        if(!empty($lesFichesFrais)) return $lesFichesFrais[0];
-        else return false ;
+        if(!empty($lesFichesFrais)) {
+            return $lesFichesFrais[0];
+        }
+        else  false ;
     }
 
     public function getDerniereFicheFraisValide( $visiteur, $em){
 
         $derniereFicheValide = $this->getDerniereFicheFrais($visiteur,$em);
-        if($this->estValide($derniereFicheValide)){
+        if($derniereFicheValide == null) {
+            return$this->creeFiche($visiteur, $em);
+        }
+        elseif($this->estValide($derniereFicheValide)){
             return $derniereFicheValide;
         }
-        else return$this->creeFiche($visiteur, $em);
+        else{
+            return$this->creeFiche($visiteur, $em);
+        }
     }
 
     /**
@@ -126,7 +158,6 @@ class GestionFicheController extends Controller
 
     public function erreur($message)
     {
-        dump($message);
         return $this->render('GestionFraisBundle:Erreur:erreur.html.twig', array(
             'message' => $message,
         ));

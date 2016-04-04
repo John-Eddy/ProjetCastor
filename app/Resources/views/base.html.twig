@@ -14,6 +14,8 @@
     <link href="{{ asset('Css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('Css/form.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
     <link href="{{ asset('Css/simple-sidebar.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+    <link href="{{ asset('Css/popup.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
+
 
 
 
@@ -58,7 +60,10 @@
                     </a>
                     <ul id="demo" class="collapse">
                         <li>
-                            <a href="#">Changer mot de passe</a>
+                            <a href="{{ path('visiteur_modifiermotdepasse') }}">Changer de mot de passe</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('visiteur_modifiercoordonnee') }}">Modifier cordonnées</a>
                         </li>
                         <li>
                             <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
@@ -93,6 +98,10 @@
 <script src="{{ asset('JavaScript/jquery.js') }}"></script>
 
 <script src="{{ asset('JavaScript/bootstrap.min.js') }}"></script>
+
+<script src="{{ asset('JavaScript/popup.js') }}"></script>
+
+
 <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();

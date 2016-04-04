@@ -31,14 +31,15 @@ class RechercherFicheFraisType extends AbstractType
         );
 
 
-        if ($options['type'] == 'comptable') {
+        if ($options['role'] == 'comptable') {
             $builder
-                ->add('Visiteur', 'entity', array(
+                ->add('utilisateur', 'entity', array(
                     'class' => 'GestionFraisBundle:Visiteur',
                     'choice_label' => 'username',
                     'required' => false,
-                    'placeholder' => 'Tous',
-                    'empty_data' => null
+                    'placeholder' => 'Utilisateur',
+                    'empty_data' => null,
+                    'label'=>' '
                 ));
         }
         $builder
@@ -46,14 +47,16 @@ class RechercherFicheFraisType extends AbstractType
             ->add('mois', 'choice', array(
                 'choices' => $mois,
                 'required' => false,
-                'placeholder' => 'Tous',
-                'empty_data' => null
+                'placeholder' => 'Mois',
+                'empty_data' => null,
+                'label'=>" "
             ))
             ->add('annee', 'choice', array(
                 'choices' => $annee,
                 'required' => false,
-                'placeholder' => 'Tous',
-                'empty_data' => null
+                'placeholder' => 'Année',
+                'empty_data' => null,
+                'label'=>' '
             ))
         ->add('Rechercher', 'submit');;
 
@@ -73,7 +76,7 @@ class RechercherFicheFraisType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'type' => 'utilisateur',
+            'role' => 'utilisateur',
         ));
     }
 }

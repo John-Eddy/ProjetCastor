@@ -14,55 +14,70 @@ class LigneFraisForfaitType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options['role'] == 'utilisateur')
+        if($options['operation'] == 'consulter')
         {
-            if($options['operation']=='modifier') {
-
-                $builder
-
-                    ->add('date', 'date')
-                    ->add('idetatlignefrais', 'entity', array(
-                        'class' => 'GestionFraisBundle:EtatLigneFrais',
-                        'choice_label' => 'libelleetatlignefrais',
-                        'disabled' => true,
-                        'label' => 'Etat'
-                    ))
-                    ->add('idfraisforfait', 'entity', array(
-                        'class' => 'GestionFraisBundle:FraisForfait',
-                        'choice_label' => 'libellefraisforfait',
-                        'required' => true,
-                        'placeholder' => 'Type de Frais',
-                        'empty_data' => null,
-                        'label' => 'Type de Frais'
-                    ))
-                    ->add('quantite', 'number')
-                    ->add('montant', 'text', array('disabled' => true))
-                    ->add('Enregistrer', 'submit');
-                ;
-            }
+            $builder
+                ->add('date', 'date', array('disabled' => true))
+                ->add('idfraisforfait', 'entity', array(
+                    'class' => 'GestionFraisBundle:FraisForfait',
+                    'choice_label' => 'libellefraisforfait',
+                    'disabled' => true,
+                    'label' => 'Type de Frais'
+                ))
+                ->add('quantite', 'text', array('disabled' => true,))
+                ->add('montant', 'text', array('disabled' => true))
+                ->add('idetatlignefrais', 'entity', array(
+                    'class' => 'GestionFraisBundle:EtatLigneFrais',
+                    'choice_label' => 'libelleetatlignefrais',
+                    'placeholder' => 'Etat',
+                    'label' => 'Etat',
+                    'disabled' => true,
+                ));
+        }
+        else if ($options['role'] == 'utilisateur')
+        {
+            $builder
+                ->add('date', 'date')
+                ->add('idetatlignefrais', 'entity', array(
+                    'class' => 'GestionFraisBundle:EtatLigneFrais',
+                    'choice_label' => 'libelleetatlignefrais',
+                    'disabled' => true,
+                    'label' => 'Etat'
+                ))
+                ->add('idfraisforfait', 'entity', array(
+                    'class' => 'GestionFraisBundle:FraisForfait',
+                    'choice_label' => 'libellefraisforfait',
+                    'required' => true,
+                    'placeholder' => 'Type de Frais',
+                    'empty_data' => null,
+                    'label' => 'Type de Frais'
+                ))
+                ->add('quantite', 'number')
+                ->add('montant', 'text', array('disabled' => true))
+                ->add('Enregistrer', 'submit');
+            ;
         }
         elseif($options['role'] == 'comptable') {
-            if ($options['operation'] == 'modifier') {
-                $builder
-                    
-                    ->add('date', 'date', array('disabled' => true))
-                    ->add('idfraisforfait', 'entity', array(
-                        'class' => 'GestionFraisBundle:FraisForfait',
-                        'choice_label' => 'libellefraisforfait',
-                        'disabled' => true,
-                        'label' => 'Type de Frais'
-                    ))
-                    ->add('quantite', 'text', array('disaled' => true,))
-                    ->add('montant', 'text', array('disabled' => true))
-                    ->add('idetatlignefrais', 'entity', array(
-                        'class' => 'GestionFraisBundle:EtatLigneFrais',
-                        'choice_label' => 'libelleetatlignefrais',
-                        'placeholder' => 'Etat',
-                        'label' => 'Etat',
-                        'required' => true
-                    ))
-                    ->add('Enregistrer', 'submit');
-            }
+
+            $builder
+
+                ->add('date', 'date', array('disabled' => true))
+                ->add('idfraisforfait', 'entity', array(
+                    'class' => 'GestionFraisBundle:FraisForfait',
+                    'choice_label' => 'libellefraisforfait',
+                    'disabled' => true,
+                    'label' => 'Type de Frais'
+                ))
+                ->add('quantite', 'text', array('disabled' => true,))
+                ->add('montant', 'text', array('disabled' => true))
+                ->add('idetatlignefrais', 'entity', array(
+                    'class' => 'GestionFraisBundle:EtatLigneFrais',
+                    'choice_label' => 'libelleetatlignefrais',
+                    'placeholder' => 'Etat',
+                    'label' => 'Etat',
+                    'required' => true
+                ))
+                ->add('Enregistrer', 'submit');
         }
     }
 

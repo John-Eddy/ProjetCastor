@@ -8,6 +8,9 @@
 
 namespace GestionFraisBundle\Controller;
 
+use DateTime;
+use GestionFraisBundle\Form\LigneFraisForfaitType;
+use GestionFraisBundle\Form\LigneFraisHorsForfaitType;
 use GestionFraisBundle\Form\RechercherFicheFraisType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,109 +18,212 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ComptableController extends Controller
 {
-    public function indexAction(Request $request){
-
+    public function RerchercherFicheFraisAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
 
+        //id etat cloturé
+        $idEtatLigneFraisCloturer = $this->container->getParameter('idetatfichefraiscloture');
+
         //recupération des  fiches frais triées par mois
-        $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findAll(
-            array('datecreation' => 'DESC')
+        $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findBy(
+            array('idetatfichefrais'=> $em->getRepository('GestionFraisBundle:EtatFicheFrais')->find($idEtatLigneFraisCloturer)),
+            array('datemodif' => 'DESC')
         );
 
+        $form = $this->createForm(new RechercherFicheFraisType(), null, array('role'=> 'comptable'));
 
-
-        // À partir du formBuilder, on génère le formulaire
-        $form = $this->createForm(
-            new RechercherFicheFraisType(),
-            null,
-            array(
-                'type'=> 'comptable'
-            ));
-
-        // On fait le lien Requête <-> Formulaire
         $form->handleRequest($request);
 
-        // À partir de maintenant, la variable $form contient les valeurs entrées dans le formulaire par le visiteur
-
-        // On vérifie que les valeurs entrées sont correctes
         if ($form->isValid())
         {
-            //On récupere la date du formulaire et on la transforme en chaine de caractères
-
-            $visiteurForm = $form->getData()['Visiteur'];
-
+            $visiteurForm = $form->getData()['utilisateur'];
+            $mois = $form->getData()['mois'];
+            $annee = $form->getData()['annee'];
             $criteres = array();
+
             if($visiteurForm){
                 $criteres['idvisiteur' ]= $visiteurForm->getId();
             }
             if($form->getData()['mois'])
             {
-                $dateForm = date_format($form->getData()['mois'], 'Y-m-d H:i:s');
-                $mois = substr($dateForm, 5, 2);
-                $annee =substr($dateForm, 0, 4); // on extrait le mois et l'année de la chaine et on les mets au format mmaaaa
                 $criteres['mois']= $mois;
-                $criteres['annee'] =$annee;
-
             }
+            if($form->getData()['annee'])
+            {
+                $criteres['annee']= $annee;
+            }
+
             //recupération de la  fiches frais corespondant au mois
-            $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findby($criteres);
+            $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findby(
+                $criteres,
+                array('datemodif' => 'DESC')
+            );
 
-          /*  //verification de l'éxistance de la fiche de frais :
-            if (!$uneFicheFrais) {
-                throw $this->createNotFoundException('Fiche introuvable.');
-            }
 
-            // On redirige vers la fiche frais
-            return $this->redirect($this->generateUrl('ficheFrais_afficher', array('id' => $uneFicheFrais->getId())));
-          */
-            return $this->render('GestionFraisBundle:Comptable:index.html.twig', array(
-                'lesFicheFrais' => $lesFicheFrais,
-                'form' => $form->createView(),
-            ));
+                return $this->render('GestionFraisBundle:Utilisateur/fichefrais:rechercher.html.twig', array(
+                    'lesFicheFrais' => $lesFicheFrais,
+                    'form' => $form->createView(),
+                    'role' => 'comptable'
+                ));
+
         }
+        return $this->render('GestionFraisBundle:Utilisateur/fichefrais:rechercher.html.twig', array(
+            'lesFicheFrais' => $lesFicheFrais,
+            'form' => $form->createView(),
+            'role' => 'comptable'
+        ));
+
     }
-    /*
-     * Affiche la fiche frais correspondant au parametres fournis avec la possibilité de modifier l'etat des lignes et de la fiche
-     *
-     */
-    public function validerFicheAction($idFicheFrais)
+    public function ValiderFicheFraisAction($idFicheFrais)
+    {
+        $em = $this->getDoctrine()->getManager();//connexion bdd
+
+        $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->find($idFicheFrais);
+        //verification de l'éxistance de la fiche de frais :
+        if (!$uneFicheFrais) {
+            throw $this->createNotFoundException('Cette fiche n\'existe pas.');
+        }
+        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+            'uneFicheFrais' => $uneFicheFrais,
+            'role'=>'comptable',
+            'operation' => 'valider'
+        ));
+    }
+
+    public function ConsulterFicheFraisAction($idFicheFrais)
     {
         $em = $this->getDoctrine()->getManager();
-
         //recupération de la fiche frais
         $uneFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findOneBy(array(
             'id' => $idFicheFrais));
 
         //verification de l'éxistance de la fiche de frais :
         if (!$uneFicheFrais) {
-            throw $this->createNotFoundException('Fiche introuvable.');
+            throw $this->createNotFoundException('Cette fiche n\'existe pas.');
         }
 
-        //recupération des ligne de frais forfait de cette fiche
-        $lesLignesFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(
-            array(
-                'idfichefrais' => $idFicheFrais,
-            )
-        );
-
-        //recupération des ligne de frais hors forfait de cette fiche
-        $lesLignesFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findBy(
-            array(
-                'idfichefrais' => $idFicheFrais,
-            )
-        );
-
-        //retourne la vue validé fiche
-        return $this->render('GestionFraisBundle:Comptable/FicheFrais:valider.html.twig', array(
+        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
             'uneFicheFrais' => $uneFicheFrais,
-            'lesLignesFraisForfait' => $lesLignesFraisForfait,
-            'lesLignesFraisHorsForfait' => $lesLignesFraisHorsForfait,
+            'role'=>'comptable',
+            'operation' => 'consulter'
         ));
     }
 
-    public function validerLigneFraisForfait($idLigneFraisForfait)
+    public function cloturerFicheFraisAction()
     {
-        throw $this->createNotFoundException('Ligne Frais GG Liza.');
+        $idEtatLigneFraisCloturer = $this->container->getParameter('idetatfichefraiscloture');
+        $em = $this->getDoctrine()->getManager();
+        $mois =null;
+        $annee = null;
+        if(date('m') == 1 ){
+            $mois = 12;
+            $annee = strval(date('Y')-1);
+        }
+        else{
+            $mois=date('m')-1;
+            $annee=strval(date('Y'));
+        }
+        if($mois <10 )$mois = "0".strval($mois);
+
+        else$mois=strval($mois);
+
+        //recupération des  fiches frais triées par mois
+        $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findBy(array(
+            'mois' => $mois,
+            'annee'=> $annee
+        ));
+        foreach($lesFicheFrais as $uneFicheFrais)
+        {
+            $uneFicheFrais->setIdetatfichefrais($em->getRepository('GestionFraisBundle:EtatFicheFrais')->find($idEtatLigneFraisCloturer));
+            $em->persist($uneFicheFrais);
+
+        }
+        $em->flush();
+        return $this->generateUrl('comptable_index');
     }
 
-}
+    public function ligneFraisForfaitAction(Request $request, $idLigneFraisForfait, $operation)
+    {
+        //Connection BDD
+        $em = $this->getDoctrine()->getManager();
+
+        if($operation != 'consulter' &&  $operation != 'valider'){
+            throw $this->createNotFoundException('Erreur '.$operation);
+        }
+        else $uneligneFraisForfait = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->find($idLigneFraisForfait);
+
+
+        $form = $this->createForm(new ligneFraisForfaitType(), $uneligneFraisForfait, array('role'=> 'comptable','operation' => $operation));
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $gestionaireFiche = $this->container->get('gestion_frais.gestionairefiche');//recuperation du service gestionaire de fiche
+            $uneligneFraisForfait->getIdfichefrais()->setMontantvalide($gestionaireFiche->calculerMontantValider($uneligneFraisForfait->getIdfichefrais()));
+            $uneligneFraisForfait->getIdfichefrais()->setDatemodif(new DateTime());
+            $em->persist($uneligneFraisForfait);//On enregistre la ligne la ligne frais
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
+
+            return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+                'uneFicheFrais' => $uneligneFraisForfait->getIdfichefrais(),
+                'role'=>'comptable',
+                'operation' => $operation
+            ));
+        }
+        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+            'form' => $form->createView(),
+            'nomForm'=> "Frais forfaitaire",
+            'role'=>'comptable',
+            'operation' => $operation,
+            'uneFicheFrais' => $uneligneFraisForfait->getIdfichefrais()
+        ));
+
+    }
+
+    public function ligneFraisHorsForfaitAction(Request $request, $idLigneFraisHorsForfait, $operation)
+    {
+        //Connection BDD
+        $em = $this->getDoctrine()->getManager();
+
+        if($operation != 'consulter' &&  $operation != 'valider'){
+            throw $this->createNotFoundException('Erreur '.$operation);
+        }
+        else $uneligneFraisHorsForfait = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->find($idLigneFraisHorsForfait);
+
+
+        $form = $this->createForm(new ligneFraisHorsForfaitType(), $uneligneFraisHorsForfait, array('role'=> 'comptable','operation' => $operation));
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $gestionaireFiche = $this->container->get('gestion_frais.gestionairefiche');//recuperation du service gestionaire de fiche
+            //calcul du montant valide
+            $uneligneFraisHorsForfait->getIdfichefrais()->setMontantvalide($gestionaireFiche->calculerMontantValider($uneligneFraisHorsForfait->getIdfichefrais()));
+            $uneligneFraisHorsForfait->getIdfichefrais()->setDatemodif(new DateTime());
+            $em->persist($uneligneFraisHorsForfait);//On enregistre la ligne la ligne frais
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
+
+            return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+                'uneFicheFrais' => $uneligneFraisHorsForfait->getIdfichefrais(),
+                'role'=>'comptable',
+                'operation' => $operation
+            ));
+        }
+        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+            'form' => $form->createView(),
+            'nomForm'=> "Frais forfaitaire",
+            'role'=>'comptable',
+            'operation' => $operation,
+            'uneFicheFrais' => $uneligneFraisHorsForfait->getIdfichefrais()
+        ));
+
+    }
+
+
+
+
+  }

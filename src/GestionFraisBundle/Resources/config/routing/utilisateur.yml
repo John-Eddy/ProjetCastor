@@ -6,22 +6,23 @@ utilisateur_saisirFrais:
     path:     /saisirfrais
     defaults: { _controller: "GestionFraisBundle:Utilisateur:saisirFrais" }
 
-utilisateur_rechercherFiche:
+utilisateur_rechercherfichefrais:
     path:     /rechercherfiche
     defaults: { _controller: "GestionFraisBundle:Utilisateur:RercherFicheFrais" }
 
-utilisateur_afficherFiche:
-    path:    /afficherfiche/{id}
-    defaults: { _controller: "GestionFraisBundle:Utilisateur:AfficherFicheFrais" }
+utilisateur_consulterfichefrais:
+    path:    /fichefrais/consulter/{idFicheFrais}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:ConsulterFicheFrais" }
 
-gestion_frais_lignefraishorsforfait:
-    resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/LigneFraisHorsForfait.yml"
-    prefix:   /lignefraishorsforfait
+utilisateur_lignefraisforfait:
+    path:    /lignefraisforfait/{operation}/{idLigneFraisForfait}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:ligneFraisForfait" }
 
-gestion_frais_lignefraisforfait:
-    resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/LigneFraisForfait.yml"
-    prefix:   /lignefraisforfait
+utilisateur_lignefraishorsforfait:
+    path:    /lignefraishorsforfait/{operation}/{idLigneFraisHorsForfait}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:ligneFraisHorsForfait" }
 
-utilisateur_fichefrais:
-     resource: "@GestionFraisBundle/Resources/config/routing/utilisateur/fichefrais.yml"
-     prefix:   /fichefrais
+
+
+
+

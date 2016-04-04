@@ -186,4 +186,21 @@ class Visiteur extends BaseUser
     {
         return $this->id;
     }
+
+    public function getRoleStr(){
+
+        if(in_array('ROLE_ADMIN',$this->getRoles()))
+        {
+            return 'administrateur';
+        }
+
+        else if (in_array('ROLE_COMPTABLE',$this->getRoles()))
+        {
+            return 'comptable';
+        }
+        else
+        {
+            return"utilisateur";
+        }
+    }
 }

@@ -45,7 +45,6 @@ class LigneFraisHorsForfait
      */
     private $libellelignehorsforfait;
 
-
     /**
      * @var integer
      *
@@ -78,7 +77,7 @@ class LigneFraisHorsForfait
     /**
      * @var \GestionFraisBundle\Entity\Justificatif
      *
-     *  @ORM\OneToOne(targetEntity="GestionFraisBundle\Entity\Justificatif", cascade={"persist"})
+     *  @ORM\OneToOne(targetEntity="GestionFraisBundle\Entity\Justificatif")
      * 
      */
     public $justificatif;

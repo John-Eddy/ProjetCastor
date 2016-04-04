@@ -28,3 +28,13 @@ lignefraishorsforfait_delete:
     path:     /delete/{id}
     defaults: { _controller: "GestionFraisBundle:LigneFraisHorsForfait:delete" }
     methods:  [POST, DELETE]
+
+    defaults: { _controller: "GestionFraisBundle:Comptable:consulterLigneFraisForfait" }
+
+comptable_validerlignefraishorsforfait:
+    path:    /lignefraishorsforfait/valider/{idLigneFraisHorsForfait}
+    defaults: { _controller: "GestionFraisBundle:Comptable:validerLigneFraisHorsForfait" }
+
+comptable_consulterlignefraishorsforfait:
+    path:    /lignefraishorsforfait/consulter/{idLigneFraisHorsForfait}
+    defaults: { _controller: "GestionFraisBundle:Comptable:consulterLigneFraisHorsForfait" }

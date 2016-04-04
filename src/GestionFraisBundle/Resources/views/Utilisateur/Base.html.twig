@@ -1,22 +1,30 @@
-{% extends '::base.html.twig' %}
 
-{% block title %}{% endblock %}
 
-    {% block elementNavbar %}
-        <li>
-            <a href="{{ path('utilisateur_saisirFrais')}}">Acceuil</a>
-        </li>
-        <li>
-            <a href="{{ path('lignefraisforfait_ajouter')}}">Saisir frais forfaitaire</a>
-        </li>
-        <li>
-            <a href="{{ path('lignefraishorsforfait_ajouter')}}">Saisir frais non forfaitaire</a>
-        </li>
-        <li>
-            <a href="{{ path('utilisateur_rechercherFiche')}}">Rechercher fiche</a>
-        </li>
+{% if role == 'utilisateur' %}
+    <li>
+        <a href="{{ path('utilisateur_saisirFrais')}}">Acceuil</a>
+    </li>
+    <li>
+        <a href="{{ path('utilisateur_lignefraisforfait',{'operation' : 'ajouter', 'idLigneFraisForfait' : 0}) }}">Saisir frais forfaitaire</a>
+    </li>
+    <li>
+        <a href="{{ path('utilisateur_lignefraishorsforfait',{'operation' :'ajouter', 'idLigneFraisHorsForfait' : 0}) }}">Saisir frais non forfaitaire</a>
+    </li>
+    <li>
+        <a href="{{ path('utilisateur_rechercherfichefrais')}}">Rechercher fiche</a>
+    </li>
+{% endif %}
 
-    </header>
-{% endblock %}
+{% if role == 'comptable' %}
+    <li>
+        <a href="{{ path('comptable_index')}}">Acceuil</a>
+    </li>
+    <li>
+        <a href="{{ path('comptable_rechercherfichefrais')}}">Rechercher fiche</a>
+    </li>
+    <li>
+        <a  href="{{ path('comptable_fichefraiscloturer') }}" onclick="return confirm('Etes vous sûre de vouloir cloturer ces fiche ?')">Cloturer fiches mois précedent</a>
+    </li>
+{% endif %}
 
-{%  block body %}{% endblock %}
+

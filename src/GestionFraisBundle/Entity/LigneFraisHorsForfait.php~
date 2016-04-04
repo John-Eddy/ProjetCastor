@@ -3,6 +3,7 @@
 namespace GestionFraisBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * LigneFraisHorsForfait
@@ -23,6 +24,11 @@ class LigneFraisHorsForfait
      * @var float
      *
      * @ORM\Column(name="montant", type="float", precision=10, scale=0, nullable=false)
+     *
+     *@Assert\Range(
+     *     min = 0,
+     *     minMessage = "Le montant doit être supérieur a 0.",
+     *     )
      */
     private $montant;
 
@@ -30,15 +36,14 @@ class LigneFraisHorsForfait
      * @var string
      *
      * @ORM\Column(name="libelleLigneHorsForfait", type="string", length=255, nullable=false)
+     *
+     *@Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Le libellé ne doit pas depasser les 255 caractères"
+     * )
+     *
      */
     private $libellelignehorsforfait;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="justificatif", type="string", length=255, nullable=false)
-     */
-    private $justificatif;
 
     /**
      * @var integer
@@ -69,6 +74,153 @@ class LigneFraisHorsForfait
      */
     private $idetatlignefrais;
 
+    /**
+     * @var \GestionFraisBundle\Entity\Justificatif
+     *
+     *  @ORM\OneToOne(targetEntity="GestionFraisBundle\Entity\Justificatif")
+     * 
+     */
+    public $justificatif;
 
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return LigneFraisHorsForfait
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set montant
+     *
+     * @param float $montant
+     *
+     * @return LigneFraisHorsForfait
+     */
+    public function setMontant($montant)
+    {
+        $this->montant = $montant;
+
+        return $this;
+    }
+
+    /**
+     * Get montant
+     *
+     * @return float
+     */
+    public function getMontant()
+    {
+        return $this->montant;
+    }
+
+    /**
+     * Set libellelignehorsforfait
+     *
+     * @param string $libellelignehorsforfait
+     *
+     * @return LigneFraisHorsForfait
+     */
+    public function setLibellelignehorsforfait($libellelignehorsforfait)
+    {
+        $this->libellelignehorsforfait = $libellelignehorsforfait;
+
+        return $this;
+    }
+
+    /**
+     * Get libellelignehorsforfait
+     *
+     * @return string
+     */
+    public function getLibellelignehorsforfait()
+    {
+        return $this->libellelignehorsforfait;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idfichefrais
+     *
+     * @param \GestionFraisBundle\Entity\FicheFrais $idfichefrais
+     *
+     * @return LigneFraisHorsForfait
+     */
+    public function setIdfichefrais(\GestionFraisBundle\Entity\FicheFrais $idfichefrais = null)
+    {
+        $this->idfichefrais = $idfichefrais;
+
+        return $this;
+    }
+
+    /**
+     * Get idfichefrais
+     *
+     * @return \GestionFraisBundle\Entity\FicheFrais
+     */
+    public function getIdfichefrais()
+    {
+        return $this->idfichefrais;
+    }
+
+    /**
+     * Set idetatlignefrais
+     *
+     * @param \GestionFraisBundle\Entity\EtatLigneFrais $idetatlignefrais
+     *
+     * @return LigneFraisHorsForfait
+     */
+    public function setIdetatlignefrais(\GestionFraisBundle\Entity\EtatLigneFrais $idetatlignefrais = null)
+    {
+        $this->idetatlignefrais = $idetatlignefrais;
+
+        return $this;
+    }
+
+    /**
+     * Get idetatlignefrais
+     *
+     * @return \GestionFraisBundle\Entity\EtatLigneFrais
+     */
+    public function getIdetatlignefrais()
+    {
+        return $this->idetatlignefrais;
+    }
+
+    public function getJustificatif()
+    {
+        return $this->justificatif;
+    }
+
+    public function setJustificatif($justificatif)
+    {
+        $this->justificatif = $justificatif;
+
+        return $this;
+    }
 }
-

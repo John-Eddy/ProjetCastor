@@ -9,6 +9,7 @@ namespace GestionFraisBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity
@@ -29,6 +30,17 @@ class Justificatif
      * @Assert\NotBlank
      */
     public $name;
+
+
+    /**
+     * @var \GestionFraisBundle\Entity\LigneFraisHorsForfait
+     *
+     * @ORM\OneToOne(targetEntity="GestionFraisBundle\Entity\LigneFraisHorsForfait")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idlignefrais", referencedColumnName="id")
+     * })
+     */
+    private $idlignefrais;
     
 
     /**
@@ -64,6 +76,45 @@ class Justificatif
     {
         return $this->file;
     }
+    /**
+     * @return mixed
+     */
+    public function getIdlignefrais()
+    {
+        return $this->idlignefrais;
+    }
+
+    /**
+     * @param mixed $idlignefrais
+     */
+    public function setIdlignefrais($idlignefrais)
+    {
+        $this->idlignefrais = $idlignefrais;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
 
     public function getAbsolutePath()
     {
@@ -89,8 +140,35 @@ class Justificatif
     protected function getUploadDir()
     {
         // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads/justificatifs';
+        // 'uploads/justificatifs/annee/mois/nomVisiteur'
+        return 'uploads/justificatifs/'.$this->getIdlignefrais()->getIdfichefrai()->getAnnee().'/'.$this->getIdlignefrais()->getIdfichefrai()->getMois().'/'.$this->getIdlignefrais()->getIdfichefrai()->getIdvisiteur()->getNom().'/';
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Justificatif
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     *
+     * @return Justificatif
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
     }
 }
-?>

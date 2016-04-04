@@ -44,30 +44,7 @@ div.bandeau-small
 	z-index: 98;
 }
 
- #form_mois_day
- {
-	 visibility: hidden;
-	 width: 0px;
- }
-.lien-fiche {
-	display: block;
-	color: black;
-	border: 1px solid #DDDDDD;
-	padding: 10px 15px;
-	border-width: 1px;
-	border-color: #DDDDDD;
-	border-radius: 4px;
-}
-.lien-fiche:hover
-{
-	background-color: #fcfcfc;
-	text-decoration: none;
-}
 
-.lien-tableau:hover
-{
-	background-color: #fcfcfc;
-}
 img
 {
 	height: 130px;
@@ -79,14 +56,8 @@ table, .table
 	margin-bottom: 0px;
 	margin-top: 0px;
 }
-#wrapper
-{
-	min-height:50px;
-}
 
-footer {
-	background-color: #101010;
-	color: #99979C;
-	text-align: center;
-	height: 50px;
+#form-connection{
+	margin-top: 10%;
+
 }

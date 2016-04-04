@@ -33,7 +33,17 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('roles')
+            ->add('roles','collection', array(
+                    'type' => 'choice',
+                    'options' => array(
+                        'choices' => array(
+                            'ROLE-UTILISATEUR' => 'Utilisateur',
+                            'ROLE_COMPTABLE' => 'Comptable',
+                            'ROLE_AMIN'=>'Administrateur'
+                        )
+                    )
+                )
+            )
             ->add('ville')
             ->add('cp')
             ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))

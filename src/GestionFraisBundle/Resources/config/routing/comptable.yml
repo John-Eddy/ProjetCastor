@@ -1,12 +1,30 @@
 comptable_index:
     path:     /
-    defaults: { _controller: "GestionFraisBundle:Comptable:Index" }
+    defaults: { _controller: "GestionFraisBundle:Comptable:RerchercherFicheFrais" }
 
-comptable_fichefrais:
-     resource: "@GestionFraisBundle/Resources/config/routing/comptable/fichefrais.yml"
-     prefix:   /fichefrais
+comptable_rechercherfichefrais:
+    path:      /fichefrais/rechercher
+    defaults: { _controller: "GestionFraisBundle:Comptable:RerchercherFicheFrais" }
+
+comptable_vaiderfichefrais:
+    path:    /fichefrais/valider/{idFicheFrais}
+    defaults: { _controller: "GestionFraisBundle:Comptable:validerFicheFrais" }
+
+comptable_consulterfichefrais:
+    path:    /fichefrais/consulter/{idFicheFrais}
+    defaults: { _controller: "GestionFraisBundle:Comptable:ConsulterFicheFrais" }
 
 
-gestion_frais_lignefraisforfait:
-    resource: "@GestionFraisBundle/Resources/config/routing/comptable/lignefraisforfait.yml"
-    prefix:   /ligneFraisForfait
+comptable_lignefraisforfait:
+    path:    /lignefraisforfait/{operation}/{idLigneFraisForfait}
+    defaults: { _controller: "GestionFraisBundle:Comptable:ligneFraisForfait" }
+
+comptable_lignefraishorsforfait:
+    path:    /lignefraishorsforfait/{operation}/{idLigneFraisHorsForfait}
+    defaults: { _controller: "GestionFraisBundle:Comptable:ligneFraisHorsForfait" }
+
+
+comptable_fichefraiscloturer:
+    path:    /fichefrais/cloturer
+    defaults: { _controller: "GestionFraisBundle:Comptable:cloturerFicheFrais" }
+

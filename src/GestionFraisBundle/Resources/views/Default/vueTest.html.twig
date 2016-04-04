@@ -1,5 +1,16 @@
 {% extends '::base.html.twig' %}
 {%  block body %}
 
-    {{ dump(file) }}
+
+    <div class="container">
+        <div class="col-lg-10 col-lg-offset-1 col-md-12 " id="contenu">
+         {{ form_start(form) }}
+         {{ form_errors(form) }}
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+
 {% endblock %}

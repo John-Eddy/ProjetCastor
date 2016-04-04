@@ -30,12 +30,16 @@ class GestionDateController extends Controller
 
     public function getMoisActuelStr()
     {
-        return (substr($this->dateEnCourse,5,2));// on extrais le jout de la chaine et on le convertis en entier
+        $mois =date('m');
+
+        if($mois<10) return'0'.strval($mois);
+
+        else return strval($mois);
     }
 
     public function getAnneeActuelleStr()
     {
-        return (substr($this->dateEnCourse,0,4));// on extrais le jout de la chaine et on le convertis en entier
+        return strval(date('Y'));
     }
     public function getJourActuelInt()
     {

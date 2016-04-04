@@ -18,6 +18,15 @@ gestion_frais_comptable:
     resource: "@GestionFraisBundle/Resources/config/routing/comptable.yml"
     prefix:   /comptable
 
-test:
-      path:     /test
-      defaults: { _controller: "GestionFraisBundle:Test:test" }
+gestion_frais_test:
+    path:     /test
+    defaults: { _controller: "GestionFraisBundle:Test:test" }
+
+visiteur_modifiermotdepasse:
+    path:    /modifiermotdepasse
+    defaults: { _controller: "GestionFraisBundle:Default:MofidierMotDePasse"}
+
+visiteur_modifiercoordonnee:
+    path:    /modifiercoordonnee
+    defaults: { _controller: "GestionFraisBundle:Default:MofidierCoordonnee"}
+

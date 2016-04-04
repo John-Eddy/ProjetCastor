@@ -13,3 +13,21 @@ lignefraishorsforfait_modifier:
 lignefraishorsforfait_supprimer:
     path:     /supprimer/{id}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:supprimerLigneFraisHorsForfait" }
+
+
+utilisateur_ajouterlignefraishorsforfait:
+    path:    /lignefraishorsforfait/ajouter
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:ajouterLigneFraisHorsForfait" }
+
+utilisateur_modifierlignefraishorsforfait:
+    path:    /lignefraishorsforfait/modifier/{idLigneFraisHorsForfait}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:modifierLigneFraisHorsForfait" }
+
+utilisateur_consulterlignefraishorsforfait:
+    path:    /lignefraishorsforfait/consulter/{idLigneFraisHorsForfait}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:consulterLigneFraisHorsForfait" }
+
+utilisateur_suprimerlignefraishorsforfait:
+    path:    /lignefraishorsforfait/suprimer/{idLigneFraisHorsForfait}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:suprimerLigneFraisHorsForfait" }
+
