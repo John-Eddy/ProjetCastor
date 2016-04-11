@@ -61,8 +61,6 @@ class GestionFicheController extends Controller
         $montantValide=0;
         $idEtatLigneFraisValider = $this->container->getParameter('idetatlignefraisvalider');
 
-        foreach($uneFicheFrais->getLignesFraisForfaits() as $uneLigneFraisForfait)
-        {
             foreach($uneFicheFrais->getLignesFraisForfaits() as $uneLigneFraisForfait){
                 if($uneLigneFraisForfait->getIdetatlignefrais()->getId() == $idEtatLigneFraisValider)
                 {
@@ -75,7 +73,7 @@ class GestionFicheController extends Controller
                     $montantValide += $uneLigneFraisHorsForfait->getMontant();
                 }
             }
-        }
+
         return $montantValide;
     }
     /**
