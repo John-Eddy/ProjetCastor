@@ -140,7 +140,7 @@ class ComptableController extends Controller
 
         }
         $em->flush();
-        return $this->generateUrl('comptable_index');
+        return $this->redirectToRoute($this->generateUrl('comptable_index'));
     }
 
     public function ligneFraisForfaitAction(Request $request, $idLigneFraisForfait, $operation)

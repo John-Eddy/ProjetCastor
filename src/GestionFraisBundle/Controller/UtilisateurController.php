@@ -117,8 +117,8 @@ class UtilisateurController extends Controller
             'role'=>'utilisateur',
             'operation' => 'consulter'
         ));
-
     }
+    
 
     public function ligneFraisForfaitAction(Request $request, $operation,  $idLigneFraisForfait)
     {
@@ -242,4 +242,90 @@ class UtilisateurController extends Controller
 
     }
 
+    public function ligneFraisAction(Request $request, $type, $operation, $idLigneFrais)
+    {
+        //Connection BDD
+        $em = $this->getDoctrine()->getManager();
+
+        if($operation != 'consulter' && $operation != 'ajouter' && $operation != 'suprimer' && $operation != 'modifier'){
+            throw $this->createNotFoundException();
+        }
+        if($type != 'fraisforfait' && $type != 'fraishorsforfait'){
+            throw $this->createNotFoundException();
+        }
+        if($operation == 'ajouter')
+        {
+            if($type == 'fraisforfait')
+            {
+                $uneligneFrais = new LigneFraisForfait();
+                $formType =  new ligneFraisForfaitType();
+                $nomForm = 'Frais forfaitaire';
+            }
+            else {
+                $uneligneFrais = new LigneFraisHorsForfait();
+                $formType =  new ligneFraisHorsForfaitType();
+                $nomForm = 'Frais non forfaitaire';
+            }
+            $idEtatLigneFraisDefaut = $this->container->getParameter('idEtatLigneFraisDefaut');
+            $gestionaireFiche = $this->container->get('gestion_frais.gestionairefiche');//recuperation du service gestionaire de fiche
+            //on récupere l'etatLigneFrais "Enregistré"
+            $unEtatLigneFrais = $em->getRepository('GestionFraisBundle:EtatLigneFrais')->findOneById($idEtatLigneFraisDefaut);
+            $uneligneFrais->setIdfichefrais($gestionaireFiche->getDerniereFicheFraisValide($this->getUser(),$em));//On attribut cette ligne à la fiche frais
+            $uneligneFrais->setIdetatlignefrais($unEtatLigneFrais);//On lui donne l'etat enregistré
+            $uneligneFrais->setDate(new \DateTime());//on lui passe la date du jour
+        }
+        else{
+            $idFicheigneFraisDefaut = $this->container->getParameter('idetatfichefraisdefaut');//id etat valider fichefrais
+            if($type == 'fraisforfait') {
+                $uneligneFrais = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->find($idLigneFrais);
+                $formType =  new ligneFraisHorsForfaitType();
+            }
+            else {
+                $uneligneFrais = $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->find($idLigneFrais);
+                $formType =  new ligneFraisForfaitType();
+            }
+        }
+        if($operation == 'suprimer'){
+            $uneligneFrais->getIdfichefrais()->setDatemodif(new DateTime());//on recupere la fiche frais de cette ligne
+            $em->remove($uneligneFrais);//on supprime la ligneFraisforfait
+            $em->flush();
+            return $this->redirect($this->generateUrl('utilisateur_saisirFrais'));
+        }
+
+        if($operation != 'consulter'){
+            $operation= 'modifier';
+        }
+        $form = $this->createForm($formType, $uneligneFrais, array('role'=> 'utilisateur','operation' => $operation));
+        $form->handleRequest($request);
+
+
+        if ($form->isValid()) {
+
+            if($type == 'fraisforfait' ){
+                $montantLigne = $uneligneFrais->getQuantite()*$uneligneFrais->getIdfraisforfait()->getMontant();
+                $uneligneFrais->setMontant($montantLigne);
+            }
+
+            $uneligneFrais->getIdfichefrais()->setDatemodif(new DateTime());
+            $em->persist($uneligneFrais);//On enregistre la ligne la ligne frais
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
+
+            // On redirige vers la fiche frais
+            return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+                'uneFicheFrais' => $uneligneFrais->getIdfichefrais(),
+                'role'=>'utilisateur',
+                'operation' => $operation,
+            ));
+        }
+        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+            'form' => $form->createView(),
+            'nomForm'=> $nomForm,
+            'role'=>'utilisateur',
+            'operation' => $operation,
+            'uneFicheFrais' => $uneligneFrais->getIdfichefrais()
+        ));
+
+    }
 }

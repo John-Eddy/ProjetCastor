@@ -1,0 +1,9 @@
+administrateur_index:
+      path:     /
+      defaults: { _controller: "GestionFraisBundle:Administrateur:Index" }
+
+admministrateur_visiteur:
+    path:    visiteur/{operation}/{idVisiteur}
+    defaults: { _controller: "GestionFraisBundle:Administrateur:Visiteur" }
+
+

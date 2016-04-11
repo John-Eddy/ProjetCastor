@@ -27,4 +27,10 @@
     </li>
 {% endif %}
 
+{% if role == 'administrateur' %}
+    <li>
+        <a href="{{ path('administrateur_index')}}">Acceuil</a>
+    </li>
+
+{% endif %}
 

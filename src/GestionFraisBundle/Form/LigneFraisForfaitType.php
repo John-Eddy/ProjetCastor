@@ -45,8 +45,7 @@ class LigneFraisForfaitType extends AbstractType
                     'label' => 'Etat'
                 ))
                 ->add('idfraisforfait', 'entity', array(
-                    'class' => 'GestionFraisBundle:FraisForfait',
-                    'choice_label' => 'libellefraisforfait',
+                    'class' => 'GestionFraisBundle:FraisForfait',    'choice_label' => 'libellefraisforfait',
                     'required' => true,
                     'placeholder' => 'Type de Frais',
                     'empty_data' => null,

@@ -18,6 +18,10 @@ gestion_frais_comptable:
     resource: "@GestionFraisBundle/Resources/config/routing/comptable.yml"
     prefix:   /comptable
 
+gestion_frais_administrateur:
+    resource: "@GestionFraisBundle/Resources/config/routing/administrateur.yml"
+    prefix:   /administrateur
+
 gestion_frais_test:
     path:     /test
     defaults: { _controller: "GestionFraisBundle:Test:test" }

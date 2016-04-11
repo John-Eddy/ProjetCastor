@@ -13,11 +13,9 @@ class DefaultController extends Controller
     {
         $roles = $this->getUser()->getRoles();
 
-        echo(serialize($roles));
-
         if(in_array('ROLE_ADMIN',$roles))
         {
-            return $this->redirectToRoute('comptable_index');
+            return $this->redirectToRoute('administrateur_index');
         }
 
         else if (in_array('ROLE_COMPTABLE',$roles))

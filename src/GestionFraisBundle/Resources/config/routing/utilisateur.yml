@@ -22,6 +22,10 @@ utilisateur_lignefraishorsforfait:
     path:    /lignefraishorsforfait/{operation}/{idLigneFraisHorsForfait}
     defaults: { _controller: "GestionFraisBundle:Utilisateur:ligneFraisHorsForfait" }
 
+utilisateur_lignefrais:
+    path:    ligne/{type}/{operation}/{idLigneFrais}
+    defaults: { _controller: "GestionFraisBundle:Utilisateur:ligneFrais" }
+
 
 
 
