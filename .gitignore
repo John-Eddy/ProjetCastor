@@ -2,3 +2,4 @@
 
 app/cache/dev
 app/cache/prod
+app\logs
