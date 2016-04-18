@@ -1,0 +1,34 @@
+{% extends 'GestionFraisBundle::rechercher.html.twig' %}
+
+{% block title %}Rechercher visiteur{% endblock %}
+{% block titrePage %}Rechercher visiteur{% endblock %}
+{% block contenue %}
+
+    <h4>Visiteur :</h4>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th><p>Nom </p></th>
+            <th><p>Prenom</p></th>
+            <th><p>TypeVisiteur</p></th>
+            <th><p>Action</p></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for unVisiteur in lesVisiteurs %}
+            <tr>
+                <td><p>{{ unVisiteur.nom}}</p></td>
+                <td><p>{{ unVisiteur.prenom}}</p></td>
+                <td><p>{{ unVisiteur.getRoleStr }}</p></td>
+                <td>
+                    <a href="{{ path( 'admministrateur_visiteur',{'operation':'consulter', 'idVisiteur': unVisiteur.id}) }}">Consulter</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr><p>Aucun visiteur trouvées</p></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

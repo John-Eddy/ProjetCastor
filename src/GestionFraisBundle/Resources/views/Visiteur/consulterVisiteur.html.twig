@@ -1,0 +1,52 @@
+
+{% extends 'GestionFraisBundle::consulter.html.twig' %}
+
+
+{% block title %}Consulter visiteur{% endblock  %}
+{% block titrePage %}{{ unVisiteur.prenom }} {{  unVisiteur.nom }}{% endblock %}
+
+
+     {% block contenue %}
+
+         <table class="table table-bordered">
+             <thead>
+             <tr>
+                 <th>Nom</th>
+                 <th>Prenom</th>
+                 <th>Type de visiteur</th>
+                 <th>Adresse</th>
+                 <th>Code postal</th>
+                 <th>Ville</th>
+                 <th>E-mail</th>
+                 <th>Derniere conexion</th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr>
+                 <td>{{ unVisiteur.nom }}</td>
+                 <td>{{ unVisiteur.prenom }}</td>
+                 <td>{{ unVisiteur.getRoleStr() }}</td>
+                 <td>{{ unVisiteur.adresse }}</td>
+                 <td>{{ unVisiteur.cp }}</td>
+                 <td>{{ unVisiteur.ville }}</td>
+                 <td>{{ unVisiteur.email}}</td>
+                 <td>{{ unVisiteur.lastLogin|date("d/m/Y") }}</td>
+
+             </tr>
+
+             </tbody>
+         </table>
+         <div class="bandeau-small"></div>
+
+            <a href="{{ path( 'admministrateur_visiteur',{'operation':'consulter', 'idVisiteur': unVisiteur.id}) }}" class="btn btn-default">modifier</a>
+            <a
+                    class="btn btn-default"
+                    href="{{ path( 'admministrateur_visiteur',{'operation':'suprimer', 'idVisiteur': unVisiteur.id}) }}"
+                    onclick="return confirm('Etes vous sûre de vouloir supprimer ce visiteur ?')"
+            >
+                <i class="glyphicon glyphicon-remove"></i>
+            </a>
+            <div class="bandeau"></div>
+
+
+{% endblock  %}

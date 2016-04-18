@@ -1,8 +1,0 @@
-fichefrais_index:
-    path:     /
-    defaults: { _controller: "GestionFraisBundle:Comptable:Index" }
-
-ficheFrais_valider:
-    path:     /valider/{idFicheFrais}
-    defaults: { _controller: "GestionFraisBundle:Comptable:ValiderFiche" }
-

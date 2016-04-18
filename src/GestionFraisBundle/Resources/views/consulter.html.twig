@@ -1,0 +1,19 @@
+
+{% extends '::base.html.twig' %}
+
+
+{% block title %}{% endblock  %}
+
+{%  block body %}
+    <div class="container-fluid">
+        <div class="col-lg-10 col-lg-offset-1 col-md-12 " id="contenu" >
+
+            <h2>{% block titrePage %}{% endblock %}</h2>
+
+
+            <div class="bandeau-small"></div>
+
+            {% block contenue %}{% endblock %}
+        </div>
+    </div>
+{% endblock  %}

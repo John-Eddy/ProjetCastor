@@ -1,0 +1,67 @@
+
+{% set role = app.user.roleStr %}
+{% if role == 'utilisateur' %}
+    <li>
+        <a href="{{ path('utilisateur_saisirFrais')}}">Acceuil</a>
+    </li>
+    <li>
+        <a href="{{ path('utilisateur_lignefraisforfait',{'operation' : 'ajouter', 'idLigneFraisForfait' : 0}) }}">Saisir frais forfaitaire</a>
+    </li>
+    <li>
+        <a href="{{ path('utilisateur_lignefraishorsforfait',{'operation' :'ajouter', 'idLigneFraisHorsForfait' : 0}) }}">Saisir frais non forfaitaire</a>
+    </li>
+    <li>
+        <a href="{{ path('utilisateur_rechercherfichefrais')}}">Rechercher fiche</a>
+    </li>
+{% endif %}
+
+{% if role == 'comptable' %}
+    <li>
+        <a href="{{ path('comptable_index')}}">Acceuil</a>
+    </li>
+    <li>
+        <a href="{{ path('comptable_rechercherfichefrais')}}">Rechercher fiche</a>
+    </li>
+    <li>
+        <a  href="{{ path('comptable_fichefraiscloturer') }}" onclick="return confirm('Etes vous sûre de vouloir cloturer ces fiche ?')">Cloturer fiches mois précedent</a>
+    </li>
+{% endif %}
+
+{% if role == 'administrateur' %}
+    <li>
+        <a href="{{ path('administrateur_index')}}">Acceuil</a>
+    </li>
+
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#visiteur">
+            <i class="fa fa-fw fa-arrows-v"></i> Visiteurs <i class="glyphicon glyphicon-cog "></i>
+            <i class="fa fa-fw fa-caret-down"></i>
+        </a>
+        <ul id="visiteur" class="collapse">
+            <li>
+                <a href="{{ path('admministrateur_recherchervisiteur') }}">Rechercher visiteur</a>
+            </li>
+            <li>
+                <a href="{{ path('admministrateur_visiteur', {'operation' :'ajouter', 'idVisiteur' : 0})}}">Ajouter visiteur</a>
+            </li>
+
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;" data-toggle="collapse" data-target="#fraisForfait">
+            <i class="fa fa-fw fa-arrows-v"></i> Frais forfaits <i class="glyphicon glyphicon-cog "></i>
+            <i class="fa fa-fw fa-caret-down"></i>
+        </a>
+        <ul id="fraisForfait" class="collapse">
+            <li>
+                <a href="{{ path('admministrateur_rechercherfraisforfait') }}">Rechercher frais forfait</a>
+            </li>
+            <li>
+                <a href="{{ path('admministrateur_fraisforfait', {'operation' :'ajouter', 'idFraisForfait' : 0})}}">Ajouter frais forfait</a>
+            </li>
+
+        </ul>
+    </li>
+
+{% endif %}
+

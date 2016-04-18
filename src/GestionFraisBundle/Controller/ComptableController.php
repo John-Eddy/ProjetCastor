@@ -64,14 +64,12 @@ class ComptableController extends Controller
                 return $this->render('GestionFraisBundle:Utilisateur/fichefrais:rechercher.html.twig', array(
                     'lesFicheFrais' => $lesFicheFrais,
                     'form' => $form->createView(),
-                    'role' => 'comptable'
                 ));
 
         }
         return $this->render('GestionFraisBundle:Utilisateur/fichefrais:rechercher.html.twig', array(
             'lesFicheFrais' => $lesFicheFrais,
             'form' => $form->createView(),
-            'role' => 'comptable'
         ));
 
     }
@@ -86,7 +84,6 @@ class ComptableController extends Controller
         }
         return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
             'uneFicheFrais' => $uneFicheFrais,
-            'role'=>'comptable',
             'operation' => 'valider'
         ));
     }
@@ -105,7 +102,6 @@ class ComptableController extends Controller
 
         return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
             'uneFicheFrais' => $uneFicheFrais,
-            'role'=>'comptable',
             'operation' => 'consulter'
         ));
     }
@@ -167,16 +163,14 @@ class ComptableController extends Controller
 
             $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
 
-            return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+            return $this->render('GestionFraisBundle:FicheFrais:modifierFicheFrais.html.twig', array(
                 'uneFicheFrais' => $uneligneFraisForfait->getIdfichefrais(),
-                'role'=>'comptable',
                 'operation' => $operation
             ));
         }
-        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+        return $this->render('GestionFraisBundle:FicheFrais:modifierFicheFrais.html.twig', array(
             'form' => $form->createView(),
             'nomForm'=> "Frais forfaitaire",
-            'role'=>'comptable',
             'operation' => $operation,
             'uneFicheFrais' => $uneligneFraisForfait->getIdfichefrais()
         ));
@@ -207,16 +201,14 @@ class ComptableController extends Controller
 
             $request->getSession()->getFlashBag()->add('notice', 'Frais bien enregistrée.');
 
-            return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+            return $this->render('GestionFraisBundle:FicheFrais:modifierFicheFrais.html.twig', array(
                 'uneFicheFrais' => $uneligneFraisHorsForfait->getIdfichefrais(),
-                'role'=>'comptable',
                 'operation' => $operation
             ));
         }
-        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+        return $this->render('GestionFraisBundle:FicheFrais:modifierFicheFrais.html.twig', array(
             'form' => $form->createView(),
             'nomForm'=> "Frais forfaitaire",
-            'role'=>'comptable',
             'operation' => $operation,
             'uneFicheFrais' => $uneligneFraisHorsForfait->getIdfichefrais()
         ));

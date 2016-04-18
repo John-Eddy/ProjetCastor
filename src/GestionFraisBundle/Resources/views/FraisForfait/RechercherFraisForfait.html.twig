@@ -1,0 +1,39 @@
+{% extends 'GestionFraisBundle::rechercher.html.twig' %}
+
+{% block title %}Rechercher frais forfait{% endblock %}
+{% block titrePage %}Rechercher frais forfait{% endblock %}
+{% block contenue %}
+
+    <h4>Frais forfaits :</h4>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th><p>Libelle </p></th>
+            <th><p>montant</p></th>
+
+            <th><p>Action</p></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for unFraisForfait in lesFraisForfaits %}
+            <tr>
+            <td><p>{{ unFraisForfait.libellefraisforfait }}</p></td>
+            <td><p>{{ unFraisForfait.montant }}</p></td>
+
+            <td>
+                <a href="{{ path( 'admministrateur_fraisforfait',{'operation':'modifier', 'idFraisForfait': unFraisForfait.id}) }}">Modifier</a>
+                <a
+                        href="{{ path( 'admministrateur_fraisforfait',{'operation':'suprimer', 'idFraisForfait': unFraisForfait.id}) }}"
+                        onclick="return confirm('Etes vous sûre de vouloir supprimer ce Frais forfait ?')"
+                >
+                    <i class="glyphicon glyphicon-remove"></i>
+                </a>
+            </td>
+
+        {% else %}
+            <tr><p>Aucune fiches trouvées</p></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

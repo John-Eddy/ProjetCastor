@@ -2,7 +2,4 @@ Gestion_frais_homepage:
     path:     /
     defaults: { _controller: "GestionFraisBundle:Default:Index" }
 
-gestion_frais_fichefrais:
-    resource: "@GestionFraisBundle/Resources/config/routing/Comptable/fichefrais.yml"
-    prefix:   /fichefrais
 

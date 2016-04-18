@@ -15,28 +15,31 @@ class VisiteurType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if($options['operation'] == 'ajouter')
-        {
+        if($options['role'] == 'administrateur') {
             $builder
                 ->add('nom')
-                ->add('prenom')
-                ->add('username')
-                ->add('roles','collection', array(
-                        'label'=>'Type visiteur',
-                        'required'=>true,
-                        'type' => 'choice',
-                        'options' => array(
-                            'label' => false,
-                            'choices' => array(
-                                'ROLE-UTILISATEUR' => 'Utilisateur',
-                                'ROLE_COMPTABLE' => 'Comptable',
-                                'ROLE_AMIN'=>'Administrateur'
-                            )
-                        )
-                    )
-                );
+                ->add('prenom');
+
         }
-        if($options['operation'] == 'changerCoordonnee' || $options['operation'] == 'ajouter')
+        if($options['operation']=='ajouter')
+        {
+            $builder
+                ->add('roles', 'collection', array(
+                'label' => 'Type visiteur',
+                'required' => true,
+                'type' => 'choice',
+                'options' => array(
+                    'label' => false,
+                    'choices' => array(
+                        'ROLE-UTILISATEUR' => 'Utilisateur',
+                        'ROLE_COMPTABLE' => 'Comptable',
+                        'ROLE_AMIN' => 'Administrateur'
+                    )
+                )
+            )
+        );
+        }
+        if($options['operation'] == 'changerCoordonnee' || $options['role'] == 'administrateur')
         {
             $builder
                 ->add('adresse')
@@ -44,18 +47,20 @@ class VisiteurType extends AbstractType
                 ->add('cp')
                 ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'));
         }
-        if($options['operation'] == 'changerMdp' || $options['operation'] == 'ajouter')
+        if($options['operation'] == 'changerMdp')
         {
             $builder
                 ->add('plainPassword', 'repeated', array(
-                'type' => 'password',
-                'options' => array('translation_domain' => 'FOSUserBundle'),
-                'first_options' => array('label' => 'form.password'),
-                'second_options' => array('label' => 'form.password_confirmation'),
-                'invalid_message' => 'fos_user.password.mismatch',
-            ));
+                    'type' => 'password',
+                    'options' => array('translation_domain' => 'FOSUserBundle'),
+                    'first_options' => array('label' => 'form.password'),
+                    'second_options' => array('label' => 'form.password_confirmation'),
+                    'invalid_message' => 'fos_user.password.mismatch',
+                ));
 
         }
+
+
         $builder
             ->add('Enregistrer', 'submit');
         ;
@@ -70,7 +75,8 @@ class VisiteurType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'GestionFraisBundle\Entity\Visiteur',
-            'operation' => 'ajouter'
+            'operation' => null,
+            'role' => null
         ));
     }
 

@@ -1,0 +1,40 @@
+{% extends 'GestionFraisBundle::rechercher.html.twig' %}
+
+{% block title %}Rechercher frais forfait{% endblock %}
+{% block titrePage %}Rechercher frais forfait{% endblock %}
+{% block contenue %}
+
+    <h4>Dernieres fiches :</h4>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th><p>Utilisateur </p></th>
+            <th><p>Mois</p></th>
+            <th><p>Date de modification</p></th>
+            <th><p>Etat</p></th>
+            <th><p>Action</p></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for uneFicheFrais in lesFicheFrais %}
+            <tr>
+                <td><p>{{ uneFicheFrais.idVisiteur.prenom }} {{ uneFicheFrais.idVisiteur.nom}}</p></td>
+                <td><p>{{ uneFicheFrais.mois }}/{{ uneFicheFrais.annee }}</p></td>
+                <td><p>{{ uneFicheFrais.dateModif|date("d/m/Y") }}</p></td>
+                <td><p>{{uneFicheFrais.idetatfichefrais.libelle }}</p></td>
+                {% if uneFicheFrais.idetatfichefrais.id == 2 and role == 'comptable'%}
+                    <td><a href="{{ path('comptable_vaiderfichefrais', {idFicheFrais: uneFicheFrais.id}) }}">Valider</a></td>
+                {% elseif uneFicheFrais.idetatfichefrais.id == 1 and role == 'utilisateur'%}
+                    <td><a href="{{ path('utilisateur_saisirFrais') }}">Saisir frais</a></td>
+                {% else %}
+                    <td><a href="{{ path(role~'_consulterfichefrais', {idFicheFrais: uneFicheFrais.id}) }}">Consulter</a></td>
+                {% endif %}
+            </tr>
+
+        {% else %}
+            <tr><p>Aucune fiches trouvées</p></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

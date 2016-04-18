@@ -1,9 +1,21 @@
 administrateur_index:
       path:     /
-      defaults: { _controller: "GestionFraisBundle:Administrateur:Index" }
+      defaults: { _controller: "GestionFraisBundle:Administrateur:Rercherchervisiteur" }
 
 admministrateur_visiteur:
     path:    visiteur/{operation}/{idVisiteur}
     defaults: { _controller: "GestionFraisBundle:Administrateur:Visiteur" }
 
 
+admministrateur_recherchervisiteur:
+    path:     /recherchervisiteur
+    defaults: { _controller: "GestionFraisBundle:Administrateur:Rercherchervisiteur" }
+
+admministrateur_fraisforfait:
+    path:    fraisforfait/{operation}/{idFraisForfait}
+    defaults: { _controller: "GestionFraisBundle:Administrateur:fraisforfait" }
+
+
+admministrateur_rechercherfraisforfait:
+    path:     /rechercherfraisforfait
+    defaults: { _controller: "GestionFraisBundle:Administrateur:Rerchercherfraisforfait" }
