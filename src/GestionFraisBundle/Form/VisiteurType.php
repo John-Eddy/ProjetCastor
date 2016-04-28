@@ -24,6 +24,14 @@ class VisiteurType extends AbstractType
         if($options['operation']=='ajouter')
         {
             $builder
+                ->add('username','text',array('required'=>true))
+                ->add('plainPassword', 'repeated', array(
+                    'type' => 'password',
+                    'options' => array('translation_domain' => 'FOSUserBundle'),
+                    'first_options' => array('label' => 'form.password'),
+                    'second_options' => array('label' => 'form.password_confirmation'),
+                    'invalid_message' => 'fos_user.password.mismatch',
+                ))
                 ->add('roles', 'collection', array(
                 'label' => 'Type visiteur',
                 'required' => true,

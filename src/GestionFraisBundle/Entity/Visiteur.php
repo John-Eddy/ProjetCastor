@@ -4,12 +4,18 @@ namespace GestionFraisBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Visiteur
  *
  * @ORM\Table(name="visiteur", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_username", columns={"username_canonical"}), @ORM\UniqueConstraint(name="UNIQ_email", columns={"email_canonical"})})
  * @ORM\Entity
+ *
+ * @ExclusionPolicy("all")
  */
 class Visiteur extends BaseUser
 {
@@ -26,6 +32,7 @@ class Visiteur extends BaseUser
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
+     * @Expose
      */
     private $nom;
 
@@ -33,6 +40,8 @@ class Visiteur extends BaseUser
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
+     *
+     * @Expose
      */
     private $prenom;
 
@@ -40,6 +49,8 @@ class Visiteur extends BaseUser
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+     *
+     * @Expose
      */
     private $adresse;
 
@@ -201,6 +212,22 @@ class Visiteur extends BaseUser
         else
         {
             return"utilisateur";
+        }
+    }
+
+    /**
+     * Get the formatted name to display (NAME Firstname or username)
+     *
+     * @param $separator: the separator between name and firstname (default: ' ')
+     * @return String
+     * @VirtualProperty
+     */
+    public function getUsedName($separator = ' '){
+        if($this->getNom()!=null && $this->getPrenom()!=null){
+            return ucfirst(strtolower($this->getPrenom())).$separator.strtoupper($this->getNom());
+        }
+        else{
+            return $this->getUserName();
         }
     }
 }

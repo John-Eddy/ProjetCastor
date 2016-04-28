@@ -7,6 +7,9 @@ gestion_frais_fichefrais:
     prefix:   /FicheFrais
 
 gestion_frais_test:
-    path:     /test/
+    path:     /test/{requette}.{_format}
     defaults: { _controller: "GestionFraisBundle:Default:test" }
+    requirements:
+              _format:  json
+              requette:     .+
 

@@ -13,6 +13,10 @@ namespace FOS\UserBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Storage agnostic user object
@@ -26,6 +30,8 @@ abstract class User implements UserInterface, GroupableInterface
 
     /**
      * @var string
+     *
+     * @Expose
      */
     protected $username;
 

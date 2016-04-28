@@ -86,7 +86,7 @@ class ClassLoader
     }
 
     /**
-     * @param array $classMap Utils to filename map
+     * @param array $classMap Class to filename map
      */
     public function addClassMap(array $classMap)
     {
@@ -147,7 +147,7 @@ class ClassLoader
      * appending or prepending to the ones previously set for this namespace.
      *
      * @param string       $prefix  The prefix/namespace, with trailing '\\'
-     * @param array|string $paths   The PSR-0 base directories
+     * @param array|string $paths   The PSR-4 base directories
      * @param bool         $prepend Whether to prepend the directories
      *
      * @throws \InvalidArgumentException

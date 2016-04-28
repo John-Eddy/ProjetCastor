@@ -34,3 +34,9 @@ visiteur_modifiercoordonnee:
     path:    /modifiercoordonnee
     defaults: { _controller: "GestionFraisBundle:Default:MofidierCoordonnee"}
 
+
+#REST
+rest :
+  type : rest
+  resource : "routing_rest.yml"
+  prefix : /api

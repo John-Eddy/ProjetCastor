@@ -2,11 +2,11 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     GSB
-    database_user:     root
-    database_password: ~
+    database_host: mysql.hostinger.fr
+    database_port: null
+    database_name: u491835955_gsb
+    database_user: u491835955_eddy
+    database_password: projetcastor
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
@@ -14,6 +14,10 @@ parameters:
     mailer_host:       127.0.0.1
     mailer_user:       ~
     mailer_password:   ~
+    idEtatFicheFraisDefaut: 1
+    idEtatFicheFraisCloture: 2
+    idEtatLigneFraisDefaut: 3
+    idEtatLigneFraisValider: 1
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt

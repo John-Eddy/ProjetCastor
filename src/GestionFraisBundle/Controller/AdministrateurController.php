@@ -157,7 +157,7 @@ class AdministrateurController extends Controller{
             ));
         }
 
-        $form = $this->createForm(new VisiteurType(), $unVisiteur, array('role' => 'administrateur'));
+        $form = $this->createForm(new VisiteurType(), $unVisiteur, array('role' => 'administrateur','operation'=>$operation));
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -167,13 +167,16 @@ class AdministrateurController extends Controller{
 
             $request->getSession()->getFlashBag()->add('notice', 'Visiteur enregistrée.');
 
-            return $this->render('GestionFraisBundle::form\afficherFormulaire.html.twig', array(
-                'operation' => $operation
+            return $this->render('GestionFraisBundle:Visiteur:consulterVisiteur.html.twig', array(
+                "unVisiteur"=>$unVisiteur,
             ));
+
         }
         return $this->render('GestionFraisBundle::form\afficherFormulaire.html.twig', array(
             'form' => $form->createView(),
             'operation' => $operation,
+            "nomForm" =>"Visiteur"
+
         ));
     }
 

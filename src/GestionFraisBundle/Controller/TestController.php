@@ -18,31 +18,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TestController extends Controller
 {
-    public function testAction(Request $request)
+    public function testAction($requette)
     {
-        $em = $this->getDoctrine()->getManager();//connexion bdd
-        $nouveauVisiteur = new Visiteur();
-
-        $roleUtilisateur = array(0=>'');
-        $roleComptable =array(0=>'ROLE_COMPTABLE');
-        $roleAdmin = array(0=>'ROLE_ADMIN');
-        $roles = array(
-            'user'=>$roleUtilisateur ,
-            'comp'=>$roleComptable ,
-            'user'=> $roleAdmin
-        );
-        $form = $this->createForm(new VisiteurType(), $nouveauVisiteur,array('roles' => $roles, 'operation'=>'changerMdp'));
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-
-            dump($nouveauVisiteur);die();
-        }
-
-
-
-        return $this->render('GestionFraisBundle:Default:vueTest.html.twig', array(
-            'form' =>$form->createView()
-        ));
+        dump(json_decode($requette));die();
     }
 }
