@@ -6,15 +6,15 @@ gestion_frais :
   name_prefix:  api_
 
 api_connection:
-    path:    /connection/{requette}.{_format}
-    defaults: { _controller: "GestionFraisBundle:WebServiceRest:getConnetion" }
+    path:    /connexion/{requette}.{_format}
+    defaults: { _controller: "GestionFraisBundle:WebServiceRest:getConnexion" }
     requirements:
           _format:  json
           requette:     .+
 
 
 api_lesfichefrais:
-    path:    /lesfichefrais/{requette}.{_format}
+    path:    /lesfichesfrais/{requette}.{_format}
     defaults: { _controller: "GestionFraisBundle:WebServiceRest:getlesFicheFrais" }
     requirements:
           _format:  json

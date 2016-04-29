@@ -20,58 +20,88 @@ class WebServiceRestController extends Controller
         return $user;
     }
 
-    public function getConnetionAction($requette){
 
+    /**
+     * Fonction qui retourne un visiteur sous forme de JSon
+     *
+     * @param $requette : requette JSon contenant l'username et le mot de passe du visiteur
+     *
+     * @return unVisiteur : Objet JSon representant le visiteur
+     */
+    public function getConnexionAction($requette){
+
+        //Transfomation de la requette Json en Objet
         $requette = json_decode($requette);
 
-        if(!isset($requette->username) || !isset($requette->password)){
-            $message = 'erreur format';
-            return json_encode($message);
-        }
-
-        $em = $this->getDoctrine();
-        $unVisiteur = $em->getRepository('GestionFraisBundle:Visiteur')->findOneByUsername($requette->username);
-
-        dump($hashedPassword);die();
-
-        if(!is_object($unVisiteur)){
-            $message = "nom d'utilisateur incorecte";
-            return json_encode($message);
-        }
-        else if($unVisiteur->getPassword() != hash('bdcrypt',$requette->password))
+        //On verifie si la requette contient bien un champ mot de passe et un champ username
+        if(!isset($requette->username) || !isset($requette->password))
         {
-            $message = 'mot de passe incorecte';
-            return json_encode($message);
+            http_response_code(400);
+            echo "Champs manquant";
+            exit;
         }
-        else{
+
+        $unVisiteur = $this->getDoctrine()->getRepository('GestionFraisBundle:Visiteur')->findOneByUsername($requette->username);
+
+        if (!$unVisiteur)
+        {
+            http_response_code(400);
+            echo "Validation Failed";
+            exit;
+        }
+        //Service qui s'occupe de l'encodage du mot de passe
+        $factory = $this->container->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($unVisiteur);
+
+        //On verifie si le mot de passe corespon au mot de passe du visiteur
+        $validated = $encoder->isPasswordValid($unVisiteur->getPassword(), $requette->password, $unVisiteur->getSalt());
+
+        if (!$validated) {
+            http_response_code(400);
+            echo "Validation Failed";
+            exit;
+        }
+        else {
             return $unVisiteur;
         }
     }
     public function getLesFicheFraisAction($requette){
 
+        //Transfomation de la requette Json en Objet
         $requette = json_decode($requette);
 
-        if(!isset($requette->username) || !isset($requette->password)){
-            $message = 'mauvais format';
-            return json_encode($message);
-        }
-
-        $em = $this->getDoctrine();
-        $unVisiteur = $em->getRepository('GestionFraisBundle:Visiteur')->findOneByUsername($requette->username);
-
-        if(!is_object($unVisiteur)){
-            $message = 'nom d\'utilisateur incorecte';
-            return json_encode($message);
-        }
-        else if($unVisiteur->getPassword() != $requette->password)
+        //On verifie si la requette contient bien un champ mot de passe et un champ username
+        if(!isset($requette->username) || !isset($requette->password) )
         {
-            $message = 'mot de passe incorecte';
-            return json_encode($message);
+            http_response_code(400);
+            echo "Champs manquant";
+            exit;
         }
 
-        $lesFicheFrais = $em->getRepository('GestionFraisBundle:FicheFrais')->findByidvisiteur($unVisiteur);
+        $unVisiteur = $this->getDoctrine()->getRepository('GestionFraisBundle:Visiteur')->findOneByUsername($requette->username);
 
-        return $lesFicheFrais;
+        if (!$unVisiteur)
+        {
+            http_response_code(400);
+            echo "Validation Failed";
+            exit;
+        }
+        //Service qui s'occupe de l'encodage du mot de passe
+        $factory = $this->container->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($unVisiteur);
 
+        //On verifie si le mot de passe corespon au mot de passe du visiteur
+        $validated = $encoder->isPasswordValid($unVisiteur->getPassword(), $requette->password, $unVisiteur->getSalt());
+
+        if (!$validated) {
+            http_response_code(400);
+            echo "Validation Failed";
+            exit;
+        }
+        else {
+            //Récupération des fiches du visiteur
+            $lesFicheFrais = $this->getDoctrine()->getRepository('GestionFraisBundle:FicheFrais')->findByidvisiteur($unVisiteur);
+            return $lesFicheFrais;
+        }
     }
 }
