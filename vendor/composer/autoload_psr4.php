@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Zend\\EventManager\\' => array($vendorDir . '/zendframework/zend-eventmanager/src'),
+    'Zend\\Code\\' => array($vendorDir . '/zendframework/zend-code/src'),
+    'Vich\\UploaderBundle\\' => array($vendorDir . '/vich/uploader-bundle'),
     'Symfony\\Component\\' => array($vendorDir . '/symfony/symfony/src/Symfony/Component'),
     'Symfony\\Bundle\\SwiftmailerBundle\\' => array($vendorDir . '/symfony/swiftmailer-bundle'),
     'Symfony\\Bundle\\MonologBundle\\' => array($vendorDir . '/symfony/monolog-bundle'),

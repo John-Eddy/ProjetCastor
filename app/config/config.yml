@@ -103,3 +103,15 @@ fos_rest:
         default_engine: twig
     routing_loader:
         default_format: json
+
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+
+    mappings:
+            document:
+                uri_prefix:         /upload/Justificatifs
+                upload_destination: %kernel.root_dir%/../web/upload/Justificatifs
+
+                inject_on_load:     false
+                delete_on_update:   true
+                delete_on_remove:   true

@@ -73,14 +73,7 @@ class LigneFraisHorsForfait
      * })
      */
     private $idetatlignefrais;
-
-    /**
-     * @var \GestionFraisBundle\Entity\Justificatif
-     *
-     *  @ORM\OneToOne(targetEntity="GestionFraisBundle\Entity\Justificatif")
-     * 
-     */
-    public $justificatif;
+    
 
     /**
      * Set date

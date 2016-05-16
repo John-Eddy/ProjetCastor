@@ -141,6 +141,7 @@ class AdministrateurController extends Controller{
             $gestionaireFiche = $this->container->get('gestion_frais.gestionairefiche');//recuperation du service gestionaire de fiche
             //on récupere l'etatLigneFrais "Enregistré"
             $unVisiteur = new Visiteur();//On créé une nouvelle Visiteur
+            $unVisiteur->setEnabled(1);
         }
         else if($operation == 'suprimer'){
             $unVisiteur = $em->getRepository('GestionFraisBundle:Visiteur')->find($idVisiteur);

@@ -16,6 +16,7 @@ use GestionFraisBundle\Entity\LigneFraisHorsForfait;
 use GestionFraisBundle\Form\LigneFraisHorsForfaitType;
 use GestionFraisBundle\Form\LigneFraisForfaitType;
 use GestionFraisBundle\Form\RechercherFicheFraisType;
+use Proxies\__CG__\GestionFraisBundle\Entity\Justificatif;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -113,6 +114,32 @@ class UtilisateurController extends Controller
             'uneFicheFrais' => $uneFicheFrais,
             'operation' => 'consulter'
         ));
+    }
+
+    public function justificatifAction(Request $request, $operation , $idJustificatifs)
+    {
+        //Connection BDD
+        $em = $this->getDoctrine()->getManager();
+
+        switch ($operation){
+            case 'ajouter':
+                $gestionaireFiche = $this->container->get('gestion_frais.gestionairefiche');//recuperation du service gestionaire de fiche
+                $unJustificatif = new Justificatif();//On créé une nouvelle ligneFraisForfait
+                $unJustificatif->setIdfichefrais($gestionaireFiche->getDerniereFicheFraisValide($this->getUser(),$em));//On attribut cette ligne à la fiche frais
+
+                break;
+            case 'suprimer':
+                $unJustificatif = $em->getRepository('GestionFraisBundle:LigneFraisForfait')->find($idJustificatifs);
+                $em->remove($unJustificatif);//on supprime la ligneFraisforfait
+                $em->flush();
+                return $this->redirect($this->generateUrl('utilisateur_saisirFrais'));
+                break;
+            default:
+                throw $this->createNotFoundException('Erreur '.$operation);
+                break;
+        }
+        $form = $this->createForm(new ligneFraisForfaitType(), $unJustificatif, array('role'=> 'utilisateur','operation' => $operation));
+        $form->handleRequest($request);
     }
     
 
@@ -232,4 +259,5 @@ class UtilisateurController extends Controller
             'uneFicheFrais' => $uneligneFraisHorsForfait->getIdfichefrais()
         ));
     }
+    
 }

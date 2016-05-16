@@ -61,13 +61,13 @@ class ComptableController extends Controller
             );
 
 
-                return $this->render('GestionFraisBundle:Utilisateur/fichefrais:rechercher.html.twig', array(
+                return $this->render('GestionFraisBundle:FicheFrais:RechercherFicheFrais.html.twig', array(
                     'lesFicheFrais' => $lesFicheFrais,
                     'form' => $form->createView(),
                 ));
 
         }
-        return $this->render('GestionFraisBundle:Utilisateur/fichefrais:rechercher.html.twig', array(
+        return $this->render('GestionFraisBundle:FicheFrais:RechercherFicheFrais.html.twig', array(
             'lesFicheFrais' => $lesFicheFrais,
             'form' => $form->createView(),
         ));
@@ -82,7 +82,7 @@ class ComptableController extends Controller
         if (!$uneFicheFrais) {
             throw $this->createNotFoundException('Cette fiche n\'existe pas.');
         }
-        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+        return $this->render('GestionFraisBundle:FicheFrais:modifierFicheFrais.html.twig', array(
             'uneFicheFrais' => $uneFicheFrais,
             'operation' => 'valider'
         ));

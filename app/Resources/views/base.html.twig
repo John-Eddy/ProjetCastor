@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="{{ asset('Css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -16,12 +15,7 @@
     <link href="{{ asset('Css/simple-sidebar.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
     <link href="{{ asset('Css/popup.css') }}" rel="stylesheet" xmlns="http://www.w3.org/1999/html">
 
-
-
-
-
     {% block stylesheets %}{% endblock %}
-
 
     <!-- Custom Fonts -->
     <link rel="icon" type="image/png" href="img/favicon.png" />
@@ -68,18 +62,16 @@
                         <li>
                             <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                         </li>
-
                     </ul>
                 </li>
             {% else %}
                 <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
             {% endif %}
-
+            {% set role = "" %}
             {% if  app.user is not null  %}
                 {% include 'GestionFraisBundle::sidebar.html.twig' %}
+                {% set role =  app.user.roleStr %}
             {% endif %}
-
-
         </ul>
     </div>
     <!-- Page Content -->
@@ -89,13 +81,6 @@
     <!-- /#page-content-wrapper -->
 
 </div>
-
-
-
-
-
-
-
 </body>
 {% block javascripts %}{% endblock %}
 <script src="{{ asset('JavaScript/jquery.js') }}"></script>

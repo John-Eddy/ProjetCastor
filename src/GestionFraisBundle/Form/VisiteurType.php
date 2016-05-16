@@ -32,6 +32,13 @@ class VisiteurType extends AbstractType
                     'second_options' => array('label' => 'form.password_confirmation'),
                     'invalid_message' => 'fos_user.password.mismatch',
                 ))
+                ->add('enabled','choice',
+                    array(
+                        'label' => 'Etat',
+                    'choices'  => array(
+                        1 => 'Activé',
+                        0 => 'Désactivé'
+                )))
                 ->add('roles', 'collection', array(
                 'label' => 'Type visiteur',
                 'required' => true,
@@ -41,7 +48,7 @@ class VisiteurType extends AbstractType
                     'choices' => array(
                         'ROLE-UTILISATEUR' => 'Utilisateur',
                         'ROLE_COMPTABLE' => 'Comptable',
-                        'ROLE_AMIN' => 'Administrateur'
+                        'ROLE_ADMIN' => 'Administrateur'
                     )
                 )
             )
