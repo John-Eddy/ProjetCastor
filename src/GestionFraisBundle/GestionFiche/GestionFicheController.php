@@ -80,24 +80,23 @@ class GestionFicheController extends Controller
      * @param $uneFicheFrais
      * @return bool
      */
-    public function estValide($uneFicheFrais)
+    public function estEnCour($uneFicheFrais)
     {
-        $idEtatLigneFraisCloturer = $this->container->getParameter('idetatfichefraiscloture');//id de l'etat cloturé
+        $idEtatFicheFraisEnCours = $idEtatLigneFraisValider = $this->container->getParameter('idetatfichefraisdefaut');
 
-
-
-         if($uneFicheFrais->getIdetatfichefrais()->getId() ==  $idEtatLigneFraisCloturer )
-         {
-             return false;
-         }
-         else if( $uneFicheFrais->getMois() == date('m') || strval(date('Y')) == $uneFicheFrais->getAnnee())
-        {
-            return true;
+        if ($uneFicheFrais == null){//si la fiche frais est null
+            return false;
         }
-        else
+        //si l'etat de la fiche n'est pas saisi en cour est valider
+        else if($uneFicheFrais->getIdetatfichefrais()->getId() !=  $idEtatFicheFraisEnCours )
         {
             return false;
         }
+        else if( $uneFicheFrais->getMois() == date('m') || strval(date('Y')) == $uneFicheFrais->getAnnee())//si la fiche frais est du mois en cour
+        {
+            return true;
+        }
+
     }
 
     /**
@@ -120,12 +119,10 @@ class GestionFicheController extends Controller
 
     public function getDerniereFicheFraisValide( $visiteur, $em){
 
-        $derniereFicheValide = $this->getDerniereFicheFrais($visiteur,$em);
-        if($derniereFicheValide == null) {
-            return$this->creeFiche($visiteur, $em);
-        }
-        elseif($this->estValide($derniereFicheValide)){
-            return $derniereFicheValide;
+        $derniereFiche = $this->getDerniereFicheFrais($visiteur,$em);
+        if( $this->estEnCour($derniereFiche))
+        {
+            return $this->creeFiche($visiteur, $em);
         }
         else{
             return$this->creeFiche($visiteur, $em);
@@ -153,13 +150,4 @@ class GestionFicheController extends Controller
 
         return $uneFicheFrais;
     }
-
-    public function erreur($message)
-    {
-        return $this->render('GestionFraisBundle:Erreur:erreur.html.twig', array(
-            'message' => $message,
-        ));
-    }
-
-
 }
