@@ -18,7 +18,6 @@ comptable_fichesfraiscloturer:
     path:    /fichefrais/cloturer
     defaults: { _controller: "GestionFraisBundle:Comptable:cloturerFicheFrais" }
 
-
 comptable_lignefraisforfait:
     path:    /lignefraisforfait/{operation}/{idLigneFraisForfait}
     defaults: { _controller: "GestionFraisBundle:Comptable:ligneFraisForfait" }
@@ -27,6 +26,3 @@ comptable_lignefraishorsforfait:
     path:    /lignefraishorsforfait/{operation}/{idLigneFraisHorsForfait}
     defaults: { _controller: "GestionFraisBundle:Comptable:ligneFraisHorsForfait" }
 
-comptable_cloturerfichefrais:
-    path:   /fichefrais/clotu
-    defaults: {_controller: "GestionFraisBundle:Comptable:cloturerFicheFrais" }

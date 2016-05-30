@@ -38,7 +38,6 @@ class GestionFicheController extends Controller
     {
         //on recupere l'id etatFicheFrais dans les parametre
         $idEtatFicheFraisDefaut = $this->container->getParameter('idEtatFicheFraisDefaut');
-        $gestionaireDate =  $this->container->get("gestionfrais.gestionairedate");
 
         $uneFicheFrais = new FicheFrais();
 
@@ -56,6 +55,13 @@ class GestionFicheController extends Controller
         return $uneFicheFrais;
     }
 
+
+    /**
+     *
+     * Fonction qui calcule la montant valide d'un fiche en fonction de l'etat de chaque ligne frais
+     * @param $uneFicheFrais
+     * @return int
+     */
     public function calculerMontantValider($uneFicheFrais)
     {
         $montantValide=0;
@@ -76,27 +82,30 @@ class GestionFicheController extends Controller
 
         return $montantValide;
     }
-    /**
-     * @param $uneFicheFrais
-     * @return bool
-     */
-    public function estEnCour($uneFicheFrais)
-    {
-        $idEtatFicheFraisEnCours = $idEtatLigneFraisValider = $this->container->getParameter('idetatfichefraisdefaut');
 
-        if ($uneFicheFrais == null){//si la fiche frais est null
-            return false;
-        }
-        //si l'etat de la fiche n'est pas saisi en cour est valider
-        else if($uneFicheFrais->getIdetatfichefrais()->getId() !=  $idEtatFicheFraisEnCours )
-        {
-            return false;
-        }
-        else if( $uneFicheFrais->getMois() == date('m') || strval(date('Y')) == $uneFicheFrais->getAnnee())//si la fiche frais est du mois en cour
-        {
-            return true;
-        }
+    public function getDerniereFicheFraisValide( $visiteur, $em){
 
+        $idEtatFicheFraisCLoture = $this->container->getParameter('idetatfichefraiscloture');
+
+        //on récupère la dérnière fiche frais
+        $derniereFiche = $this->getDerniereFicheFrais($visiteur,$em);
+        //si l'etat de celle-ci est "saisie en cour"
+        if( $this->estEnCour($derniereFiche))
+        {
+            //on la retourne
+            return $derniereFiche;
+        }
+        else{
+            //si il existe un derniere fiche
+            if($derniereFiche != null){
+                //on la cloture avant d'en créée une nouvelle
+                $derniereFiche->setEtatFicheFrais($idEtatFicheFraisCLoture);
+                $em->persist($derniereFiche);
+                $em->flush();
+            }
+            //on cree une nouvelle fiche
+            return $this->creeFiche($visiteur, $em);
+        }
     }
 
     /**
@@ -111,43 +120,37 @@ class GestionFicheController extends Controller
             array('idvisiteur' => $visiteur->getId()),
             array('datecreation' => 'DESC')
         );
+        //
         if(!empty($lesFichesFrais)) {
             return $lesFichesFrais[0];
         }
-        else  false ;
-    }
-
-    public function getDerniereFicheFraisValide( $visiteur, $em){
-
-        $derniereFiche = $this->getDerniereFicheFrais($visiteur,$em);
-        if( $this->estEnCour($derniereFiche))
-        {
-            return $this->creeFiche($visiteur, $em);
-        }
-        else{
-            return$this->creeFiche($visiteur, $em);
-        }
+        else  return null ;
     }
 
     /**
      * @param $uneFicheFrais
-     * @param $em
-     * @return mixed
+     * @return bool
      */
-    public function chargerLignesFrais($uneFicheFrais, $em)
+    public function estEnCour($uneFicheFrais)
     {
-        $uneFicheFrais->setLignesFraisForfaits( $em->getRepository('GestionFraisBundle:LigneFraisForfait')->findBy(
-            array(
-                'idfichefrais' => $uneFicheFrais
-            )
-        ));
+        $idEtatFicheFraisEnCours = $idEtatLigneFraisValider = $this->container->getParameter('idetatfichefraisdefaut');
 
-        $uneFicheFrais->setLignesFraisHorsForfaits( $em->getRepository('GestionFraisBundle:LigneFraisHorsForfait')->findBy(
-            array(
-                'idfichefrais' => $uneFicheFrais
-            )
-        ));
+        //si la fiche frais n'existe pas
+        if ($uneFicheFrais == null){
+            return false;
+        }
+        //si l'etat de la fiche n'est pas "saisie en cour"
+        else if($uneFicheFrais->getIdetatfichefrais()->getId() !=  $idEtatFicheFraisEnCours )
+        {
+            return false;
+        }
+        //si le mois et l'année de la fiche frais corespondent au mois et à l'année actuel
+        else if( $uneFicheFrais->getMois() == date('m') || strval(date('Y')) == $uneFicheFrais->getAnnee())
+        {
+            return true;
+        }
 
-        return $uneFicheFrais;
     }
+
+
 }

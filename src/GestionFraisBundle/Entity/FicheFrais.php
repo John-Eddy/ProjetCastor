@@ -3,12 +3,18 @@
 namespace GestionFraisBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * FicheFrais
  *
  * @ORM\Table(name="fiche_frais", indexes={@ORM\Index(name="idEtatFicheFrais", columns={"idEtatFicheFrais"}), @ORM\Index(name="idVisiteur", columns={"idVisiteur"})})
  * @ORM\Entity
+ *
+ * @ExclusionPolicy("all")
  */
 class FicheFrais
 {
@@ -16,6 +22,8 @@ class FicheFrais
      * @var string
      *
      * @ORM\Column(name="mois", type="string", length=2, nullable=false)
+     *
+     * @Expose
      */
     private $mois;
 

@@ -2,7 +2,9 @@
 
 namespace GestionFraisBundle\Controller;
 
+use FOS\UserBundle\Form\Type\ChangePasswordFormType;
 use GestionFraisBundle\Entity\Visiteur;
+use GestionFraisBundle\Form\ChangerMotDePasseType;
 use GestionFraisBundle\Form\VisiteurType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,30 +29,6 @@ class DefaultController extends Controller
             return $this->redirectToRoute("utilisateur_index");
         }
     }
-
-    public function MofidierMotDePasseAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();//connexion bdd
-        $visiteurConnecter = $this->getUser();
-
-        $form = $this->createForm(new VisiteurType(), $visiteurConnecter,array('operation'=>'changerMdp'));
-        $form->handleRequest($request);
-
-
-        if ($form->isValid()) {
-
-            $em->persist($visiteurConnecter);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('Gestion_frais_homepage'));
-        }
-        return $this->render('GestionFraisBundle:Form:afficherFormulaire.html.twig', array(
-            'nomForm' => 'Mofifier mot de passe',
-            'role' => $visiteurConnecter->getRoleStr(),
-            'form'=>$form->createView()
-        ));
-    }
-
     public function MofidierCoordonneeAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();//connexion bdd

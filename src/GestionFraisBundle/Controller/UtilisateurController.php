@@ -33,6 +33,7 @@ class UtilisateurController extends Controller
         $em = $this->getDoctrine()->getManager();//connexion bdd
         $uneFicheFrais = $gestionaireFiche->getDerniereFicheFraisValide($visiteurConnecter, $em);
 
+
         return $this->render('GestionFraisBundle:FicheFrais:modifierFicheFrais.html.twig', array(
             'uneFicheFrais' => $uneFicheFrais,
             'operation' => 'modifier'

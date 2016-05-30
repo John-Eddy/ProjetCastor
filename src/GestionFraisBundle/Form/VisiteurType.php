@@ -65,8 +65,10 @@ class VisiteurType extends AbstractType
         if($options['operation'] == 'changerMdp')
         {
             $builder
+                ->add('mdp',new ChangerMotDePasseType())
                 ->add('plainPassword', 'repeated', array(
                     'type' => 'password',
+                    'label' => 'Nouveau mot de passe',
                     'options' => array('translation_domain' => 'FOSUserBundle'),
                     'first_options' => array('label' => 'form.password'),
                     'second_options' => array('label' => 'form.password_confirmation'),

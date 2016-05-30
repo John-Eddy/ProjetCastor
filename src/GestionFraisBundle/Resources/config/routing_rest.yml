@@ -12,6 +12,13 @@ api_connection:
           _format:  json
           requette:     .+
 
+api_fichefrais:
+    path:    /fichefrais/{requette}.{_format}
+    defaults: { _controller: "GestionFraisBundle:WebServiceRest:getficheFrais" }
+    requirements:
+          _format:  json
+          requette:     .+
+
 
 api_lesfichefrais:
     path:    /lesfichesfrais/{requette}.{_format}

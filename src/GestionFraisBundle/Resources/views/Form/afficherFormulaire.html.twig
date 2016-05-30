@@ -5,14 +5,22 @@
     {% include 'GestionFraisBundle::sidebar.html.twig' %}
 {% endblock %}
 
-{% block title %}{{ nomForm }}{% endblock  %}
+{% block title %}
+    {% if nomForm is defined  %}
+        {{ nomForm }}
+    {% else %}
+        Formulaire
+    {% endif %}
+{% endblock  %}
 
 {%  block body %}
     <div class="bandeau"></div>
     <div class="container-fluid">
 
         <div class="col-lg-8 col-lg-offset-2 col-md-12 " id="contenu" >
-            <h2>{{ nomForm }}</h2>
+            {% if nomForm is defined  %}
+                <h2>{{ nomForm }}</h2>
+            {% endif %}
             <div class="bandeau-small"></div>
             <div class="form-group">
 
@@ -24,6 +32,8 @@
 
                 {# Fermeture de la balise <form> du formulaire HTML #}
                 {{ form_end(form) }}
+
+
 
             </div>
             <div class="bandeau"></div>
