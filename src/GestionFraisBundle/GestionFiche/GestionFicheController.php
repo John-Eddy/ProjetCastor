@@ -99,7 +99,7 @@ class GestionFicheController extends Controller
             //si il existe un derniere fiche
             if($derniereFiche != null){
                 //on la cloture avant d'en créée une nouvelle
-                $derniereFiche->setEtatFicheFrais($idEtatFicheFraisCLoture);
+                $derniereFiche->setIdetatfichefrais($em->getRepository('GestionFraisBundle:EtatFicheFrais')->findOneById($idEtatFicheFraisCLoture));
                 $em->persist($derniereFiche);
                 $em->flush();
             }
@@ -145,7 +145,7 @@ class GestionFicheController extends Controller
             return false;
         }
         //si le mois et l'année de la fiche frais corespondent au mois et à l'année actuel
-        else if( $uneFicheFrais->getMois() == date('m') || strval(date('Y')) == $uneFicheFrais->getAnnee())
+        else if( $uneFicheFrais->getMois() == date('m') && strval(date('Y')) == $uneFicheFrais->getAnnee())
         {
             return true;
         }

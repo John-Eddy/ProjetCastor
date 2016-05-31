@@ -46,7 +46,7 @@ class VisiteurType extends AbstractType
                 'options' => array(
                     'label' => false,
                     'choices' => array(
-                        'ROLE-UTILISATEUR' => 'Utilisateur',
+                        'ROLE_UTILISATEUR' => 'Utilisateur',
                         'ROLE_COMPTABLE' => 'Comptable',
                         'ROLE_ADMIN' => 'Administrateur'
                     )

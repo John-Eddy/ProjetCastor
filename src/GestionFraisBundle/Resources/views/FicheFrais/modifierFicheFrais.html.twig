@@ -30,7 +30,11 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-xs-12">
-                        <p> Etat : {{ uneFicheFrais.idetatfichefrais.libelle() }}</p>
+                        <p> Etat : {{ uneFicheFrais.idetatfichefrais.libelle() }}
+                            {% if role == 'comptable' %}
+                                <a href="{{ path('comptable_modifieretatfichefrais', {'idFicheFrais': uneFicheFrais.id}) }}">Modifier </a>
+                            {% endif %}
+                        </p>
                     </div>
                     <div class="col-sm-3 col-xs-12">
                         <p> MontantValide : {{ uneFicheFrais.montantvalide }} €</p>
@@ -82,9 +86,6 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    {% if role == 'utilisateur' %}
-                        <a class = "btn btn-default" href = "{{ path('utilisateur_lignefraisforfait',{'operation':'ajouter', 'idLigneFraisForfait': 0}) }}">Ajouter</a>
-                    {% endif %}
                 </div>
 
                 <div class="bandeau-small"></div>
@@ -124,9 +125,7 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    {% if role == 'utilisateur' %}
-                        <a class = "btn btn-default" href = "{{ path('utilisateur_lignefraishorsforfait',{'operation' :'ajouter', 'idLigneFraisHorsForfait' : 0}) }}">Ajouter</a>
-                    {% endif %}
+
                 </div>
                 <div class="bandeau-small"></div>
             </div>

@@ -26,3 +26,6 @@ comptable_lignefraishorsforfait:
     path:    /lignefraishorsforfait/{operation}/{idLigneFraisHorsForfait}
     defaults: { _controller: "GestionFraisBundle:Comptable:ligneFraisHorsForfait" }
 
+comptable_modifieretatfichefrais:
+    path:    /etatfichefrais/{idFicheFrais}
+    defaults: { _controller: "GestionFraisBundle:Comptable:modifierEtatFicheFrais" }

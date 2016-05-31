@@ -59,16 +59,9 @@ class AdministrateurController extends Controller{
 
         if($operation == 'ajouter')
         {
-            $gestionaireFiche = $this->container->get('gestion_frais.gestionairefiche');//recuperation du service gestionaire de fiche
-            //on récupere l'etatLigneFrais "Enregistré"
-            $unFraisForfait = new FraisForfait();//On créé une nouvelle FraisForfait
+            $unFraisForfait = new FraisForfait();//On créé un nouveau FraisForfait
         }
-        else if($operation == 'suprimer'){
-            $unFraisForfait = $em->getRepository('GestionFraisBundle:FraisForfait')->find($idFraisForfait);
-            $em->remove($unFraisForfait);//on supprime la FraisForfait
-            $em->flush();
-            return $this->redirect($this->generateUrl('administrateur_index'));
-        }
+
         else $unFraisForfait = $em->getRepository('GestionFraisBundle:FraisForfait')->find($idFraisForfait);
 
 
@@ -78,15 +71,14 @@ class AdministrateurController extends Controller{
 
         if ($form->isValid()) {
 
-            $em->persist($unFraisForfait);//On enregistre la ligne la ligne frais
+            $em->persist($unFraisForfait);//On enregistre le frais frais
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('notice', 'FraisForfait enregistrée.');
 
-            return $this->render('GestionFraisBundle::form\afficherFormulaire.html.twig', array(
-                'operation' => $operation
-            ));
+            return $this->redirect($this->generateUrl('admministrateur_rechercherfraisforfait'));
         }
+
         return $this->render('GestionFraisBundle::form\afficherFormulaire.html.twig', array(
             'form' => $form->createView(),
             'nomForm'=> "FraisForfait",
@@ -142,12 +134,6 @@ class AdministrateurController extends Controller{
             //on récupere l'etatLigneFrais "Enregistré"
             $unVisiteur = new Visiteur();//On créé une nouvelle Visiteur
             $unVisiteur->setEnabled(1);
-        }
-        else if($operation == 'suprimer'){
-            $unVisiteur = $em->getRepository('GestionFraisBundle:Visiteur')->find($idVisiteur);
-            $em->remove($unVisiteur);//on supprime la Visiteur
-            $em->flush();
-            return $this->redirect($this->generateUrl('administrateur_index'));
         }
         else $unVisiteur = $em->getRepository('GestionFraisBundle:Visiteur')->find($idVisiteur);
 

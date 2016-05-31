@@ -22,8 +22,7 @@ class FicheFrais
      * @var string
      *
      * @ORM\Column(name="mois", type="string", length=2, nullable=false)
-     *
-     * @Expose
+     ** @Expose
      */
     private $mois;
 
@@ -31,6 +30,7 @@ class FicheFrais
      * @var string
      *
      * @ORM\Column(name="annee", type="string", length=4, nullable=false)
+     * @Expose
      */
     private $annee;
 
@@ -38,6 +38,8 @@ class FicheFrais
      * @var \DateTime
      *
      * @ORM\Column(name="dateCreation", type="datetime", nullable=false)
+     *
+     * @Expose
      */
     private $datecreation;
 
@@ -45,6 +47,8 @@ class FicheFrais
      * @var \DateTime
      *
      * @ORM\Column(name="dateModif", type="datetime", nullable=false)
+     *
+     * @Expose
      */
     private $datemodif;
 
@@ -52,6 +56,8 @@ class FicheFrais
      * @var float
      *
      * @ORM\Column(name="montantValide", type="float", precision=10, scale=0, nullable=false)
+     *
+     * @Expose
      */
     private $montantvalide;
 
@@ -61,6 +67,8 @@ class FicheFrais
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     *
+     * @Expose
      */
     private $id;
 
@@ -71,6 +79,8 @@ class FicheFrais
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idEtatFicheFrais", referencedColumnName="id")
      * })
+     *
+     * @Expose
      */
     private $idetatfichefrais;
 
@@ -82,16 +92,22 @@ class FicheFrais
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idVisiteur", referencedColumnName="id")
      * })
+     *
+     * @Expose
      */
     private $idvisiteur;
 
     /**
      * @ORM\OneToMany(targetEntity="GestionFraisBundle\Entity\LigneFraisForfait", mappedBy="idfichefrais")
+     *
+     * @Expose
      */
     private $lignesFraisForfaits;
 
     /**
      * @ORM\OneToMany(targetEntity="GestionFraisBundle\Entity\LigneFraisHorsForfait", mappedBy="idfichefrais")
+     *
+     * @Expose
      */
     private $lignesFraisHorsForfaits;
 

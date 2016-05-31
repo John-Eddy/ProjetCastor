@@ -15,11 +15,12 @@ class FicheFraisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mois')
-            ->add('datemodif')
-            ->add('montantvalide')
-            ->add('idvisiteur')
-            ->add('idetatfichefrais')
+            ->add('idetatfichefrais','entity',array(
+                'class' => 'GestionFraisBundle:EtatFicheFrais',
+                    'choice_label' => 'libelle',
+                    'label' => 'Etat Fiche Frais'
+                ))
+            ->add('Enregister','submit');
         ;
     }
     

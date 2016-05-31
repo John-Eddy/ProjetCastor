@@ -9,6 +9,7 @@
 namespace GestionFraisBundle\Controller;
 
 use DateTime;
+use GestionFraisBundle\Form\FicheFraisType;
 use GestionFraisBundle\Form\LigneFraisForfaitType;
 use GestionFraisBundle\Form\LigneFraisHorsForfaitType;
 use GestionFraisBundle\Form\RechercherFicheFraisType;
@@ -88,6 +89,8 @@ class ComptableController extends Controller
         ));
     }
 
+
+
     public function ConsulterFicheFraisAction($idFicheFrais)
     {
         $em = $this->getDoctrine()->getManager();
@@ -100,7 +103,7 @@ class ComptableController extends Controller
             throw $this->createNotFoundException('Cette fiche n\'existe pas.');
         }
 
-        return $this->render('GestionFraisBundle:Utilisateur/FicheFrais:modifier.html.twig', array(
+        return $this->render('GestionFraisBundle:FicheFrais:modifierFicheFrais.html.twig', array(
             'uneFicheFrais' => $uneFicheFrais,
             'operation' => 'consulter'
         ));
@@ -211,6 +214,35 @@ class ComptableController extends Controller
             'nomForm'=> "Frais forfaitaire",
             'operation' => $operation,
             'uneFicheFrais' => $uneligneFraisHorsForfait->getIdfichefrais()
+        ));
+
+    }
+
+    public function modifierEtatFicheFraisAction(Request $request, $idFicheFrais)
+    {
+        //Connection BDD
+        $em = $this->getDoctrine()->getManager();
+
+        $uneFicheFrais = $em->getRepository("GestionFraisBundle:FicheFrais")->find($idFicheFrais);
+
+        $form = $this->createForm(new FicheFraisType(), $uneFicheFrais);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em->persist($uneFicheFrais);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Fiche frais bien enregistrée.');
+
+            return $this->redirect($this->generateUrl('comptable_consulterfichefrais',array('idFicheFrais' => $idFicheFrais )));
+
+        }
+        return $this->render('GestionFraisBundle:FicheFrais:modifierFicheFrais.html.twig', array(
+            'form' => $form->createView(),
+            'nomForm'=> "Etat Fiche Frais",
+            'operation' => "consulter",
+            'uneFicheFrais' =>$uneFicheFrais
         ));
 
     }

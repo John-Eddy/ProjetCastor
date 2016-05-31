@@ -38,13 +38,7 @@
          </table>
          <div class="bandeau-small"></div>
 
-            <a href="{{ path( 'admministrateur_visiteur',{'operation':'consulter', 'idVisiteur': unVisiteur.id}) }}" class="btn btn-default">modifier</a>
-            <a
-                    class="btn btn-default"
-                    href="{{ path( 'admministrateur_visiteur',{'operation':'suprimer', 'idVisiteur': unVisiteur.id}) }}"
-                    onclick="return confirm('Etes vous sûre de vouloir supprimer ce visiteur ?')"
-            >
-                <i class="glyphicon glyphicon-remove"></i>
+            <a href="{{ path( 'admministrateur_visiteur',{'operation':'modifier', 'idVisiteur': unVisiteur.id}) }}" class="btn btn-default">modifier</a>
             </a>
             <div class="bandeau"></div>
 
