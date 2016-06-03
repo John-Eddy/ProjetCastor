@@ -99,6 +99,7 @@
                             <th><p>Montant</p></th>
                             <th><p>Libellé</p></th>
                             <th><p>Etat</p></th>
+                            <th><p>Motif</p></th>
                             <th><p>Action</p></th>
 
                         </tr>
@@ -109,7 +110,13 @@
                                 <td> {{ uneLigneFraisHorsForfait.date|date("d/m/Y")}} </td>
                                 <td>{{ uneLigneFraisHorsForfait.montant }} €</td>
                                 <td >{{ uneLigneFraisHorsForfait.libellelignehorsforfait|length > 20 ? uneLigneFraisHorsForfait.libellelignehorsforfait|slice(0,20)  ~ '...' : uneLigneFraisHorsForfait.libellelignehorsforfait  }}</td>
-                                <td>{{ uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
+                                {% if  uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() == "Refusé"%}
+                                    <td style="color: red;">{{ uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
+                                {% else %}
+                                    <td>{{ uneLigneFraisHorsForfait.getIdetatlignefrais().getLibelleetatlignefrais() }}</td>
+                                {% endif %}
+                                <td >{{ uneLigneFraisHorsForfait.motif|length > 20 ? uneLigneFraisHorsForfait.motif|slice(0,20)  ~ '...' : uneLigneFraisHorsForfait.motif  }}</td>
+
                                 <td>
                                     <a href="{{ path( role~'_lignefraishorsforfait',{'operation':operation, 'idLigneFraisHorsForfait': uneLigneFraisHorsForfait.id}) }}">{{ operation }}</a>
                                     {% if role == 'utilisateur' and operation == 'modifier' %}

@@ -25,6 +25,10 @@ class LigneFraisHorsForfaitType extends AbstractType
                     'label'=>'Libelle',
                     'disabled' => true
                 ))
+                ->add('motif', 'textarea', array(
+                    'label'=>'Motif',
+                    'disabled' => true
+                ))
                 ->add('idetatlignefrais', 'entity', array(
                     'class' => 'GestionFraisBundle:EtatLigneFrais',
                     'choice_label' => 'libelleetatlignefrais',
@@ -37,6 +41,7 @@ class LigneFraisHorsForfaitType extends AbstractType
                 ->add('date', 'date')
                 ->add('montant', 'money')
                 ->add('libellelignehorsforfait', 'textarea', array('label'=>'Libelle'))
+                ->add('motif', 'textarea', array('label'=>'Motif', 'disabled'=>true))
                 ->add('idetatlignefrais', 'entity', array(
                     'class' => 'GestionFraisBundle:EtatLigneFrais',
                     'choice_label' => 'libelleetatlignefrais',
@@ -54,6 +59,10 @@ class LigneFraisHorsForfaitType extends AbstractType
                     'disabled' => true,
                     'label'=>'Libelle'
                     ))
+                ->add('motif', 'textarea',array(
+                    'label'=>'Motif',
+                    'required'=>false
+                ))
                 ->add('idetatlignefrais', 'entity', array(
                     'class' => 'GestionFraisBundle:EtatLigneFrais',
                     'choice_label' => 'libelleetatlignefrais',

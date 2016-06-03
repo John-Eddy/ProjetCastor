@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 31 Mai 2016 à 16:26
+-- Généré le :  Ven 03 Juin 2016 à 13:49
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `etat_ligne_frais` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelleEtatLigneFrais` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `etat_ligne_frais`
@@ -61,7 +61,8 @@ CREATE TABLE IF NOT EXISTS `etat_ligne_frais` (
 INSERT INTO `etat_ligne_frais` (`id`, `libelleEtatLigneFrais`) VALUES
 (1, 'Valide'),
 (2, 'Non valide'),
-(3, 'Enregistré');
+(3, 'Enregistré'),
+(4, 'Refusé');
 
 -- --------------------------------------------------------
 
@@ -90,13 +91,13 @@ CREATE TABLE IF NOT EXISTS `fiche_frais` (
 INSERT INTO `fiche_frais` (`id`, `mois`, `dateModif`, `montantValide`, `idVisiteur`, `idEtatFicheFrais`, `dateCreation`, `annee`) VALUES
 (31, '04', '2016-04-28 10:39:19', 0, 6, 3, '2016-05-31 10:34:10', '2016'),
 (34, '03', '2016-03-31 10:44:58', 0, 6, 3, '2016-03-02 10:44:58', '2016'),
-(35, '05', '2016-05-31 11:52:41', 0, 6, 1, '2016-05-31 10:47:04', '2016'),
+(35, '05', '2016-05-31 11:52:41', 0, 6, 2, '2016-05-31 10:47:04', '2016'),
 (36, '04', '2016-04-28 10:56:53', 0, 9, 3, '2016-04-07 10:56:30', '2016'),
 (37, '03', '2016-03-23 10:57:51', 0, 9, 3, '2016-03-02 10:57:37', '2016'),
 (38, '03', '2016-03-31 11:04:08', 0, 10, 3, '2016-03-02 11:04:08', '2016'),
 (39, '04', '2016-04-29 11:05:44', 0, 10, 3, '2016-04-01 11:05:16', '2016'),
-(40, '05', '2016-05-31 11:07:57', 0, 10, 1, '2016-05-31 11:07:50', '2016'),
-(41, '05', '2016-05-31 11:08:48', 0, 9, 1, '2016-05-31 11:08:40', '2016');
+(40, '05', '2016-06-03 13:46:46', 0, 10, 2, '2016-05-31 11:07:50', '2016'),
+(41, '05', '2016-05-31 11:08:48', 0, 9, 2, '2016-05-31 11:08:40', '2016');
 
 -- --------------------------------------------------------
 
@@ -135,7 +136,6 @@ CREATE TABLE IF NOT EXISTS `ligne_frais_forfait` (
   `idFraisForfait` int(11) DEFAULT NULL,
   `date` datetime NOT NULL,
   `montant` double NOT NULL,
-  `comentaire` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idVisiteur` (`idFraisForfait`),
   KEY `idEtatLigneFrais` (`idEtatLigneFrais`),
@@ -147,27 +147,27 @@ CREATE TABLE IF NOT EXISTS `ligne_frais_forfait` (
 -- Contenu de la table `ligne_frais_forfait`
 --
 
-INSERT INTO `ligne_frais_forfait` (`id`, `quantite`, `idFicheFrais`, `idEtatLigneFrais`, `idFraisForfait`, `date`, `montant`, `comentaire`) VALUES
-(34, 25, 31, 1, 1, '2016-04-15 00:00:00', 26.25, NULL),
-(35, 10, 31, 1, 2, '2016-04-17 00:00:00', 100, NULL),
-(36, 1, 31, 1, 3, '2016-04-14 00:00:00', 15, NULL),
-(37, 70, 34, 1, 1, '2016-03-31 00:00:00', 73.5, NULL),
-(38, 10, 34, 1, 1, '2016-03-31 00:00:00', 10.5, NULL),
-(39, 3, 34, 1, 3, '2016-02-26 00:00:00', 45, NULL),
-(40, 5, 34, 1, 2, '2016-03-14 00:00:00', 50, NULL),
-(41, 50, 35, 3, 1, '2016-05-31 00:00:00', 52.5, NULL),
-(45, 5, 36, 1, 2, '2016-04-16 00:00:00', 50, NULL),
-(46, 100, 36, 1, 1, '2016-05-31 00:00:00', 105, NULL),
-(47, 100, 37, 1, 1, '2016-05-31 00:00:00', 105, NULL),
-(48, 3, 37, 1, 3, '2016-05-31 00:00:00', 45, NULL),
-(49, 10, 37, 1, 2, '2016-05-31 00:00:00', 100, NULL),
-(55, 200, 38, 1, 1, '2016-03-31 00:00:00', 210, NULL),
-(56, 10, 38, 1, 2, '2016-05-14 00:00:00', 100, NULL),
-(57, 5, 39, 1, 3, '2016-05-31 00:00:00', 75, NULL),
-(58, 100, 39, 1, 1, '2016-05-31 00:00:00', 105, NULL),
-(59, 10, 40, 3, 2, '2016-05-31 00:00:00', 100, NULL),
-(60, 10, 41, 3, 1, '2016-05-31 00:00:00', 10.5, NULL),
-(61, 10, 35, 3, 1, '2016-05-31 00:00:00', 10.5, NULL);
+INSERT INTO `ligne_frais_forfait` (`id`, `quantite`, `idFicheFrais`, `idEtatLigneFrais`, `idFraisForfait`, `date`, `montant`) VALUES
+(34, 25, 31, 1, 1, '2016-04-15 00:00:00', 26.25),
+(35, 10, 31, 1, 2, '2016-04-17 00:00:00', 100),
+(36, 1, 31, 1, 3, '2016-04-14 00:00:00', 15),
+(37, 70, 34, 1, 1, '2016-03-31 00:00:00', 73.5),
+(38, 10, 34, 1, 1, '2016-03-31 00:00:00', 10.5),
+(39, 3, 34, 1, 3, '2016-02-26 00:00:00', 45),
+(40, 5, 34, 1, 2, '2016-03-14 00:00:00', 50),
+(41, 50, 35, 3, 1, '2016-05-31 00:00:00', 52.5),
+(45, 5, 36, 1, 2, '2016-04-16 00:00:00', 50),
+(46, 100, 36, 1, 1, '2016-05-31 00:00:00', 105),
+(47, 100, 37, 1, 1, '2016-05-31 00:00:00', 105),
+(48, 3, 37, 1, 3, '2016-05-31 00:00:00', 45),
+(49, 10, 37, 1, 2, '2016-05-31 00:00:00', 100),
+(55, 200, 38, 1, 1, '2016-03-31 00:00:00', 210),
+(56, 10, 38, 1, 2, '2016-05-14 00:00:00', 100),
+(57, 5, 39, 1, 3, '2016-05-31 00:00:00', 75),
+(58, 100, 39, 1, 1, '2016-05-31 00:00:00', 105),
+(59, 10, 40, 3, 2, '2016-05-31 00:00:00', 100),
+(60, 10, 41, 3, 1, '2016-05-31 00:00:00', 10.5),
+(61, 10, 35, 3, 1, '2016-05-31 00:00:00', 10.5);
 
 -- --------------------------------------------------------
 
@@ -182,10 +182,8 @@ CREATE TABLE IF NOT EXISTS `ligne_frais_hors_forfait` (
   `libelleLigneHorsForfait` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `idFicheFrais` int(11) DEFAULT NULL,
   `idEtatLigneFrais` int(11) DEFAULT NULL,
-  `justificatif_id` int(11) DEFAULT NULL,
-  `comentaire` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `motif` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_EC01626D4B85A991` (`justificatif_id`),
   KEY `idEtatLigneFrais` (`idEtatLigneFrais`),
   KEY `idEtatLigneFrais_2` (`idEtatLigneFrais`),
   KEY `idFicheFrais` (`idFicheFrais`)
@@ -195,10 +193,10 @@ CREATE TABLE IF NOT EXISTS `ligne_frais_hors_forfait` (
 -- Contenu de la table `ligne_frais_hors_forfait`
 --
 
-INSERT INTO `ligne_frais_hors_forfait` (`id`, `date`, `montant`, `libelleLigneHorsForfait`, `idFicheFrais`, `idEtatLigneFrais`, `justificatif_id`, `comentaire`) VALUES
-(81, '2016-05-31', 10, 'Péage', 31, 2, NULL, NULL),
-(83, '2016-05-31', 50, 'Billet de train', 39, 2, NULL, NULL),
-(84, '2016-05-31', 50, 'Billet de train', 40, 3, NULL, NULL);
+INSERT INTO `ligne_frais_hors_forfait` (`id`, `date`, `montant`, `libelleLigneHorsForfait`, `idFicheFrais`, `idEtatLigneFrais`, `motif`) VALUES
+(81, '2016-05-31', 10, 'Péage', 31, 2, ''),
+(83, '2016-05-31', 50, 'Billet de train', 39, 2, ''),
+(84, '2016-05-31', 50, 'Billet de train', 40, 3, '');
 
 -- --------------------------------------------------------
 
@@ -245,7 +243,7 @@ INSERT INTO `visiteur` (`id`, `nom`, `prenom`, `adresse`, `cp`, `ville`, `userna
 (8, 'administrateur', 'administrateur', NULL, '00000', 'ville', 'administrateur', 'administrateur', 'administrateur@administrateur.fr', 'administrateur@administrateur.fr', 1, '1toobk12ap7o0w4s888cwo8g4kok80c', '$2y$13$1toobk12ap7o0w4s888cwe.zawnFR667iSPN7ZORvX.JBJtIaoaI.', '2016-05-31 10:35:35', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL),
 (9, 'utilisateur2', 'utilisateur2', NULL, '00000', 'ville', 'utilisateur2', 'utilisateur2', 'utilisateur2@utilisateur.fr', 'utilisateur2@utilisateur.fr', 1, 'q6xv7sxijmok0g4wkg4swowcg80kk0g', '$2y$13$q6xv7sxijmok0g4wkg4swerqVVuWhTFXHGCMtVG.zDB.u.NHgjsM.', '2016-05-31 11:08:39', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:16:"ROLE_UTILISATEUR";}', 0, NULL),
 (10, 'utilisateur3', 'utilisateur3', NULL, '00000', 'ville', 'utilisateur3', 'utilisateur3', 'utilisateur3@utilisateur.fr', 'utilisateur3@utilisateur.fr', 1, 'hazf4oabd4gso0soww0sk44wgs408cc', '$2y$13$hazf4oabd4gso0soww0skusrMHDOgry31dJwiWf/iJ8lEuH3QUVpO', '2016-05-31 11:00:00', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:16:"ROLE_UTILISATEUR";}', 0, NULL),
-(11, 'comptable', 'comptable', NULL, '00000', 'Ville', 'comptable', 'comptable', 'comptable@comptable.fr', 'comptable@comptable.fr', 1, 'ayutaokky9cs0scwwwgc80co8cwc8g8', '$2y$13$ayutaokky9cs0scwwwgc8un5nSlOojVuo.jmcSpMiSYz4hRNlnFmm', '2016-05-31 11:09:00', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:14:"ROLE_COMPTABLE";}', 0, NULL);
+(11, 'comptable', 'comptable', NULL, '00000', 'Ville', 'comptable', 'comptable', 'comptable@comptable.fr', 'comptable@comptable.fr', 1, 'ayutaokky9cs0scwwwgc80co8cwc8g8', '$2y$13$ayutaokky9cs0scwwwgc8un5nSlOojVuo.jmcSpMiSYz4hRNlnFmm', '2016-06-03 13:41:08', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:14:"ROLE_COMPTABLE";}', 0, NULL);
 
 --
 -- Contraintes pour les tables exportées

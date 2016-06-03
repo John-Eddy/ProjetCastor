@@ -46,6 +46,19 @@ class LigneFraisHorsForfait
     private $libellelignehorsforfait;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="motif", type="string", length=120, nullable=false)
+     *
+     *@Assert\Length(
+     *      max = 120,
+     *      maxMessage = "Le motif ne doit pas depasser les 120 caractères"
+     * )
+     *
+     */
+    private $motif;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -216,4 +229,21 @@ class LigneFraisHorsForfait
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getMotif()
+    {
+        return $this->motif;
+    }
+
+    /**
+     * @param string $motif
+     */
+    public function setMotif($motif)
+    {
+        $this->motif = $motif;
+    }
+    
 }
